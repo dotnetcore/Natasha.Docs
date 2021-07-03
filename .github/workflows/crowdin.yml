@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: "12"
       - name: install better-crowdin
-        run: npm install -g @cabify-dev/better-crowdin
+        run: npm install -g better-crowdin
       - name: run crowdin
         run: |
           better-crowdin upload
