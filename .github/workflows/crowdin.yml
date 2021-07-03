@@ -12,7 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: crowdin action
-        uses: ardeois/better-crowdin-action@v1.1
+      - uses: actions/setup-node@v1
         with:
-          action: "upload sources"
+          node-version: "12"
+      - name: install better-crowdin
+        run: npm install -g @cabify-dev/better-crowdin
+      - name: run crowdin
+        run: |
+          better-crowdin upload
