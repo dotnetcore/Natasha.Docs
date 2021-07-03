@@ -44,9 +44,7 @@ Operator 作为动态构建对外使用的操作类，一个 Operator 可大致�
 
 <br/>
 
-     Natasha に組み込まれている Builder を直接使用すると、： OopBuilder<TOperator> や MethodBuilder などのカスタマイズをすばやく<TOperator>。
-     前者はオブジェクト構築テンプレートを提供し、後者は構築方法に焦点を当てします。
-     前者はオブジェクト構築テンプレートを提供し、後者は構築方法に焦点を当てします。
+     直接使用 Natasha 内置的 Builder 可以快速实现定制，例如： OopBuilder<TOperator> ，MethodBuilder<TOperator>。
      前者为其提供对象构造模板，后者专注构建方法。
 
 <br/>
@@ -65,15 +63,14 @@ this.Access(AccessFlags.Public)
 .Modifier(ModifierFlags.Static);
 ```
 
-同時に、MethodBuilder のメソッド スクリプトは、コンパイルと使用のためにクラス/インターフェイス/構造体に "寄生" する必要があるため、MethodBuilder にはホスト [OopBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs#L24) が</code>{randomname} ：`組み込まれています。
+同时 MethodBuilder 的方法脚本需要 “寄生” 在一个类/接口/结构体中才能进行编译和使用，因此 MethodBuilder 内部有宿主 [OopBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs#L24) 来接收 MethodBuilder 产生的脚本，最后进行编译的是 OopBuilder , 同时 OopBuilder 有如下初始化：`public static class {randomname} {}`。
 
 ```cs
  ClassOptions(item => item
-. Modifier(ModifierFlags.Static)
-. Class()
-. UseRandomName()
-. HiddenNamespace()
-. Access(AccessFlags.Public)
+.Modifier(ModifierFlags.Static)
+.Class()
+.UseRandomName()
+.HiddenNamespace()
+.Access(AccessFlags.Public)
 );
-`
 ```
