@@ -17,7 +17,8 @@ jobs:
       - name: crowdin action
         uses: crowdin/github-action@1.1.0
         with:
-          upload_translations: true
+          upload_sources: true
+          upload_translations: false
           download_translations: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
