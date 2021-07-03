@@ -1,5 +1,6 @@
 commit_message: "[ci skip]"
 preserve_hierarchy: true
+base_path: "./"
 files:
   - source: "/src/i18n/zh-Hans/**/*"
     translation: "/src/i18n/%locale%/**/%original_file_name%"

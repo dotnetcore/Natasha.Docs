@@ -2,7 +2,7 @@ name: Crowdin Action
 
 on:
   push:
-    branches: [main]
+    branches: [main, "feature/crowdin"]
 
 jobs:
   synchronize-with-crowdin:
