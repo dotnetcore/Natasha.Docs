@@ -1,5 +1,5 @@
 ---
-title: "API 用法展示"
+title: "API usage is demonstrated"
 ---
 
 - **NDomain**
@@ -41,9 +41,9 @@ string result = await action("Hello", "World1!");
 
 ```
 
-#### OopOperator : see UT Test
+#### OopOperator : [see UT Test](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/BuilderUT)
 
-#### OopComplier : see UT Test
+#### OopComplier :[ see UT Test](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OopComplierTest.cs)
 
 <br/>
 
@@ -53,9 +53,9 @@ string result = await action("Hello", "World1!");
 
   <br/>
 
-- 普通定制
+- General customization
 
-> 快速定制一个方法
+> Quickly customize a method
 
 ```cs
 var action = FastMethodOperator.Default()
@@ -70,7 +70,7 @@ var result = action("Hello ","World!");    //result:   "Hello World!"
 
 <br/>
 
-- 增强实现与异步支持 > `Complie<T>`方法会检测参数以及返回类型，如果其中有任何一处没有指定，那么 `Complie` 方法会使用自己默认的参数或者返回值进行填充, > 如果是 `Action<int>` 这种带有 1 个参数的，请使用"arg", 另外如果想使用异步方法，请使用 `UseAsync` 方法,或者 `AsyncFrom<Class>(methodName)`这两种方法。 > 返回的参数需要您指定 `Task<>`,以便运行时异步调用，记得外面那层方法要有 async 关键字哦。 > the parameters returned require you to specify `Task<>`so that the runtime calls asynchronously, remember that the outer layer of methods has the async keyword. > 返回的参数需要您指定 `Task<>`,以便运行时异步调用，记得外面那层方法要有 async 关键字哦。
+- 增强实现与异步支持 > `Complie<T>`方法会检测参数以及返回类型，如果其中有任何一处没有指定，那么 `Complie` 方法会使用自己默认的参数或者返回值进行填充, > 如果是 `Action<int>` 这种带有 1 个参数的，请使用"arg", 另外如果想使用异步方法，请使用 `UseAsync` 方法,或者 `AsyncFrom<Class>(methodName)`这两种方法。 > 返回的参数需要您指定 `Task<>`,以便运行时异步调用，记得外面那层方法要有 async 关键字哦。 > the parameters returned require you to specify `Task<>`so that the runtime calls asynchronously, remember that the outer layer of methods has the async keyword. > the parameters returned require you to specify `Task<>`so that the runtime calls asynchronously, remember that the outer layer of methods has the async keyword.
 
 ```cs
 var delegateAction = FastMethodOperator.Random()
@@ -92,17 +92,17 @@ string result = await delegateAction?.Invoke("Hello", "World2!");   //result:   
 
 #### DelegateOperator
 
-> 快速快速实现委托
+> Enable delegates quickly and quickly
 
 ```cs
 
-Define a delegate
-public delegate string GetterDelegate (int value);
+//定义一个委托
+public delegate string GetterDelegate(int value);
 
 
 
-//Method One
-var action . DelegateOperator<GetterDelegate>. Delegate("value += 101; return value. ToString(); ");
+//方法一
+var action = DelegateOperator<GetterDelegate>.Delegate("value += 101; return value.ToString();");
 string result = action(1);
 //result: "102"
 
@@ -114,7 +114,7 @@ string result = action(1);
 
 #### FakeMethodOperator
 
-> 快速复制方法并实现
+> Quickly copy the method and implement it
 
 ```cs
 public class Test
@@ -136,7 +136,7 @@ var action = FakeMethodOperator.Default()
 string result = action("xiao");              //result: "xiao is xxx;"
 ```
 
-> [参见 UT 测试](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/DynamicMethodTest.cs#L96-L196)
+> [See UT test](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/DynamicMethodTest.cs#L96-L196)
 
 <br/>
 <br/>
