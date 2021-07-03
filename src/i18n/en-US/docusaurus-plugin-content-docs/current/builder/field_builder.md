@@ -1,5 +1,5 @@
 ---
-title: "Field Builder"
+title: "字段构建器"
 ---
 
-Field Builder inherits everything from `FieldTemplate<FieldBuilder>` owns field templates.
+字段构建器继承自 `FieldTemplate<FieldBuilder>` 拥有字段模板的一切 API.

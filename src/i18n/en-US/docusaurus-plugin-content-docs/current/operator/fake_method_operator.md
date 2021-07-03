@@ -15,8 +15,6 @@ The initialization template for this class is：
 ```cs
 using
 
-   public static class [random_name]. . .
-
-         . . . need to build your own
-   . . .
+   public static class [random_name]. need to build your own
+   .
 ```

@@ -1,9 +1,9 @@
 ---
-title: "アップグレード ログ"
+title: "升级日志"
 ---
 
-## Natahsha は、比較的包括的なアップグレード ログを提供します
+## Natahsha 提供了相对较全面的升级日志
 
-仕訳帳は年ディメンション別に分割され、
+日志按年份维度划分，
 
 - [2019](https://natasha.dotnetcore.xyz/zh/update/2019.html)

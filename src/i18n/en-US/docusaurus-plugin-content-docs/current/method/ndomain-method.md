@@ -1,8 +1,8 @@
 ---
-title: "The ndomain method"
+title: "ndomain 方法"
 ---
 
-NDomain's static approach allows you to dynamically build delegates for the Func/Action series.
+NDomain 的静态方法，可以动态构建出 Func / Action 系列的委托。
 
 ```cs
 Create a delegate in a random domain
@@ -21,13 +21,13 @@ The second argument of Func / AsyncFunc / Unsafe Funnc / AsyncUnsafeFunc is the 
 
 method(script, "System", assembly, tyypeof(Console));
 
-e.g.：
-NDomain.Default.Func<int,int,string>("return" (arg1-arg2). ToString(); ","System","System.IO");
+例如：
+NDomain.Default.Func<int,int,string>("return (arg1+arg2).ToString();","System","System.IO");
 ```
 
  <br/>
 
-Because it is a variable parameter, you can pass multiple
+由于是可变参数，所以你可以传多种多个
 
 ```cs
 

@@ -5,13 +5,13 @@ title: "enum"
 ```cs
 
 var script = new OopOperator()
-    . HiddenNameSpace(). ChangeToEnum()
-    . Access(AccessTypes.Public)
-    . Name("EnumUT1")
-    . EnumField("Apple")
-    . EnumField("Orange",2)
-    . EnumField("Banana")
-    . Builder(). Script;
+    .HiddenNameSpace().ChangeToEnum()
+    .Access(AccessTypes.Public)
+    .Name("EnumUT1")
+    .EnumField("Apple")
+    .EnumField("Orange",2)
+    .EnumField("Banana")
+    .Builder().Script;
 
 
 
@@ -26,19 +26,19 @@ public enum EnumUT1{
 
 ```
 
-HiddenNameSpace メソッドが呼び出されたため、結果に Namespace はありません
+因为调用了 HiddenNameSpace 方法，所以结果没有 Namespace
 
-NEnum を使用して、新しいアプリケーションを直接：
+也可以直接用 NEnum 来创建：
 
 ```cs
 
 var script = NEnum
-    . Namespace("aaa")
-    . Access(AccessTypes.Public)
-    . Name("EnumUT1")
-    . EnumField("Apple")
-    . EnumField("Orange",2)
-    . EnumField("Banana")
-    . GetType();
+    .Namespace("aaa")
+    .Access(AccessTypes.Public)
+    .Name("EnumUT1")
+    .EnumField("Apple")
+    .EnumField("Orange",2)
+    .EnumField("Banana")
+    .GetType();
 
 ```

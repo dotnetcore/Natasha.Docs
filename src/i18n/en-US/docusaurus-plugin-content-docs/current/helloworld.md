@@ -4,7 +4,7 @@ title: "Hello world"
 
 ## Brief introduction
 
-Natasha allows you to script interactions at runtime, create dynamic methods, typical scenarios such as type mapping, and make remote calls. If you haven't already used apps like AutoMapper/Dapper/Json.net, experience their quickness and convenience, and if you continue to delve deeper you'll find some OpCodes-style code, that's the code for dynamic builds.
+Natasha allows you to script interactions at runtime, create dynamic methods, typical scenarios such as type mapping, and make remote calls. Natasha 支持您在运行时进行脚本交互，创建动态方法，典型场景例如类型映射，远程调用。 如果您还没有用过此类的应用可以尝试一些例如 AutoMapper/Dapper/Json.net 之类的名库， 体验一下它们的快捷与方便，如果您继续深入探索便会发现一些 OpCodes 样式的代码,那便是用于动态构建的代码。 If you haven't already used apps like AutoMapper/Dapper/Json.net, experience their quickness and convenience, and if you continue to delve deeper you'll find some OpCodes-style code, that's the code for dynamic builds.
 
 .NET allows you to generate additional functionality again based on logic while your program is running, and from a technical point of view, the cycle of the program runs roughly as follows, the C#code, compiled into IL code, is converted to cost instructions, When your program starts running, the IL code starts to work, and the .NET virtual machine allows you to inject IL code again at runtime, It's a bit like a plug-in that loads into a program at runtime.
 
@@ -18,7 +18,9 @@ Both Emit and Expression Tree use scenarios, Natasha, apply.
 
 ## Use groups
 
-First of all, this class library is not for beginners, but needs to have a certain packaging basis, have a certain dynamic programming skills of people.  
+首先来说本类库并不是为初学者准备的，而是需要有一定的封装基础，有一定的动态编程技巧的人。  
+尽管 Natasha 入门十分简单，但如果您没有基础知识和经验的话还是不知道它能用在何处。  
+Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.First of all, this class library is not for beginners, but needs to have a certain packaging basis, have a certain dynamic programming skills of people.  
 Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.  
 Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.
 
@@ -60,10 +62,8 @@ sharpBuilder.Compiler.Domain s domainmanagement.Random;
 // Use file compilation mode, dynamic assemblies will compile into DLL files, and of course you can use memory streaming mode.
 sharpBuilder.UseFileCompile();
 
-// If the code compiles incorrectly, throw and log.
-sharpBuilder.UseFileCompile();
-
-// If the code compiles incorrectly, throw and log. sharpBuilder.ThrowAndLogCompilerError();
+//如果代码编译错误，那么抛出并且记录日志。
+sharpBuilder.ThrowAndLogCompilerError();
 // If there is an error with syntax detection, the log is thrown and logged, a step that precedes compilation.
 sharpBuilder.ThrowAndLogSyntaxError();
 

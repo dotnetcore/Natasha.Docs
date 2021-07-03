@@ -1,8 +1,8 @@
 ---
-title: "ndomain メソッド"
+title: "ndomain 方法"
 ---
 
-Func/Action ファミリのデリゲートを動的に構築できる NDomain の静的メソッド。
+NDomain 的静态方法，可以动态构建出 Func / Action 系列的委托。
 
 ```cs
 ランダムドメインにデリゲートを作成します
@@ -21,13 +21,13 @@ Func / AsyncFunc / UnsafeFunc / AsyncUnsafeFunc の 2 番目の引数は名前�
 
 method(script, "System", assembly, tyypeof(Console));
 
-例：
-NDomain.Default.Func<int,int,string>("return (arg1+arg2)) です。 ToString(); ","System","System.IO");
+例如：
+NDomain.Default.Func<int,int,string>("return (arg1+arg2).ToString();","System","System.IO");
 ```
 
  <br/>
 
-可変パラメータなので、複数のパスを渡します
+由于是可变参数，所以你可以传多种多个
 
 ```cs
 

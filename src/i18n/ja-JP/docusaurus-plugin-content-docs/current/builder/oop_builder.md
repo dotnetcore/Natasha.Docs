@@ -1,7 +1,7 @@
 ---
-title: "オブジェクト ビルダー OopBuilder"
+title: "对象构建器 OopBuilder"
 ---
 
-オブジェクト ビルダーは、UsingTemplate テンプレートを継承し、オブジェクトを構築するためのすべての API を所有します。  
-オブジェクトビルダーは、FieldBuilder / PropertyBuilder / MethodBuilder / CtorBuilder のデリゲートビルド API をラップします ：`Method (Action<MethodBuilder> action)`  
-や、PublicField / InternalField / PrivateStaticField などの単純な Field API など。
+对象构建器继承了 UsingTemplate 模板，拥有 构建对象的所有 API。  
+对象构建器包装了 FieldBuilder / PropertyBuilder / MethodBuilder / CtorBuilder 的委托构建 API， 例如 ：`Method(Action<MethodBuilder> action)`  
+以及一些简单的 Field API 例如 PublicField / InternalField / PrivateStaticField 等等。

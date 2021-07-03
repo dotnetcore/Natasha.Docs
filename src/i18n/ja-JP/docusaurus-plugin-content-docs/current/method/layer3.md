@@ -1,7 +1,7 @@
 ---
-title: "軽度のパッケージ3"
+title: "轻度封装3"
 ---
 
-DelegateOperator 上に簡単な操作が組み込まれます。
+在 DelegateOperator 的基础上构建了更简单的操作。
 
 TODO

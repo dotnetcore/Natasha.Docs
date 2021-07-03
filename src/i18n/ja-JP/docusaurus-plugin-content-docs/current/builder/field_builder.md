@@ -1,5 +1,5 @@
 ---
-title: "フィールド ビルダー"
+title: "字段构建器"
 ---
 
-フィールド ビルダーは、 `FieldTemplate<FieldBuilder>` を所有しているすべての API から継承されます。
+字段构建器继承自 `FieldTemplate<FieldBuilder>` 拥有字段模板的一切 API.

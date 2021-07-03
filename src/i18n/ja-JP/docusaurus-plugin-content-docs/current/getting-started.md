@@ -25,7 +25,7 @@ Emit とエクスプレッション ツリーの使用シナリオは、Natasha 
 
 ## インストールします
 
-プロジェクトが . NetCore プロジェクトでは、Natasha .
+NetCore プロジェクトでは、Natasha .
 
 - コマンド  
   `Install-Package DotNetCore.Natasha -Version xxxx を選択`
