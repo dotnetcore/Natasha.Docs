@@ -1,0 +1,31 @@
+name: build site
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feature/docusaurus
+  push:
+    branches:
+      - feature/docusaurus
+
+jobs:
+  build:
+    if: "! contains(toJSON(github.event.commits.*.message), '[ci skip]')"
+    name: Build docusaurus Site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: install yarn
+        run: npm i -g --force yarn
+      - name: restore yarn
+        run: |
+          cd $GITHUB_WORKSPACE/src
+          yarn install
+      - name: yarn build
+        run: |
+          cd $GITHUB_WORKSPACE/src
+          yarn run build
