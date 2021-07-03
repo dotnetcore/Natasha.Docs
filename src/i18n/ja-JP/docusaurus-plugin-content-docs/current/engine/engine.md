@@ -1,21 +1,21 @@
 ---
-title: "Natasha.CSharpEngine エンジンは、Natasha.Framework のフレームワークを使用してカプセル化および統合されています。"
+title: "Natasha.CSharpEngine 引擎采用了 Natasha.Framework 的框架，对其进行封装、集成。"
 ---
 
-Natasha.CSharpEngine は、：Natasha.CSharpSyntax \ Natasha.CSharpCompiler \ Natasha.Exception \ Natasha.Domain で構成されています。
+Natasha.CSharpEngine 是由：Natasha.CSharpSyntax \ Natasha.CSharpCompiler \ Natasha.Exception \ Natasha.Domain 组成。
 
-- C# 標準レイヤーとして、コンパイルと構文ライブラリは次のようになります ：
+- 作为 C# 标准层，编译与语法库如下 ：
 
-  - Natasha.CSharpSyntax： は、Framework の SyntaxBase 標準を実装し、LoadTreeFromLauguage メソッドをオーバーロードして、上層に C# 構文ツリーを提供します。
-  - Natasha.CSharpCompiler: Framework の ComplierBase 標準を実装し、GetCompilation メソッドをオーバーロードして、上層に C# コンパイル要素を提供します。
+  - Natasha.CSharpSyntax： 实现了 Framework 中 SyntaxBase 标准， 重载 LoadTreeFromLauguage 方法为上层提供 C# 语法树。
+  - Natasha.CSharpCompiler:实现了 Framework 中 ComplierBase 标准，重载 GetCompilation 方法为上层提供 C# 编译元。
 
-- NatashaCSharpEngine クラスはコア エンジンであり、NatashaCSharpSyntax と NatashaCSharpCompiler で構成され、エンジンセクションには ComplierBase のイベントが登録され、NatashaCSharpSyntax と NatashaCSharpCompiler の自動エラー訂正機能が実装されます：
+- NatashaCSharpEngine 类为核心引擎, 由 NatashaCSharpSyntax 和 NatashaCSharpCompiler 组成，其中引擎部分注册了 ComplierBase 的事件，事件中实现了 NatashaCSharpSyntax 与 NatashaCSharpCompiler 配合自动纠错的功能：
 
-  - NatashaCSharpSyntax : Natasha.CSharpSyntax の CSharpSyntaxBase から継承され、ライブラリ自体に必要な機能の一部が追加されます。
-  - NatashaCSharpCompiler : Natasha.CSharpCompiler の CSharpCompilerBase から継承され、トップライブラリ自体に必要な機能の一部が追加されます。
-  - Natasha.Domain ： は、Framework の DomainBase 標準を実装し、DomainManagement に自動的に登録する機能を追加し、プラグイン参照管理を追加し、動的コンパイルとプラグインの相互作用を強化します。
-  - Natasha.Exception : CompilationException クラスを提供し、上記のプロセスに統合してコンパイル例外を収集します。
+  - NatashaCSharpSyntax : 继承自 Natasha.CSharpSyntax 中的 CSharpSyntaxBase，并增加了上层库本身需要的一些功能。
+  - NatashaCSharpCompiler : 继承自 Natasha.CSharpCompiler 中的 CSharpCompilerBase，并增加了上层库本身需要的一些功能。
+  - Natasha.Domain ： 实现了 Framework 中 DomainBase 标准，添加了自动向 DomainManagement 注册的功能， 添加了 插件-引用 管理，增强了动态编译与插件的互动。
+  - Natasha.Exception : 提供了 CompilationException 类，并集成在上述流程中，全程搜集编译异常。
 
-- AssemblyCSharpBuilder は、NatashaCSharpEngine から継承され、構文ツリーとコンパイラの構成 API をカプセル化し、コンパイル プロセスを完全に制御する、外部に公開されるアセンブリ のコンパイル クラスです。
+- AssemblyCSharpBuilder 为对外暴露的程序集编译类，该类继承自 NatashaCSharpEngine, 对语法树和编译器的配置 API 进行了封装，对编译流程进行了完整的把控。
 
-Natasha.CSharpSyntax および Natasha.CSharpCompiler を使用して、独自の機能を実装できます。
+您可以使用 Natasha.CSharpSyntax 及 Natasha.CSharpCompiler 去实现自己的功能。

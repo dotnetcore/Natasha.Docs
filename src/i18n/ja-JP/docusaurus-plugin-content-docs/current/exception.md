@@ -1,8 +1,8 @@
 ---
-title: "例外キャッチ"
+title: "异常捕获"
 ---
 
-#### 例外構造：
+#### 异常结构：
 
 ```cs
 public class CompilationException
@@ -17,44 +17,44 @@ public class CompilationException
         }
 
 
-        //コンパイルログ
+        //编译日志
         public string Log;
 
-        //エラー情報
+        //错误信息
         public string Message;
 
-        //format のスクリプト文字列
+        //格式化后的脚本字符串
         public string Formatter;
 
-        //エラーの種類
+        //错误类型
         public ComplieError ErrorFlag;
 
-        //roslyn 診断コレクション
+        //roslyn诊断集合
         public List<Diagnostic> Diagnostics;
 
 }
 ```
 
 ```cs
-コンパイル プロセス全体で例外が関与するプロセスには、：
-// 構文ツリーを追加すると例外
+//整个编译流程中涉及到异常的过程包括：
+//添加语法树会返回异常
+//AssemblyBuilde builder;;
+var exception = builder.Syntax.Add();
+
+
+//编译过后 Exceptions 字段中会存有异常
 //AssemblyBuilde builder;
-var exception = builder. Syntax.Add();
+var exception = builder.Exceptions;
 
 
-//コンパイル後の Exceptions フィールドに例外があります
-//AssemblyBuilde builder;
-var exception = builder. Exceptions;
-
-
-//異常な動作を設定することで、異常の発生動作を制御
-builder. Syntax.ErrorBehavior = ExceptionBehavior.Log | ExceptionBehavior.Throw;
+//可以通过设置异常行为来控制异常的发生动作
+builder.Syntax.ErrorBehavior = ExceptionBehavior.Log | ExceptionBehavior.Throw;
 builder.Compiler.ErrorBehavior = ExceptionBehavior.Throw;
 ```
 
-例：
+例如：
 
 ```cs
 NClass @class = NClass.Random();
-@class. Syntax.ErrorBehavior = xxx;
+@class.Syntax.ErrorBehavior = xxx;
 ```

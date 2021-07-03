@@ -4,7 +4,7 @@ title: "Hello world"
 
 ## はじめに
 
-Natasha は、実行時にスクリプト操作を実行したり、型マッピングやリモート呼び出しなどの一般的なシナリオで動的メソッドを作成したりできます。 AutoMapper/Dapper/Json.net などの名前のライブラリをまだ使用していないアプリを使用していない場合は、 ですばやく簡単に体験できます。
+Natasha は、実行時にスクリプト操作を実行したり、型マッピングやリモート呼び出しなどの一般的なシナリオで動的メソッドを作成したりできます。 如果您还没有用过此类的应用可以尝试一些例如 AutoMapper/Dapper/Json.net 之类的名库， 体验一下它们的快捷与方便，如果您继续深入探索便会发现一些 OpCodes 样式的代码,那便是用于动态构建的代码。
 
 .NET を使用すると、プログラムの実行中にロジックに基づいて他の機能を再度生成でき、技術的な観点からは、 プログラムの実行サイクルは、次のように実行され、C# コードは IL コードにコンパイルされ、コストで変換され、 プログラムの実行を開始すると IL コードが機能し始め、.NET 仮想マシンは実行時に IL コードを再度挿入できます これはプラグインのようなもので、実行時にプログラムにロードされます。
 
@@ -50,6 +50,18 @@ DotNetCore.Natasha.CSharp.All v2.0.0.0 を使用して、安定版を統合し�
 
 ```cs
 
+//使用 Natasha 的 CSharp 编译器直接编译字符串
+AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
+
+//给编译器指定一个随机域
+sharpBuilder.Compiler.Domain = DomainManagement.Random;
+
+//使用文件编译模式，动态的程序集将编译进入DLL文件中，当然了你也可以使用内存流模式。
+sharpBuilder.UseFileCompile();
+
+//如果代码编译错误，那么抛出并且记录日志。
+sharpBuilder.ThrowAndLogCompilerError();
+//如果语法检测时出错，那么抛出并记录日志，该步骤在编译之前。
 Natasha の CSharp コンパイラを使用して文字列を直接コンパイルします
 AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
 

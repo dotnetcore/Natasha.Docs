@@ -1,5 +1,5 @@
 ---
-title: "Object action class OopOperator"
+title: "对象操作类 OopOperator"
 ---
 
-The change class inherits from OopBuilder and has all the APIs to build the object. There is no other way.
+改类继承自 OopBuilder ，拥有构建对象的一切 API. 无其他方法。

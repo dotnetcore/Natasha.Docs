@@ -1,19 +1,19 @@
 ---
-title: "API quick checklist"
+title: "API速查表"
 ---
 
 <br/>
 
-|   The class name   |                                   function                                    |       Namespaces        |            The type of operation             |
-|:------------------:|:-----------------------------------------------------------------------------:|:-----------------------:|:--------------------------------------------:|
-|     NAssembly      | Quickly create action classes such as oop and delegates for the same assembly |     Natasha.CSharp      | Static initialization, dynamic instantiation |
-|     NInstance      |  Depending on the type, a delegate that initializes the instance is provided  |     Natasha.CSharp      |                    Static                    |
-|     NDelegate      |         Quickly create Action/Func delegates for the specified domain         |     Natasha.CSharp      | Static initialization, dynamic instantiation |
-|       NClass       |                         Quickly create a public class                         |     Natasha.CSharp      | Static initialization, dynamic instantiation |
-|     NInterface     |                       Quickly create a public interface                       |     Natasha.CSharp      | Static initialization, dynamic instantiation |
-|       NEnum        |                   Quickly create a public enumeration class                   |     Natasha.CSharp      | Static initialization, dynamic instantiation |
-|      NStruct       |                       Quickly create a public structure                       |     Natasha.CSharp      | Static initialization, dynamic instantiation |
-| FakeMethodOperator |                        Copy methodInfo creation method                        | Natasha.CSharp.Operator | Static initialization, dynamic instantiation |
-| FastMethodOperator |                            Quickly create methods                             | Natasha.CSharp.Operator | Static initialization, dynamic instantiation |
-|  DelegateOperator  |                          Quickly implement delegates                          | Natasha.CSharp.Operator |                    Static                    |
-|    OopOperator     |                Build classes/interfaces/structures dynamically                | Natasha.CSharp.Operator | Static initialization, dynamic instantiation |
+|         类名         |           作用            |       Namespaces        |    操作类型     |
+|:------------------:|:-----------------------:|:-----------------------:|:-----------:|
+|     NAssembly      |  快速创建同程序集的 oop 及委托等操作类  |     Natasha.CSharp      | 静态初始化,动态实例化 |
+|     NInstance      |    根据类型，提供一个初始化实例的委托    |     Natasha.CSharp      |     静态      |
+|     NDelegate      | 快速创建指定域的 Action/Func 委托 |     Natasha.CSharp      | 静态初始化,动态实例化 |
+|       NClass       |        快速创建一个公有类        |     Natasha.CSharp      | 静态初始化,动态实例化 |
+|     NInterface     |       快速创建一个公有接口        |     Natasha.CSharp      | 静态初始化,动态实例化 |
+|       NEnum        |       快速创建一个公有枚举类       |     Natasha.CSharp      | 静态初始化,动态实例化 |
+|      NStruct       |       快速创建一个公有结构体       |     Natasha.CSharp      | 静态初始化,动态实例化 |
+| FakeMethodOperator |   仿造 MethodInfo 创建方法    | Natasha.CSharp.Operator | 静态初始化,动态实例化 |
+| FastMethodOperator |         快速创建方法          | Natasha.CSharp.Operator | 静态初始化,动态实例化 |
+|  DelegateOperator  |         快速实现委托          | Natasha.CSharp.Operator |     静态      |
+|    OopOperator     |      动态构建类/接口/结构体       | Natasha.CSharp.Operator | 静态初始化,动态实例化 |

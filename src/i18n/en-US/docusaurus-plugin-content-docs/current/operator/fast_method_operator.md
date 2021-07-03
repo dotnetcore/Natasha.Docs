@@ -9,8 +9,6 @@ Initialize the template to：
 ```cs
 using
 
-   public static class [random_name]. . .
-
-         public static . . . need to build your own
-   . . .
+   public static class [random_name]. public static . need to build your own
+   .
 ```

@@ -19,8 +19,6 @@ var assembly s domain. LoadPluginFromStream(dllPath);
 //remove the reference from the current domain and the next compilation will not take the assembly's information with
 
 //Remove the short name reference
-domain. Remove(dllPath);
-// Remove assembly references, or short name references
-domain. Remove(assembly);
+domain.
 
 ```

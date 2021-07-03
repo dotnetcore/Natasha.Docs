@@ -1,9 +1,9 @@
 ---
-title: "Upgrade logs"
+title: "升级日志"
 ---
 
-## Natahsha provides a relatively comprehensive upgrade log
+## Natahsha 提供了相对较全面的升级日志
 
-Logs are broken down by year dimension.
+日志按年份维度划分，
 
 - [2019](https://natasha.dotnetcore.xyz/zh/update/2019.html)
