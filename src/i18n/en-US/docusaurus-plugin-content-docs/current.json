@@ -1,0 +1,10 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.someSidebar.category.基础内容": {
+    "message": "The underlying content",
+    "description": "The label for category 基础内容 in sidebar someSidebar"
+  }
+}
