@@ -12,14 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v1
+      - name: crowdin action
+        uses: crowdin/github-action@1.1.0
         with:
-          node-version: "12"
-      - name: install better-crowdin
-        run: npm install -g better-crowdin
-      - name: run crowdin
+          upload_translations: true
+          download_translations: true
         env:
-          CROWDIN_API_KEY: ${{ secrets.CROWDIN_API_KEY }}
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_API_KEY }}
-        run: |
-          better-crowdin upload
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_API_KEY }}
