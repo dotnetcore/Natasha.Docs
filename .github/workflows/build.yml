@@ -8,10 +8,10 @@ on:
   push:
     branches:
       - feature/docusaurus
+      - l10n_crowdin_action
 
 jobs:
   build:
-    if: "! contains(toJSON(github.event.commits.*.message), '[ci skip]')"
     name: Build docusaurus Site
     runs-on: ubuntu-latest
     steps:
