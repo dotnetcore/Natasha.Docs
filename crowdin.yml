@@ -1,0 +1,19 @@
+commit_message: "[ci skip]"
+preserve_hierarchy: true
+files:
+  - source: "/src/i18n/zh-Hans/**/*"
+    translation: "/src/i18n/%locale%/**/%original_file_name%"
+  - source: "/src/docs/**/*"
+    translation: "/src/i18n/%locale%/docusaurus-plugin-content-docs/current/**/%original_file_name%"
+  - source: "/src/blog/**/*"
+    translation: "/src/i18n/%locale%/docusaurus-plugin-content-blog/**/%original_file_name%"
+  - source: "/src/versioned_docs/**/*"
+    translation: "/src/i18n/%locale%/docusaurus-plugin-content-docs/**/%original_file_name%"
+  - source: "/src/src/pages/**/*"
+    translation: "/src/i18n/%locale%/docusaurus-plugin-content-pages/**/%original_file_name%"
+    ignore:
+      - "/**/*.js"
+      - "/**/*.jsx"
+      - "/**/*.ts"
+      - "/**/*.tsx"
+      - "/**/*.css"
