@@ -1,0 +1,5 @@
+# Configuration for labeler - https://github.com/actions/labeler
+
+📖 Docs: src/docs/**/*
+🌍 i18n: src/i18n/en-US/**/*
+Actions: .github/workflows/**/*
