@@ -1,19 +1,19 @@
 ---
-title: "API速查表"
+title: "API のチェックリスト"
 ---
 
 <br/>
 
-|         类名         |           作用            |          命名空间           |    操作类型     |
-|:------------------:|:-----------------------:|:-----------------------:|:-----------:|
-|     NAssembly      |  快速创建同程序集的 oop 及委托等操作类  |     Natasha.CSharp      | 静态初始化,动态实例化 |
-|     NInstance      |    根据类型，提供一个初始化实例的委托    |     Natasha.CSharp      |     静态      |
-|     NDelegate      | 快速创建指定域的 Action/Func 委托 |     Natasha.CSharp      | 静态初始化,动态实例化 |
-|       NClass       |        快速创建一个公有类        |     Natasha.CSharp      | 静态初始化,动态实例化 |
-|     NInterface     |       快速创建一个公有接口        |     Natasha.CSharp      | 静态初始化,动态实例化 |
-|       NEnum        |       快速创建一个公有枚举类       |     Natasha.CSharp      | 静态初始化,动态实例化 |
-|      NStruct       |       快速创建一个公有结构体       |     Natasha.CSharp      | 静态初始化,动态实例化 |
-| FakeMethodOperator |   仿造 MethodInfo 创建方法    | Natasha.CSharp.Operator | 静态初始化,动态实例化 |
-| FastMethodOperator |         快速创建方法          | Natasha.CSharp.Operator | 静态初始化,动态实例化 |
-|  DelegateOperator  |         快速实现委托          | Natasha.CSharp.Operator |     静态      |
-|    OopOperator     |      动态构建类/接口/结构体       | Natasha.CSharp.Operator | 静态初始化,动态实例化 |
+|        クラス名        |                   役割                    |          名前空間           |    アクションの種類     |
+|:------------------:|:---------------------------------------:|:-----------------------:|:---------------:|
+|     NAssembly      | アセンブリの oop やデリゲートなどのアクション クラスをすばやく作成します |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|     NInstance      |      型に応じて、インスタンスを初期化するデリゲートを提供します      |     Natasha.CSharp      |      静的です       |
+|     NDelegate      |  指定したドメインの Action/Func デリゲートをすばやく作成します  |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|       NClass       |           パブリック クラスをすばやく作成します           |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|     NInterface     |        パブリック インターフェイスをすばやく作成します         |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|       NEnum        |          パブリック列挙クラスをすばやく作成します           |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|      NStruct       |           パブリック構造体をすばやく作成します            |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+| FakeMethodOperator |         MethodInfo 作成メソッドを模倣します         | Natasha.CSharp.Operator | 静的初期化、動的インスタンス化 |
+| FastMethodOperator |             メソッドをすばやく作成します              | Natasha.CSharp.Operator | 静的初期化、動的インスタンス化 |
+|  DelegateOperator  |             デリゲートをすばやく実装します             | Natasha.CSharp.Operator |      静的です       |
+|    OopOperator     |        クラス/インターフェイス/構造体を動的に構築します        | Natasha.CSharp.Operator | 静的初期化、動的インスタンス化 |

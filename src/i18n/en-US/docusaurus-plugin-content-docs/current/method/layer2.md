@@ -1,7 +1,7 @@
 ---
-title: "轻度封装2"
+title: "Mild package 2"
 ---
 
-在第一层操作类的基础上，又封装了一下，让操作简单一些：
+On the basis of the first layer of operation class, it is encapsulated to make the operation simpler：
 
 TODO

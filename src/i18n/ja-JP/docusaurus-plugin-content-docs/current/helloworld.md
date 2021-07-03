@@ -62,6 +62,18 @@ sharpBuilder.UseFileCompile();
 // コードのコンパイルが間違っている場合は、スローされ、ログが記録されます。
 sharpBuilder.ThrowAndLogCompilerError();
 // 構文検出でエラーが発生した場合は、コンパイル前にログがスローされ、ログが記録されます。
+Natasha の CSharp コンパイラを使用して文字列を直接コンパイルします
+AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
+
+// コンパイラにランダムドメインを割り当
+sharpBuilder.Compiler.Domain = DomainManagement.Random;
+
+//ファイル コンパイル モードを使用すると、動的アセンブリは DLL ファイルにコンパイルされ、もちろんメモリ ストリーム モードを使用することもできます。
+sharpBuilder.UseFileCompile();
+
+// コードのコンパイルが間違っている場合は、スローされ、ログが記録されます。
+sharpBuilder.ThrowAndLogCompilerError();
+// 構文検出でエラーが発生した場合は、コンパイル前にログがスローされ、ログが記録されます。
 sharpBuilder.ThrowAndLogSyntaxError();
 
 
@@ -88,8 +100,7 @@ GetDelegateFromShortName<T>
 // 書き込み呼び出しスクリプトを指定し、先ほどのアセンブリをスローして、using 参照を自動的に追加します
 var action = NDelegate.UseDomain(sharpBuilder.Compiler.Domain). Action("Test.Show();" , assembly);
 
-//実行し、ハローワールドを参照してください!
-action();
+//実行し、ハローワールドを参照してください! action();
 
 ```
 
@@ -114,7 +125,7 @@ func. DisposeDomain();
 
 ランダムドメイン内にカスタムUsingのデリゲートを作成し、結果をDLL
 //に続くUsingパラメータに書き込み、Assembly/Assembly[]/Type/Type[]/string/string[]
-//例でtypeof(string)を渡します。パラメータは可変パラメータであり、無限に追加できます
+//例でtypeof(string)を渡します。 パラメータは可変パラメータであり、無限に追加できます
 
 var func = NDelegate.RandomDomain(
 builder=>builder
@@ -122,7 +133,7 @@ builder=>builder
   . UseFileCompile()
   ). Func<string>("return \"Hello World!\"; ", typeof(string));
 Console.WriteLine(func());
-func. DisposeDomain();
+func.
 
 ```
 
@@ -155,7 +166,7 @@ actionDelegate.DisposeDomain();
 // またはこの
 var action = (Action<string>) actionDelegate;
 action("HelloWorld!");
-action. DisposeDomain();
+action.
 ```
 
 <br/>
@@ -167,7 +178,6 @@ action. DisposeDomain();
 NClass nClass = NClass.DefaultDomain();
 nClass
   . Namespace("MyNamespace")
-  . Public()
   . Name("MyClass")
   . Ctor(ctor=>ctor. Public(). Body("MyField=\"Hello\"; "))
   . Property(prop => prop
@@ -181,7 +191,6 @@ nClass
 //追加メソッド (3.4.00 より前のバージョンでは、上記のプロパティの API を参照)
 MethodBuilder mb = new MethodBuilder();
 mb
-  . Public()
   . Override()
   . Name("ToString")
   . Body("return MyField+\" \"+MyProperty; ")
@@ -191,8 +200,7 @@ mb
 
 //フィールドの追加 (3.4.00 より前のバージョンでは、上記のプロパティの API を参照)
 FieldBuilder fb = nClass.GetFieldBuilder();
-fb. Public()
-  . Name("MyField")
+fb. Name("MyField")
   . Type<string>();
 
 
@@ -202,7 +210,7 @@ fb. Public()
   . Action("Console.WriteLine((new MyClass()). ToString()); ", nClass.GetType());
 
 action();
-action. DisposeDomain();
+action.
 ```
 
 ## 6番目のハローワールド

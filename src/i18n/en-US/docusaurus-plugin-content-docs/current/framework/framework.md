@@ -1,61 +1,61 @@
 ---
-title: "Natasha 3.0+ 抽象了引擎结构，分离出了框架以及各个模块。"
+title: "Natasha 3.0 plus abstracts the engine structure, separating the framework and the individual modules."
 ---
 
-#### 各模块的标准封装在 Natasha.Framework 中：
+#### The standard packages for each module are in Natasha.Framework：
 
-- DomainBase: 继承自 AssemblyLoadContext 类，完成了部分域功能及部分抽象标准。
+- DomainBase: Inherited from the AssemblyLoadContext class, completes some domain functionality and part abstraction standards.
 
-  - AssemblyReferences ： 编译需要的引用库，该字段以程序集/引用字典的形式储存了程序集对应的引用。
-  - GetInstance ： 该方法需要重载，以便于 DomainManagement 类的 Create 操作， 需要返回你当前类的实例，需要重载。
-  - Default_Resolving ： 在系统域加载时触发的方法，需要重载。
-  - Default_ResolvingUnmanagedDll ： 在系统域加载非安代码时触发的方法，需要重载。
-  - CompileStreamHandler ： 当以流的方式成功编译时触发的方法，需要重载。
-  - CompileFileHandler : 当以文件的方式成功编译时触发的方法，需要重载。
-  - Remove ： 删除引用时触发的方法，需要重载。
+  - AssemblyReferences ： the reference library needed for compilation, and the field stores the reference to the assembly as an assembly/reference dictionary.
+  - GetInstance ： this method needs to be overloaded so that the Create operation of the DomainManagement class can be facilitated, that you need to return an instance of your current class, that it needs to be overloaded.
+  - Default_Resolving ： method that is triggered when the system domain loads and needs to be overloaded.
+  - Default_ResolvingUnmanagedDll ： method that triggers when the system domain loads non-safe code, it needs to be overloaded.
+  - CompileStreamHandler ： methods that are triggered when successfully compiled as streams need to be overloaded.
+  - CompileFileHandler: Methods that are triggered when successfully compiled as files need to be overloaded.
+  - Remove ： method that triggers when a reference is deleted and needs to be overloaded.
 
-  - AddDeps ： 该方法默认实现通过文件路径添加依赖，3.0+ 将解析 deps.json, 2.0+ 将只添加单个文件。
-  - AddReferencesFromFolder ： 从一个文件夹中添加引用库，可重载。
-  - AddReferencesFromDepsJsonFile ： 从 deps.json 文件中解析引用库，可重载。
-  - AddReferencesFromDllFile ： 从单个 dll 文件中获取引用库，可重载。
-  - LoadPluginFromFile ： 默认实现，加载插件调用 AddDeps 方法加载引用依赖，调用 GetAssemblyFromFile 从文件加载程序集到域，可重载。
-  - LoadPluginFromStream ： 默认实现，加载插件调用 AddDeps 方法加载引用依赖，调用 GetAssemblyFromStream 从流加载程序集到域，可重载。
-  - GetAssemblyFromStream ： 默认实现，区分了系统域和自定义域，从流中加载程序集到域，可重载。
-  - GetAssemblyFromFile ： 默认实现，区分了系统域和自定义域，从文件中加载程序集到域，可重载。
-  - GetDefaultReferences ： 该方法返回一个系统域的所有引用，可重载。
-  - GetCompileReferences ： 该方法返回了系统域及非系统域组合的引用， 可重载。
-  - LoadPluginFromFile ： 当插件以文件方式加载时触发的方法，可重载。
-  - LoadPluginFromStream ： 当插件以流方式加载时触发的方法，可重载。
+  - AddDeps ： This method defaults to adding dependencies through the file path, 3.0 plus will resolve deps.json, and 2.0 plus will add only a single file.
+  - AddReferences FromFolder ： add a reference library from a folder that can be overloaded.
+  - AddReferences FromDepsJsonFile ： parsing the reference library from the deps.json file is overloadable.
+  - AddReferencesFromDllFile ： gets the reference library from a single dll file and can be overloaded.
+  - LoadPluginFromFile ： default implementation, the loading plug-in calls the AddDeps method load reference dependency, calls GetAssemblyFromFile from the file load assembly to the domain, can be overloaded.
+  - LoadPluginFromStream ： default implementation, the loading plug-in calls the AddDeps method load reference dependency, and calls GetAssemblyFromStream from the stream load assembly to the domain, which can be overloaded.
+  - GetAssemblyFromStream ： default implementation that distinguishes between system and custom domains, loading assemblies from stream to domain and overloading.
+  - GetAssemblyFromFile ： default implementation that distinguishes between system domains and custom domains, loading assemblies from files to domains and overloading them.
+  - GetDefaultReferences ： this method returns all references to a system domain and can be overloaded.
+  - GetCompileReferences ： this method returns a reference to a combination of system domain and non-system domain and can be overloaded.
+  - LoadPluginFromFile ： methods that trigger when plug-ins load as files can be overloaded.
+  - LoadPluginFromStream ： method that triggers when a plug-in loads in a stream, can be overloaded.
 
-- SyntaxBase: 作为语法转换的基础类，提供了代码及语法树缓存，规定了一些抽象方法，实现了自动添加缓存的方法。
+- SyntaxBase: As the base class for syntax transformations, it provides a cache of code and syntax trees, specifies abstract methods, and implements methods for automatically adding caches.
 
-  - TreeCache ： 存放字符串代码及语法树的缓存。
-  - LoadTree / LoadTreeFromScript ： 每个语言都有自己的转换方法，但最终需要返回 SyntaxTree ,当您继承该类时，需要实现该方法，返回对应语言的语法树，需要重载。
-  - AddTreeToCache ： 该方法会自动将对应语言的代码及语法树缓存起来，可重载。
+  - TreeCache ： cache that holds string code and syntax trees.
+  - LoadTree / LoadTreeFromScript ： each language has its own conversion method, but eventually needs to return to SyntaxTree, which you need to implement when you inherit the class, return the syntax tree for the corresponding language, and overload it.
+  - AddTreeToCache ： This method automatically caches the code and syntax trees for the corresponding language and can be overloaded.
 
-- `CompilerBase<TCompilation, TCompilationOptions>` where TCompilation : Compilation where TCompilationOptions : CompilationOptions: 编译器抽象， TCompilation 被约束为 Compilation 类型，该类为编译的基础类，在构建编译信息时，每种语言都会对该类进行继承改造，因此它是编译基础。TCompilationOptions 被约束为 CompilationOptions 类型, 改类为构建编译信息的选项类，在构建编译信息时，
+- `CompilerBase<TCompilation, TCompilationOptions>` where TCompilation : Compilation where TCompilationOptions : CompilationOptions: 编译器抽象， TCompilation 被约束为 Compilation 类型，该类为编译的基础类，在构建编译信息时，每种语言都会对该类进行继承改造，因此它是编译基础。TCompilationOptions 被约束为 CompilationOptions 类型, 改类为构建编译信息的选项类，在构建编译信息时，TCompilationOptions is constrained as the Compilation Options type, which is changed to an option class for building compiled information, when building compiled information,
 
-  - AssemblyName : 编译器会对当前代码进行整程序集编译，需要指定程序集名。
-  - AssemblyResult : 编译结果。
-  - AssemblyOutputKind ：Assembly 输出的方式，编译到文件 file / 编译到流 stream。
-  - Domain : 该属性承载了 DomainBase 实例。
-  - PreComplier ： 该方法在编译前执行，如果返回 false 将阻止编译， 可重写。
-  - CompileToFile ： 该方法实现了将以上信息编译到文件的功能，可重写。
-  - CompileToStream : 该方法实现了将以上信息编译到流的功能，可重写。
-  - Compile ：该方法实现了根据输出方式（AssemblyOutputKind）进行自动编译，file 调用 CompileToFile 方法， stream 调用 CompileToStream 方法。
-  - CompileTrees ： 需要被编译的语法树。
+  - AssemblyName: The compiler compiles the entire assembly of the current code and needs to specify the assembly name.
+  - AssemblyResult: Compilation results.
+  - AssemblyOutputKind ：assembly output in a way that compiles to file/compilation to stream stream.
+  - Domain: This property hosts domainBase instances.
+  - PreComplier ： This method is executed before compilation, and if false is returned, it will prevent compilation and can be overridden.
+  - CompileToFile ： this method enables the ability to compile the above information into a file and can be rewritten.
+  - CompileToStream: This method enables the ability to compile the above information into a stream and can be rewritten.
+  - Compile ：this method enables automatic compilation based on the output method (AssemblyOutputKind), file calls the CompileToFile method, and stream calls the CompileToStream method.
+  - CompileTrees ： syntax tree that needs to be compiled.
 
-  - GetCompilationOptions ：返回编译选项，必须重写。
-  - AddOption ：选项设置方法，在获取到 CompilationOptions 之后对其进行自定义操作。
-  - GetCompilation ：根据拿到的 CompilationOptions 返回不同语言的编译信息集，必须重写。
+  - GetCompilationOptions ：returns compilation options that must be rewritten.
+  - AddOption ：option setting method and customize it after you get It.
+  - GetCompilation ：must be rewritten based on the compilation information set that you get that you get in different languages.
 
-  - CompileEmitToFile： 将 compilation 编译到文件，必须重新写。
-  - CompileEmitToStream: 将 compilation 编译到内存流，必须重写。
+  - CompileEmitToFile： compiles the compilation into a file and must be rewritten.
+  - CompileEmitToStream: Compiles compilation into memory stream and must be rewritten.
 
-  - FileCompileSucceedHandler ： 当文件形式编译成功之后引发的事件。
-  - StreamCompileSucceedHandler ：当流形式编译成功之后引发的事件。
+  - FileCompileSucceedHandler ： events that are raised after a file form has been compiled successfully.
+  - StreamCompileSucceedHandler ：events that are raised after a streaming compilation is successful.
 
-  - FileCompileFailedHandler ： 当文件形式编译失败之后引发的事件。
-  - StreamCompileFailedHandler ： 当流形式编译失败之后引发的事件。
+  - FileCompileFailedHandler ： events that are raised after file compilation fails.
+  - StreamCompileFailedHandler ： events raised after a failed compilation of the streaming form.
 
-对以上类进行重写，即可完成一门语言的动态编译，详情请看 Engine 实现篇。
+Rewrite the above classes to complete dynamic compilation of a language, see engine implementation for details.

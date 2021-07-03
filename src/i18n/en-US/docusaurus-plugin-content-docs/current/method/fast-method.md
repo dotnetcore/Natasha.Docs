@@ -1,42 +1,42 @@
 ---
-title: "fast 方法"
+title: "Fast method"
 ---
 
-## 域操作
+## The domain operation
 
 ```cs
-FastMethodOperator.Default             //系统域
-FastMethodOperator.Create("MyDomain")  //创建一个新的独立域
-FastMethodOperator.Random()            //使用一个随机域
+FastMethodOperator.Default//System Domain
+FastMethodOperator.Create ("MyDomain")//Create a new stand-alone domain
+FastMethodOperator.Random()//Use a random domain
 
-//如果方法里传 bool 类型则可以告诉编译器，是否编译成DLL文件，默认是编译到内存。
+//If the bool type is passed in the method, you can tell the compiler whether to compile into a DLL file, which is compiled to memory by default.
 ```
 
 <br/>
 
-## 构建方式
+## How it's built
 
-FastMethodOperator 操作类中，构造函数里制作了一个默认的模板：
+In the FastMethodOperator operation class, a default template is made in the constructor：
 
 ```cs
 HiddenNameSpace()
-.OopAccess(AccessTypes.Public)
-.OopModifier(Modifiers.Static)
-.MethodAccess(AccessTypes.Public)
-.MethodModifier(Modifiers.Static);
+. OopAccess(AccessTypes.Public)
+. OopModifier(Modifiers.Static)
+. MethodAccess(AccessTypes.Public)
+. MethodModifier(Modifiers.Static);
 ```
 
-1. 隐藏了命名空间。
-1. 类的访问级别为公有。
-1. 类的修饰符为静态，
-1. 方法的访问级别为共有。
-1. 方法的修饰符为静态
+1. The namespace is hidden.
+1. The class's access level is public.
+1. The modifier of the class is static,
+1. The access level of the method is common.
+1. The modifier of the method is static
 
 <br/>
 
-## 期望结果
+## Expect results
 
-模板的样子翻译成字符串为：
+The look of the template translates into a string of：
 
 ```cs
 
@@ -53,56 +53,56 @@ public static class xxx
 
 <br/>
 
-## 自动定制
+## Auto-customized
 
-以上的结果可以看出，`xxx`的内容可能需要由自己来定制。Natasha 考虑到这种情况，在模板中实现了‘自实现’功能。
+以上的结果可以看出，`xxx`的内容可能需要由自己来定制。Natasha 考虑到这种情况，在模板中实现了‘自实现’功能。Natasha takes this into account and implements the 'self-implementation' feature in the template.
 
 - className:
 
-  在类模板中，类名初始化会被随机创建，如下：`OopNameScript = "N" + Guid.NewGuid().ToString("N");`, 类名将自动以 GUID 的形式创建。
+  In the class template, the initialization of the class name is randomly created, as follows：`opNameScript s "N" and Guid.NewGuid(). ToString("N");`, the class name is automatically created as a GUID.
 
 - returnType/params:
 
-  在 FastMethodOperator 中重写了 `Complie<T>`方法，以便在父类（builder）编译前对返回值和参数进行检查处理，重度懒癌患者甚至懒得写返回值和参数，那么 Natasha 为此提供了返回值和参数解析的功能。
+  Natasha provides the ability to return values and parameters by rewriting the `Complie<T>`method in FastMethodOperator to examine and process return values and parameters before the parent class compiles, and severe lazy cancer patients are not even bothered to write return values and parameters.
 
 <br/>
 
-## 为什么不自动实现 Using
+## Why not implement Using automatically
 
-- 难以确定的二义性引用，二义性这个问题我不想再多解释了。
-- 制作命名空间映射表，这个代价是巨大的，并还需要解决二义性。
+- Difficult to determine the ambiguity reference, ambiguity this problem I do not want to explain more.
+- Making namespace mapping tables is costly and requires addressing ambiguity.
 - 编程的严谨性，任何编译型语言都是强约束的，它们有自己的规则和特性，不管您是用 EMIT 还是表达式树，元数据都是不可缺少的， Natasha 虽然不用你再去写指令及元数据，但起码的命名空间还是需要您来保障的。
 
 <br/>
 
-## 随意定制
+## Feel free to customize
 
-Natasha 的模板都是写活的，Builder 都十分的灵活，因此您可以不用拘泥于 FastMethodOperator 的模板，在使用时根据自己的场景进行定制。
+Natasha's templates are live and Builder is flexible, so you can customize them to your own scenario without having to stick to FastMethodOperator templates.
 
 例如： `Operator.OopAccess(AccessTypes.Internal);`这将覆盖原有的 OopAccess 函数功能。
 
 <br/>
 
-## 案例
+## Case
 
 ```cs
 
- var script =  FastMethodOperator.Default
-               .Param<string>("str1")
-               .Param<string>("str2")
-               .MethodBody(@"
+ var script = FastMethodOperator.Default
+               . Param<string>("str1")
+               . Param<string>("str2")
+               . MethodBody(@"
                    string result = str1 +"" ""+ str2;
                    Console.WriteLine(result);
-                   return result;")
-               .Return<string>()
-               .Builder()
-               .MethodScript;
+                   return result; ")
+               . Return<string>()
+               . Builder()
+               . MethodScript;
 
 
-/*可以看到生成的代码：
-public static string NatashaDynamicMethod(String str1, String str2)
-{
-     string result = str1 +" "+ str2;
+/?can see the generated code：
+public static string Natasha DynamicMethod (String str1, String str2)
+s
+     string results s str1 s"
      Console.WriteLine(result);
      return result;
 }*/

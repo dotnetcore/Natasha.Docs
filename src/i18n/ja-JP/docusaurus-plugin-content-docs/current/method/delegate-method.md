@@ -1,8 +1,8 @@
 ---
-title: "Delegate 方法"
+title: "Delegate メソッド"
 ---
 
-再 FakeMethodOperator 基础上，构建了 `DelegateOperator<T>`操作类。
+FakeMethodOperator に加え、 `DelegateOperator の<T>`が構築されました。
 
 ```cs
 
@@ -22,28 +22,28 @@ title: "Delegate 方法"
 ```
 
 ```cs
-var action = DelegateOpeartor<Func<string>>.Delegate("return \"1\";");
-action(); //结果是1
+var action = DelegateOpeartor<Func<string>>. Delegate("return \"1\"; ");
+action(); 結果は 1 です
 ```
 
-同时还有几个方法：
+また、いくつかの方法があります：
 
 ```cs
-//异步方法
-DelegateOpeartor<T>.AsyncDelegate
-//非托管方法
-DelegateOpeartor<T>.UnsafeDelegate
-//异步非托管方法
-DelegateOpeartor<T>.UnsafeAsyncDelegate
+非同期メソッド
+DelegateOpeartor<T>. AsyncDelegate
+//アンマネージ メソッド
+DelegateOpeartor<T>. UnsafeDelegate
+//非同期アンマネージ メソッド
+DelegateOpeartor<T>. UnsafeAsyncDelegate
 ```
 
-NamespaceConverter，可以直接扔一个 Assembly,或者精确的传 Type,或者直接写 String.
+NamespaceConverter は、Assembly を直接スローしたり、正確なパス タイプを送信したり、String を直接書き込みできます。
 
 ```cs
 method(script, "System", assembly, tyypeof(Console));
 ```
 
-由于是可变参数，所以你可以传多种多个
+可変パラメータなので、複数のパスを渡します
 
 ```cs
 method(script, "System", "System", "System");

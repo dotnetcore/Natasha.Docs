@@ -1,10 +1,10 @@
 ---
-title: "new 方法"
+title: "new メソッド"
 ---
 
 ```cs
-NewMethod.Create(builder);     //返回弱类型委托
-NewMethod.Create<T>(builder);  //返回强类型委托
+NewMethod.Create(builder);     弱い型のデリゲートを返
+NewMethod.Create<T>(builder);  厳密に型指定されたデリゲートを返します
 ```
 
-这里的 builder 是 FastMethodOperator 实例。
+ここで builder は FastMethodOperator のインスタンスです。

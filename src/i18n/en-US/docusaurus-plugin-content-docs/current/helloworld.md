@@ -19,6 +19,7 @@ Both Emit and Expression Tree use scenarios, Natasha, apply.
 ## Use groups
 
 First of all, this class library is not for beginners, but needs to have a certain packaging basis, have a certain dynamic programming skills of people.  
+Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.  
 Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.
 
 <br/>
@@ -60,7 +61,9 @@ sharpBuilder.Compiler.Domain s domainmanagement.Random;
 sharpBuilder.UseFileCompile();
 
 // If the code compiles incorrectly, throw and log.
-sharpBuilder.ThrowAndLogCompilerError();
+sharpBuilder.UseFileCompile();
+
+// If the code compiles incorrectly, throw and log. sharpBuilder.ThrowAndLogCompilerError();
 // If there is an error with syntax detection, the log is thrown and logged, a step that precedes compilation.
 sharpBuilder.ThrowAndLogSyntaxError();
 
@@ -89,7 +92,6 @@ GetDelegate FromShortName<T>
 var action = NDelegate.UseDomain(sharpBuilder.Compiler.Domain). Action("Test.Show();" , assembly);
 
 //Run and see Hello World!
-action();
 
 ```
 
@@ -113,8 +115,7 @@ func. DisposeDomain();
 ```cs
 
 Create a custom Using delegate within the random domain and write the results to the DLL
-//subsequent Using parameters can pass assembly/assembly/type/type/string?
-/string/string', which is a variable parameter that can be added indefinitely
+//subsequent Using parameters can pass assembly/assembly/type/type/string? /string/string', which is a variable parameter that can be added indefinitely
 
 var func sdal negate.RandomDomain (
 builder->builder
@@ -122,7 +123,7 @@ builder->builder
   . UseFileCompile()
   ). Func<string>("return \"Hello World!\"; ", typeof(string));
 Console.WriteLine(func());
-func. DisposeDomain();
+func.
 
 ```
 
@@ -155,7 +156,7 @@ actionDelegate.DisposeDomain();
 // or so
 var action .<string>) actionDelegate;
 action("HelloWorld!");
-action. DisposeDomain();
+action.
 ```
 
 <br/>
@@ -167,7 +168,6 @@ Class
 NClass nClass s NClass.DefaultDomain();
 nClass
   . Namespace("MyNamespace")
-  . Public()
   . Name("MyClass")
   . Ctor(ctor=>ctor. Public(). Body("MyField=\"Hello\"; "))
   . Property(prop => prop
@@ -181,7 +181,6 @@ nClass
 //Add method (prior to 3.4.00, please refer to the API of the above properties)
 MethodBuilder mb Method s newBuilder();
 mb
-  . Public()
   . Override()
   . Name("ToString")
   . Body("return MyField+\" \"+MyProperty; ")
@@ -191,8 +190,7 @@ mb
 
 //Add fields (prior to 3.4.00, please refer to the API of the above properties)
 FieldBuilder fb s nClass.GetFieldBuilder();
-fb. Public()
-  . Name("MyField")
+fb. Name("MyField")
   . Type<string>();
 
 
@@ -202,7 +200,7 @@ var action s NDelegate
   . Action("Console.WriteLine((new MyClass()). ToString()); ", nClass.GetType());
 
 action();
-action. DisposeDomain();
+action.
 ```
 
 ## The sixth HelloWorld

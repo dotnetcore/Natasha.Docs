@@ -1,10 +1,10 @@
 ---
-title: "new 方法"
+title: "The new method"
 ---
 
 ```cs
-NewMethod.Create(builder);     //返回弱类型委托
-NewMethod.Create<T>(builder);  //返回强类型委托
+NewMethod.Create(builder);     Returns a weak-type delegate
+NewMethod.Create<T>;  Returns a strong-type delegate
 ```
 
-这里的 builder 是 FastMethodOperator 实例。
+The builder here is an example of FastMethodOperator.

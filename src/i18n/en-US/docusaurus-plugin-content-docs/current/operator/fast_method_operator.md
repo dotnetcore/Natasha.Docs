@@ -1,16 +1,16 @@
 ---
-title: "方法快速构建操作类 FastMethodOperator"
+title: "Method to quickly build the action class FastMethodOperator"
 ---
 
-该类继承自 MethodBuilder ，拥有构建方法的一切 API.
+This class is inherited from MethodBuilder and has all the APIs for building methods.
 
-初始化模板为：
+Initialize the template to：
 
 ```cs
 using
 
-   public static class [random_name]{
+   public static class [random_name]. . .
 
-         public static [ 需要自己构建 ]
-   }
+         public static . . . need to build your own
+   . . .
 ```

@@ -10,8 +10,7 @@ var func1 s NDomain.Random(). Func<int>("return 111;" );
 // Create a domain called Jim, and create a delegate within the domain
 var func2 - NDomain.Create ("Jim"). Func<int,string>("return arg. ToString(); ");
 // Create a delegate directly in the system domain
-var func3 s NDomain.Default.Func<int,int,string>("return" (arg1-arg2). ToString(); ");
-.....
+var func3 s NDomain.Default.Func<int,int,string>("return" (arg1-arg2).
 ```
 
  <br/>

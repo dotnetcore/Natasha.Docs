@@ -1,54 +1,54 @@
 ---
-title: "静态初始化操作"
+title: "Static initialization operation"
 ---
 
-Natasha 的所有模板均继承自 ComplierTemplate ，ComplierTemplate 本身会提供静态构造方法。因此上层 API 也会被支持。
+Natasha 的所有模板均继承自 ComplierTemplate ，ComplierTemplate 本身会提供静态构造方法。因此上层 API 也会被支持。Therefore, the upper-level API is also supported.
 
 <br/>
 
-## 使用
+## use
 
-NDelegate / NAssembly / NClass.. / xxx_Oerator 等等以下称为 “Handler”.
+NDelegate / NAssembly / NClass.. / xxx_Oerator and so on is called "Handler".
 
 <br/>
 
-#### 静态初始化代码：
+#### Static initialization code：
 
 ```cs
 
-//使用 domain 域
-Handler.UseDomain(domian, compiler => { 编译器配置 });
+Use domain domain
+Handler.UseDomain (domian, compiler s> { 编译器配置 });
 
 
-//使用某编译器的域
-Handler.UseCompiler(assemblyCSharpCompiler, compiler => { 编译器配置 }));
+// Use a compiler's domain
+Handler.UseCompiler (assemblyCSharpCompiler, compiler s> { 编译器配置 }));
 
 
-//创建一个 "domainJim" 域
-Handler.CreateDomain("domianJim", compiler => { 编译器配置 });
+// Create a "domainJim" domain
+Handler.CreateDomain ("domian Jim", compiler s> { 编译器配置 });
 
 
-//使用默认域
-Handler.DefaultDomain(compiler => { 编译器配置 });
+// Use the default domain
+Handler.DefaultDomain (compiler s> { 编译器配置 });
 
 
-//使用随机域
-Handler.RandomDomain(compiler => { 编译器配置 });
+// Use random domain
+Handler.RandomDomain (compiler s> { 编译器配置 });
 
 ```
 
 <br/>
 
-#### 编译器配置：
+#### Compiler configuration：
 
 ```cs
 builder =>
 {
      builder
-       .CustomerUsing()                    //使用用户自定义的Using
-       .SetAssemblyName("MyAssemblyName")  //设置程序集名
-       .ThrowAndLogCompilerError()         //抛出并记录编译器的异常
-       .ThrowSyntaxError()                 //抛出语法树异常
-       .UseStreamCompile();                //使用流编译
-}
+       . CustomerUsing() // Use user-defined
+       . SetAssemblyName ("MyAssemblyName") // Set assembly name
+       . ThrowAndLogCompilerErrRor() // Throw and record the compiler's exception
+       . ThrowSyntaxError() //Throw syntax tree exception
+       . UseStreamCompile();                Compile
+with a stream
 ```

@@ -5,7 +5,7 @@ title: "Add plug-ins within the domain"
 ```cs
 
 Create an instance of an assembly operation from the specified domain
-var assembly . . . domain. CreateAssembly("MyAssembly");
+var assembly . domain. CreateAssembly("MyAssembly");
 
 
 // Add a written class/structure/interface/enumeration
@@ -42,12 +42,12 @@ assembly. GetType(name);
 
             var domain = DomainManagment.Random;
             var type = NDomain.Create(domain). GetType("public class A{ public A(){Name=\"1\"; }public string Name; }");
-            var func = NDomain.Create(domain). Func<string>("return (new A()). Name; ");
+            var func = NDomain.Create(domain). Name; ");
             Console.WriteLine(func());  result : 1
 
             type. RemoveReferences();  If not removed, the next time A is referenced, a ambiguity
             type is NDomain.Create. GetType("public class A{ public A(){Name=\"2\"; }public string Name; }");
-            func = NDomain.Create(domain). Func<string>("return (new A()). Name; ");
+            func = NDomain.Create(domain). Name; ");
             Console.WriteLine(func());  result : 2
 ```
 

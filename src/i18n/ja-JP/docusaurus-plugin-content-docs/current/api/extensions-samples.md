@@ -1,5 +1,5 @@
 ---
-title: "使用 Natasha 的类型扩展"
+title: "ナタシャの型拡張を使用します"
 ---
 
 ```cs
@@ -7,27 +7,27 @@ title: "使用 Natasha 的类型扩展"
 Example:
 
 
-        typeof(Dictionary<string,List<int>>[]).GetDevelopName();
-        //result:  "System.Collections.Generic.Dictionary<System.String,System.Collections.Generic.List<Int32>>[]"
+        typeof(Dictionary<string,List<int>>[]). GetDevelopName();
+        //result: "System.Collections.Generic.Dictionary<System.String,System.Collections.Generic.List<Int32>>[]"
 
 
-        typeof(Dictionary<string,List<int>>[]).GetAvailableName();
-        //result:  "Dictionary_String_List_Int32____"
+        typeof(Dictionary<string,List<int>>[]). GetAvailableName();
+        //result: "Dictionary_String_List_Int32____"
 
 
-        typeof(Dictionary<string,List<int>>).GetAllGenericTypes();
-        //result:  [string,list<>,int]
+        typeof(Dictionary<string,List<int>>). GetAllGenericTypes();
+        //result: [string,list<>,int]
 
 
-        typeof(Dictionary<string,List<int>>).IsImplementFrom<IDictionary>();
+        typeof(Dictionary<string,List<int>>). IsImplementFrom<IDictionary>();
         //result: true
 
 
-        typeof(Dictionary<string,List<int>>).IsSimpleType();
+        typeof(Dictionary<string,List<int>>). IsSimpleType();
         //result: false
 
 
-        typeof(List<>).With(typeof(int));
+        typeof(List<>). With(typeof(int));
         //result: List<int>
 
 ```

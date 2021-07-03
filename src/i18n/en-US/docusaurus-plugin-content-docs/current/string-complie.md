@@ -1,8 +1,8 @@
 ---
-title: "从字符串编译"
+title: "Compiled from a string"
 ---
 
-传入整个字符串进行编译， Natasha 的最小编译单元为程序集。 请使用 AssemblyCSharpBuilder .
+传入整个字符串进行编译， Natasha 的最小编译单元为程序集。 请使用 AssemblyCSharpBuilder . Please use AssemblyCSharpBuilder .
 
 ```cs
 string text = @"
@@ -10,25 +10,25 @@ string text = @"
   {public class Test{public Test(){
             Name=""111"";
         }public string Name;
-        public int Age{get;set;}
+        public int Age{get; set; }
     }
   }";
 
 
-//根据脚本创建动态类
-AssemblyCSharpBuilder oop = new AssemblyCSharpBuilder();
+// Create dynamic classes based on scripts
+AssemblyCSharpBuilder oops , new AssemblyCSharpBuilder();
 
-//这里就算你添加100个类，最终编译的时候都会在一个程序集中
-oop.Add(text);
+// Here even if you add 100 classes, the final compilation will be in one assembly
+oop. Add(text);
 
-//下面的程序集里会有你在 Syntax 中添加的类
-Assembly assembly = oop.GetAssembly();
+// There will be classes you added to Syntax in the assembly assembly
+.oop. GetAssembly();
 
 
-//或者使用二级API NAssembly
-//该操作类有 CreateClass / CreateInterface 等 API 函数，但最终的构建编译都会在同一个 AssemblyCSharpBuilder 中
-var asm = new NAssembly("MyAssembly");
-asm.AddScript(text);
-var type = asm.GetTypeFromShortName("Test");
-var type = asm.GetTypeFromFullName("HelloWorld.Test");
+//or using a secondary API NAssembly
+//the operation class has API functions such as CreateClass /CreateInterface, but the final build compilation is in the same AssemblyCSharpBuilder
+var asm s new NAssembly ("MyAssembly");
+asm. AddScript(text);
+var type = asm. GetTypeFromShortName("Test");
+var type = asm. GetTypeFromFullName("HelloWorld.Test");
 ```

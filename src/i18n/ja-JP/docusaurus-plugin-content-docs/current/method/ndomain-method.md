@@ -8,10 +8,9 @@ Func/Action ファミリのデリゲートを動的に構築できる NDomain �
 ランダムドメインにデリゲートを作成します
 var func1 = NDomain.Random() Func<int>("return 111;" );
 // Jim という名前のドメインを作成し、ドメイン内にデリゲートを作成します
-var func2 = NDomain.Create("Jim")。. Func<int,string>("return arg. ToString(); ");
+var func2 = NDomain.Create("Jim")。 . Func<int,string>("return arg. ToString(); ");
 //システム ドメインに直接デリゲートを作成します
-var func3 = NDomain.Default.Func<int,int,string>("return (arg1+arg2))。 ToString(); ");
-.....
+var func3 = NDomain.Default.Func<int,int,string>("return (arg1+arg2))。
 ```
 
  <br/>
