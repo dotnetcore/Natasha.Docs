@@ -30,7 +30,7 @@ assembly. CreateFakeMethod(name=null);
 // アセンブリを使用してコンパイルし、アセンブリ
 var result = assembly.Complier();
 // 型を取得し、ここで assembly は前の手順の result
-assembly ではない。 GetType(name);
+assembly ではない。
 
 ```
 
@@ -42,12 +42,12 @@ assembly ではない。 GetType(name);
 
             var domain = DomainManagment.Random;
             var type = NDomain.Create(domain). GetType("public class A{ public A(){Name=\"1\"; }public string Name; }");
-            var func = NDomain.Create(domain). Func<string>("return (new A()). Name; ");
+            var func = NDomain.Create(domain). Name; ");
             Console.WriteLine(func());  result : 1
 
             type. RemoveReferences();  削除しない場合、次に A を参照するときに二義性が表示されます
-            type = NDomain.Create(domain) です。. GetType("public class A{ public A(){Name=\"2\"; }public string Name; }");
-            func = NDomain.Create(domain). Func<string>("return (new A()). Name; ");
+            type = NDomain.Create(domain) です。 . GetType("public class A{ public A(){Name=\"2\"; }public string Name; }");
+            func = NDomain.Create(domain). Name; ");
             Console.WriteLine(func());  result : 2
 ```
 

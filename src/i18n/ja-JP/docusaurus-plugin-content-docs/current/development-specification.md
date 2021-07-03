@@ -46,6 +46,7 @@ Operator の最も重要なコア部分である Builder は、主に Operator �
 
      Natasha に組み込まれている Builder を直接使用すると、： OopBuilder<TOperator> や MethodBuilder などのカスタマイズをすばやく<TOperator>。
      前者はオブジェクト構築テンプレートを提供し、後者は構築方法に焦点を当てします。
+     前者はオブジェクト構築テンプレートを提供し、後者は構築方法に焦点を当てします。
 
 <br/>
 
@@ -63,13 +64,15 @@ this. Access(AccessFlags.Public)
 . Modifier(ModifierFlags.Static);
 ```
 
-同時に、MethodBuilder のメソッド スクリプトは、コンパイルと使用のためにクラス/インターフェイス/構造体に "寄生" する必要があるため、MethodBuilder にはホスト [OopBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs#L24) が</code>{randomname} ：`組み込まれています。</p>
+同時に、MethodBuilder のメソッド スクリプトは、コンパイルと使用のためにクラス/インターフェイス/構造体に "寄生" する必要があるため、MethodBuilder にはホスト [OopBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs#L24) が</code>{randomname} ：`組み込まれています。
 
-<pre><code class="cs"> ClassOptions(item => item
+```cs
+ ClassOptions(item => item
 . Modifier(ModifierFlags.Static)
 . Class()
 . UseRandomName()
 . HiddenNamespace()
 . Access(AccessFlags.Public)
 );
-`</pre>
+`
+```

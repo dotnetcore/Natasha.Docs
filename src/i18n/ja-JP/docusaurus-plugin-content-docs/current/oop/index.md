@@ -32,6 +32,6 @@ public class OopOperator : OopBuilder<OopOperator>
 
 ![Struction](https://github.com/dotnetcore/Natasha/blob/master/Image/OopStruct.png)
 
-この図の右側の注釈は、Natasha のテンプレートのメソッドに対応し、`。`に従って方法を見つけ出します。
+この図の右側の注釈は、Natasha のテンプレートのメソッドに対応し、`。 `に従って方法を見つけ出します。
 
 > 同じ行に注釈が付け、コードは左から右、メソッドは上から下に記述されます。

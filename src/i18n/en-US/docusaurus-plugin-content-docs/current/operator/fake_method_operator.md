@@ -1,22 +1,22 @@
 ---
-title: "仿制方法操作类 FakeMethodOperator"
+title: "Imitation method operation class FakeMethodOperator"
 ---
 
-该类继承自 MethodBuilder 拥有全部构建方法的 API:
+This class is inherited from the API that MethodBuilder has all the build methods:
 
-- UseMethod : 将方法元数据中的信息反射出来，进行仿制，构建出相同的委托。
+- UseMethod: Reflects the information in the method metadata, copies it, and builds the same delegate.
 
-- Methodbody ： 添加方法内容
+- Methodbody ： add method content
 
-- StaticMethodBody : 将方法转为静态方法，并添加方法内容（常用）
+- StaticMethodBody: Turn methods into static methods and add method content (commonly used)
 
-该类的初始化模板为：
+The initialization template for this class is：
 
 ```cs
 using
 
-   public static class [random_name]{
+   public static class [random_name]. . .
 
-         [ 需要自己构建 ]
-   }
+         . . . need to build your own
+   . . .
 ```

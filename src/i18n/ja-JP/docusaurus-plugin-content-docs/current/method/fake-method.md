@@ -23,7 +23,7 @@ FakeMethodOperator.Default
 . Complie()
 ```
 
-これにより、Delegate 型の結果が得られます。 (Action)result。これは.
+これにより、Delegate 型の結果が得られます。 (Action)result。 これは.
 
 または、それは：
 

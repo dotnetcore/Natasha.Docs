@@ -1,8 +1,8 @@
 ---
-title: "从字符串编译"
+title: "文字列からコンパイルします"
 ---
 
-传入整个字符串进行编译， Natasha 的最小编译单元为程序集。 请使用 AssemblyCSharpBuilder .
+文字列全体をコンパイルに渡して、Natasha の最小コンパイル単位はアセンブリです。 AssemblyCSharpBuilder を使用してください。
 
 ```cs
 string text = @"
@@ -10,25 +10,25 @@ string text = @"
   {public class Test{public Test(){
             Name=""111"";
         }public string Name;
-        public int Age{get;set;}
+        public int Age{get; set; }
     }
   }";
 
 
-//根据脚本创建动态类
+//スクリプトから動的クラスを作成する
 AssemblyCSharpBuilder oop = new AssemblyCSharpBuilder();
 
-//这里就算你添加100个类，最终编译的时候都会在一个程序集中
-oop.Add(text);
+//ここでは 100 クラスを追加しても、最終的にコンパイルされ、アセンブリに oop
+されます。 Add(text);
 
-//下面的程序集里会有你在 Syntax 中添加的类
-Assembly assembly = oop.GetAssembly();
+//以下のアセンブリには、Syntax で追加したクラス
+Assembly assembly = oop があります。 GetAssembly();
 
 
-//或者使用二级API NAssembly
-//该操作类有 CreateClass / CreateInterface 等 API 函数，但最终的构建编译都会在同一个 AssemblyCSharpBuilder 中
+/または第 2 レベルの API NAssembly
+//このアクションクラスには CreateClass / CreateInterface などの API 関数がありますが、最終的なビルドコンパイルは同じ AssemblyCSharpBuilder で行います
 var asm = new NAssembly("MyAssembly");
-asm.AddScript(text);
-var type = asm.GetTypeFromShortName("Test");
-var type = asm.GetTypeFromFullName("HelloWorld.Test");
+asm. AddScript(text);
+var type = asm. GetTypeFromShortName("Test");
+var type = asm. GetTypeFromFullName("HelloWorld.Test");
 ```
