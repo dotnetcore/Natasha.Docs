@@ -2,6 +2,7 @@
 title: "プロジェクトの概要"
 description: "Natasha は、コードを動的に簡単に呼び出すことができます"
 slug: /
+sidebar_position: 1
 ---
 
 # Natasha

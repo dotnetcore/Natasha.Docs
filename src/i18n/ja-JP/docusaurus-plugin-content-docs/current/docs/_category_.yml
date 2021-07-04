@@ -1,0 +1,4 @@
+---
+label: 'ドキュメントを作成します'
+position: 600000 #float position is supported
+collapsed: true #keep the category open by default

@@ -2,6 +2,7 @@
 title: "Introduction to the project"
 description: "Natasha helps you easily and dynamically invoke code"
 slug: /
+sidebar_position: 1
 ---
 
 # Natasha
