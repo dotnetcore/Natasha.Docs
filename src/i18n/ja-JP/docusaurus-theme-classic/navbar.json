@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "Natasha",
+    "description": "The title in the navbar"
+  },
+  "item.label.开发文档": {
+    "message": "开发文档",
+    "description": "Navbar item with label 开发文档"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
+}
