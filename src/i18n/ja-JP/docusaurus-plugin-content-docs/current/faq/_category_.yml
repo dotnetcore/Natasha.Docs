@@ -1,0 +1,4 @@
+---
+label: 'よくある質問です'
+position: 500000 #float position is supported
+collapsed: true #keep the category open by default

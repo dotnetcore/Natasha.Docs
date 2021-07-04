@@ -1,0 +1,50 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.someSidebar.category.基础内容": {
+    "message": "The underlying content",
+    "description": "The label for category 基础内容 in sidebar someSidebar"
+  },
+  "sidebar.mySidebar.category.更新记录": {
+    "message": "Update the record",
+    "description": "The label for category 更新记录 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.api": {
+    "message": "api",
+    "description": "The label for category api in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.builder": {
+    "message": "builder",
+    "description": "The label for category builder in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.domain": {
+    "message": "domain",
+    "description": "The label for category domain in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.engine": {
+    "message": "engine",
+    "description": "The label for category engine in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.framework": {
+    "message": "framework",
+    "description": "The label for category framework in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.method": {
+    "message": "method",
+    "description": "The label for category method in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.oop": {
+    "message": "oop",
+    "description": "The label for category oop in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.operator": {
+    "message": "operator",
+    "description": "The label for category operator in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.template": {
+    "message": "template",
+    "description": "The label for category template in sidebar mySidebar"
+  }
+}
