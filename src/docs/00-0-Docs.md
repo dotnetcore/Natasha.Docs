@@ -2,6 +2,7 @@
 title: "项目简介"
 description: "Natasha 助您便利地动态调用代码"
 slug: /
+sidebar_position: 1
 ---
 
 # Natasha

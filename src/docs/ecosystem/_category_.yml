@@ -1,0 +1,3 @@
+label: '周边生态'
+position: 300000 # float position is supported
+collapsed: true # keep the category open by default
