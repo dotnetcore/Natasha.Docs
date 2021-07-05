@@ -2,7 +2,7 @@
 module.exports = {
   title: "Natasha",
   tagline: "Natasha",
-  url: "https://natasha.dotnet-china.org",
+  url: "https://natasha.dotnetcore.xyz",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -144,7 +144,7 @@ module.exports = {
             //   to: "blog",
             // },
             {
-              label: "China .NET Core Community (NCC)",
+              label: ".NET Core Community (NCC)",
               href: "https://github.com/dotnetcore",
             },
             {
