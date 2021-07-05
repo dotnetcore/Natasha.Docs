@@ -23,7 +23,7 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 
 ## 使用群体
 
-首先来说本类库并不是为初学者准备的，而是需要有一定的封装基础，有一定的动态编程技巧的人。  
+首先来说本类库并不是为初学者准备的，而是需要有一定的封装基础，有一定的动态编程经验的人。  
 尽管 Natasha 入门十分简单，但如果您没有基础知识和经验的话还是不知道它能用在何处。
 
 <br/>
@@ -33,41 +33,19 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 如果您的项目是 .NetCore 项目，那么您可以使用 Natasha .
 
 - 命令  
-  `Install-Package DotNetCore.Natasha -Version xxxx`
+  `Install-Package DotNetCore.Natasha.CSharp.All -Version xxxx`
 
 - nuget  
-  `DotNetCore.Natasha`
+  `DotNetCore.Natasha.CSharp.All`
 
 <br/>
 
 ## 准备工作
 
-您需要在工程文件中添加一些引用所需的标签：
+您需要在程序之初进行 Natasha 组件的初始化：
 
 ```cs
-
-  <PropertyGroup>
-
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-
-    //控制台/桌面如下
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-
-    //老版WEB需要
-    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
-
-    //3.1 新版WEB要加
-    <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    //3.1 如果不加上面节点也可以引用Razor的编译服务
-    Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
-
-    //如果你觉得发布文件夹下关于本地化的文件夹太多，您可以选择如下节点
-    //选项：cs / de / es / fr / it / ja / ko / pl / ru / tr / zh-Hans / zh-Hant
-    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-
-  </PropertyGroup>
-
+NatashaInitializer.InitializeAndPreheating();
 ```
 
 <br/>
@@ -82,7 +60,9 @@ string script = "Console.WriteLine(""Hello World!"");";
 
 //然后像这样用
 var action = NDomain.Random().Delegate(script);
-action();
+action();  
+
+//如果以后都不会再用 action 可以卸载
 action.DisposeDomain();
 
 ```
