@@ -64,14 +64,3 @@ this.Access(AccessFlags.Public)
 .Modifier(ModifierFlags.Static);
 ```
 
-同时 MethodBuilder 的方法脚本需要 “寄生” 在一个类/接口/结构体中才能进行编译和使用，因此 MethodBuilder 内部有宿主 [OopBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs#L24) 来接收 MethodBuilder 产生的脚本，最后进行编译的是 OopBuilder , 同时 OopBuilder 有如下初始化：`public static class {randomname} {}`。
-
-```cs
- ClassOptions(item => item
-.Modifier(ModifierFlags.Static)
-.Class()
-.UseRandomName()
-.HiddenNamespace()
-.Access(AccessFlags.Public)
-);
-```
