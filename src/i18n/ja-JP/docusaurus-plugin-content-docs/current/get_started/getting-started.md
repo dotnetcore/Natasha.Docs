@@ -18,7 +18,7 @@ Emit とエクスプレッション ツリーの使用シナリオは、Natasha 
 
 ## グループを使用します
 
-まず、このライブラリは初心者向けではなく、特定のカプセル化基盤と動的プログラミングスキルを持つ人を必要とします。  
+まず、このライブラリは初心者向けではなく、特定のカプセル化基盤と動的プログラミングの経験を持つ人を必要とします。  
 ナタシャは始めるのは簡単ですが、基本と経験がない場合は、どこで使用できるかわからない場合があります。
 
 <br/>
@@ -28,41 +28,19 @@ Emit とエクスプレッション ツリーの使用シナリオは、Natasha 
 NetCore プロジェクトでは、Natasha .
 
 - コマンド  
-  `Install-Package DotNetCore.Natasha -Version xxxx を選択`
+  `Install-Package DotNetCore.Natasha.CSharp.All -Version xxxx コマンド`
 
 - nuget  
-  `DotNetCore.Natasha`
+  `DotNetCore.Natasha.CSharp.All`
 
 <br/>
 
 ## 準備をする
 
-プロジェクト ファイルに、必要なラベルを参照するラベルをいくつか追加する必要があります：
+プログラムの初めに Natasha コンポーネントの初期化を行う必要があります：
 
 ```cs
-
-  <PropertyGroup>
-
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-
-    //コンソール/デスクトップは次のとおりです
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-
-    //古い WEB は
-    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
-
-    //3.1 新しいバージョンの WEB を追加する必要があります
-    <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    //3.1 上記のノードを追加しない場合、Razor のコンパイル サービスを参照できます
-    Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
-
-    //ローカライズされたフォルダに関するリリース フォルダが多すぎると思う場合は、次のノード
-    //オプション：cs / de / es / fr / it / ja / ko / pl / ru / tr / zh-Hans / zh-Hant
-    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-
-  </PropertyGroup>
-
+NatashaInitializer.InitializeAndPreheating();
 ```
 
 <br/>
@@ -77,7 +55,9 @@ string script = "Console.WriteLine("Hello World!");";
 
 // を使用して、
 var action = NDomain.Random() を使用します。 Delegate(script);
-action();
+action();  
+
+//後で action を使用しない場合は、
 action. DisposeDomain();
 
 ```

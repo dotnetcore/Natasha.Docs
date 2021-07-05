@@ -18,9 +18,7 @@ Both Emit and Expression Tree use scenarios, Natasha, apply.
 
 ## Use groups
 
-首先来说本类库并不是为初学者准备的，而是需要有一定的封装基础，有一定的动态编程技巧的人。  
-尽管 Natasha 入门十分简单，但如果您没有基础知识和经验的话还是不知道它能用在何处。  
-Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.First of all, this class library is not for beginners, but needs to have a certain packaging basis, have a certain dynamic programming skills of people.  
+First of all, this class library is not for beginners, but needs to have a certain packaging basis, have a certain degree of dynamic programming experience of people.First of all, this class library is not for beginners, but needs to have a certain packaging basis, have a certain dynamic programming skills of people.  
 Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.  
 Although Natasha is easy to get started, you don't know where it can be used if you don't have the basics and experience.
 
@@ -31,41 +29,19 @@ Although Natasha is easy to get started, you don't know where it can be used if 
 If your project is . NetCore project, then you can use Natasha .
 
 - Command  
-  `Install-Package DotNetCore.Natasha -xxxx`
+  `Install-Package DotNetCore.Natasha.CSharp.All -Version xxxx`
 
 - nuget  
-  `DotNetCore.Natasha`
+  `DotNetCore.Natasha.CSharp.All`
 
 <br/>
 
 ## Preparations
 
-You need to add some of the labels required for references to the project file：
+You need to initialize the Natasha component at the beginning of the program：
 
 ```cs
-
-  <PropertyGroup>
-
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-
-    //console/desktop as follows
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-
-    //legacy WEB requires
-    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
-
-    //3.1 New WEB to add
-    <PreserveCompilationReferences>true</PreserveCompilationReferences>
-    //3.1 Can reference Razor's compilation service without the node above
-    Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
-
-    // If you feel that there are too many folders about localization under the publishing folder, you can choose the following node
-    //option：cs / de / es / fr / it / ja / ko / pl / ru / tr / zh-Hans / zh-Hant
-    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-
-  </PropertyGroup>
-
+NatashaInitializer.InitializeAndPreheating();
 ```
 
 <br/>
@@ -80,7 +56,9 @@ string script s "Console.WriteLine" ("Hello World!");
 
 // and then use
 var action s NDomain.Random() like this. Delegate(script);
-action();
+action();  
+
+// If you don't use action again in the future you can uninstall
 action. DisposeDomain();
 
 ```
