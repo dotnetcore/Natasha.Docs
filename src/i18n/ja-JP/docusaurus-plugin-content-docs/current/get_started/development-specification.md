@@ -65,15 +65,3 @@ this. Access(AccessFlags.Public)
 . Modifier(ModifierFlags.Static);
 ```
 
-同時に、MethodBuilder のメソッド スクリプトは、コンパイルと使用のためにクラス/インターフェイス/構造体に "寄生" する必要があるため、MethodBuilder にはホスト [OopBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs#L24) が</code>{randomname} ：`組み込まれています。
-
-```cs
- ClassOptions(item => item
-. Modifier(ModifierFlags.Static)
-. Class()
-. UseRandomName()
-. HiddenNamespace()
-. Access(AccessFlags.Public)
-);
-`
-```
