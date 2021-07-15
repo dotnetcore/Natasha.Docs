@@ -2,20 +2,27 @@
 title: "The Natasha.CSharpEngine engine is encapsulated and integrated using the framework of Natasha.Framework."
 ---
 
-Natasha.CSharpEngine is made up of：Natasha.CSharpSyntax, Natasha.CSharpCompiler, Natasha.Exception, Natasha.Domain.
+Natasha structure diagram:
 
-- As the standard layer of C# , the compilation and syntax libraries are as follows ：
+![png](/images/framework-natasha-all.svg)
 
-  - Natasha.CSharpSyntax： implements the Syntax Base standard in framework, and the overloaded LoadTreeFrom Lauguage method provides the upper layer with a C# syntax tree.
-  - Natasha.CSharpCompiler: Implements the ComplierBase standard in Framework, and the overloaded GetCompilation method provides the upper layer with a C#compilation element.
+Natasha.Framework provides Natasha with the core compilation class standards, and developers who need to write compilation capabilities need to implement the various abstract classes in Natasha.Framework (as followed).
 
-- The NatashaCSharpEngine class is the core engine, consisting of NatashaCSharpSyntax and NatashaCSharpCompiler, where the engine partially registers the EventerBase event, which implements natashaCSharpSyntax with NatashaCSharpCompiler to automatically correct errors：
+Natasha.Framework is divided into two parts:
+  - Syntax tree and compiler based on Roslyn standard.
+  - Runtime-based domain implementation.
 
-  - NatashaCSharpSyntax : Inherited from CSharpSyntax Base in Natasha.CSharpSyntax, and adds some of the functionality required by the upper library itself.
-  - Natasha CSharpCompiler : Inherited from CSharp Compiler Base in Natasha.CSharpCompiler and adds some of the features required by the upper library itself.
-  - Natasha.Domain ： implements the DomainBase standard in Framework, adds the ability to automatically register with DomainManagement, adds plug-in-reference management, and enhances dynamic compilation and plug-in interaction.
-  - Natasha.Exception: The CompilationException class is available and integrated into the above process to collect compilation exceptions throughout the process.
+Wherein, SyntaxBase provides a conversion interface for string-to-syntax trees, but the syntax tree for exactly what language needs to be implemented or referenced by itself, and the syntax tree also needs to be compatible with the Roslyn syntax tree for compilation into the compiler.  The compiler here also has compilers in different languages, requiring developers to reference or implement them themselves. Framework projects simply provide an abstract implementation of Roslyn, so we can easily use abstract implementations to draw up the compilation process and even customize our own compilation framework.  
+another part is Runtime's domain abstraction, Natasha's domain-based class provisions and implementation of part of the API, which can be very good for compiling and implementing memory-to-assembly conversion and reference management.
 
-- AssemblyCSharpBuilder compiles a class for exposed assemblies, inherited from NatashaCSharpEngine, encapsulates the syntax tree and compiler configuration APIs, and provides complete control over the compilation process.
+Natasha in Natasha.CSharp.Engine uses the abstract classes provided by the Framework project to complete the entire process of C# from script to assembly into the domain, and provides more detailed and more perfect implementation in terms of exception control and semantic pre-processing, making Engine more of a complete and feasible dynamic compilation scenario. Engine has opened up the component registration interface, and can register the implemented syntax tree/compiler/domain into the entities that have been implemented into the Engine to give the dynamic compilation soul, such as Natasha implementing the framework abstract base class, Natasha AssemblyDomain / Natasha CSharp Corppiler / NatashaCSharpSyntax three features that define the functionality of the domain / the functionality of the CSharp compiler / CSharp syntax tree. By this point Natasha.CSharp.Engine is ready for dynamic compilation.
 
-You can use Natasha.CSharpSyntax and Natasha.CSharpCompiler to implement your own functionality.
+As for the outer template API and the flat Script Utils are both processed for strings and metadata, mainly for more convenient dynamic construction, Natasha.CSharp.Reverser is the implementation of the Script Utils layer, which mainly provides the ability to restore metadata as strings; Natasha.CSharp.Template provides a friendlier API on all basis, to facilitate developers to reduce the cost of using dynamic compilation libraries.
+
+Natasha.CSharp.All integrates all Natasha CSharp dynamic compilation related components, and provides initialization functions to complete component registration and dynamic compilation of warm-up loading.
+
+```cs
+NatashaInitializer.InitializeAndPreheating();
+```
+
+![png](/images/framework-natasha-component.svg)

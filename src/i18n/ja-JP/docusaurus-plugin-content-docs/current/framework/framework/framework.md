@@ -6,56 +6,96 @@ title: "Natasha 3.0+ はエンジン構造を抽象化し、フレームワー�
 
 - DomainBase: AssemblyLoadContext クラスから継承され、ドメイン機能の一部と部分的な抽象化標準が完成しました。
 
-  - AssemblyReferences ： アセンブリ/参照ディクショナリとしてアセンブリに対応する参照を格納するために必要な参照ライブラリをコンパイルします。
-  - GetInstance ： メソッドは、DomainManagement クラスの Create 操作を簡単にするためにオーバーロードする必要があり、現在のクラスのインスタンスを返す必要があり、オーバーロードが必要です。
-  - Default_Resolving ： ドメインの読み込み時にトリガーされるメソッドを作成するには、オーバーロードが必要です。
-  - Default_ResolvingUnmanagedDll ： アンペアコードがロードされたときに起動するメソッドを記述するには、オーバーロードが必要です。
-  - CompileStreamHandler ： ストリームとして正常にコンパイルされたときに起動するメソッドをオーバーロードする必要があります。
-  - CompileFileHandler : ファイルとして正常にコンパイルされたときに起動するメソッドで、オーバーロードが必要です。
-  - Remove ： が削除されたときに発生するメソッドで、オーバーロードが必要です。
+  - フィールド:
+    - フィールド DefaultDomain : 既定のドメインの実装, プログラムのプライマリ ドメインはアンインストールできません。.
+    - フィールド AddAssemblyEvent : アセンブリの読み込み時に発生するイベント。
+    - フィールド RemoveAssemblyEvent : アセンブリが削除されたときに発生するイベント。
+    - フィールド UseNewVersionAssmebly : 新しい参照が見つかった場合は、バージョンで更新された参照があります。
+    - フィールド AssemblyReferencesCache : メモリ ストリームコンパイルされたアセンブリと参照を格納します。
+    - フィールド OtherReferencesFromFile : 外部ファイルによって個別にロードされた参照を格納します。
+    - フィールド Count : 現在のドメインの参照数。
 
-  - AddDeps ： メソッドの既定の実装では、ファイル パスを介して依存関係が追加され、3.0+ は deps.json を解析し、2.0+ は 1 つのファイルのみを追加します。
-  - AddReferencesFromFolder ： 、オーバーロードできるフォルダから参照ライブラリを追加します。
-  - AddReferencesFromDepsJsonFile ： deps.json ファイルから参照ライブラリを解決し、オーバーロードできます。
-  - AddReferencesFromDllFile ： 単一の dll ファイルからオーバーロードできる参照ライブラリを取得します。
-  - LoadPluginFromFile ： 既定の実装では、Load プラグインは AddDeps メソッドを呼び出して参照依存関係を読み込み、GetAssemblyFromFile を呼び出して、ファイルからドメインにアセンブリを読み込み、オーバーロードできます。
-  - LoadPluginFromStream ： 既定の実装では、読み込みプラグインは AddDeps メソッドを呼び出して参照依存関係を読み込み、GetAssemblyFromStream を呼び出してストリームからドメインにアセンブリを読み込み、オーバーロードできます。
-  - GetAssemblyFromStream ： 既定の実装では、システム ドメインとカスタム ドメインを区別し、ストリームからドメインにアセンブリを読み込み、オーバーロードできます。
-  - GetAssemblyFromFile ： 既定の実装であり、システム ドメインとカスタム ドメインを区別し、ファイルからドメインにアセンブリを読み込み、オーバーロードできます。
-  - GetDefaultReferences ： メソッドは、オーバーロードできるシステム ドメインへのすべての参照を返します。
-  - GetCompileReferences ： メソッドは、オーバーロードできるシステム ドメインと非システム ドメインの組み合わせへの参照を返します。
-  - LoadPluginFromFile ： プラグインがファイルとして読み込まれたときに起動するメソッドをオーバーロードできます。
-  - LoadPluginFromStream ： プラグインがストリームとして読み込まれるときに起動するメソッドをオーバーロードできます。
+  - 抽象メソッド:
+    - 抽象メソッド GetReferenceElements : 現在のドメインの参照要素のコレクションを返します ( using System など)。
+    - 抽象メソッド LoadPlugin : プラグインをロードします。
+    - 抽象メソッド RemovePlugin : プラグインを削除します。
+    - 抽象メソッド GetPluginAssemblies : 現在のドメイン内のプラグイン アセンブリのコレクションを取得します。
+    - 抽象メソッド Default_Resolving : 既定のドメイン ロード イベント。
+    - 抽象メソッド Default_ResolvingUnmanagedDll: 既定のドメイン アンマネージ アセンブリの読み込みイベント。
+    - 抽象メソッド GetCompileReferences : システム ドメイン + 現在のドメインへのすべての参照を取得します。
+    - 抽象メソッド CompileStreamCallback : メモリ コンパイルが流れた後に処理する必要がある処理方法。
+
+  - 仮想メソッド:
+    - 仮想メソッド RemoveReference : 外部ファイルへの参照を削除します。
+    - 仮想メソッド RemoveReference : アセンブリに対応する参照を削除します。
+    - 仮想メソッド AddReferencesFromAssembly : アセンブリへの参照を追加します。
+    - 仮想メソッド AddReferencesFromDllFile : DLL パスに基づいて 1 つの参照を追加し、ファイルとして参照として読み込みます。
+    - 仮想メソッド AddReferencesFromFileStream : DLL パスに基づいて 1 つの参照を追加し、ストリームとして参照として読み込みます。
+    - 仮想メソッド AddReferencesFromAssemblyStream : アセンブリとメモリ ストリームを参照キャッシュに追加します。
+    - 仮想メソッド AddReferencesFromFolder : フォルダをスキャンし、フォルダの下の DLL ファイルを参照に追加します。
+    - 仮想メソッド LoadAssemblyFromFile : ファイルをアセンブリに変換し、参照をキャッシュし、アセンブリをドメインに読み込みます。
+    - 仮想メソッド LoadAssemblyFromStream : ストリームをアセンブリに変換し、参照をキャッシュし、アセンブリをドメインに読み込みます。
+    - 仮想メソッド LoadAssemblyFromStream : ファイル ストリームをアセンブリに変換し、参照をキャッシュし、アセンブリをドメインに読み込みます。
+    - 仮想メソッド Dispose : 明確な参照、関数の破棄。
+
+  - 保護過負荷:
+    - オーバーロード Load の保護 : 実装する必要があるメソッド。
+    - オーバーロードされた LoadUnmanagedDll の保護 : 実装する必要があるメソッド。
+
+<br/>
 
 - SyntaxBase: 構文変換の基になるクラスとして、コードと構文ツリーキャッシュを提供し、いくつかの抽象メソッドを定義し、キャッシュを自動的に追加するメソッドを実装します。
 
-  - TreeCache ： 文字列コードと構文ツリーのキャッシュを保持します。
-  - LoadTree / LoadTreeFromScript ： 各言語には独自の変換メソッドがありますが、最終的には SyntaxTree を返す必要があり、クラスを継承するときにメソッドを実装し、対応する言語の構文ツリーを返し、オーバーロードする必要があります。
-  - AddTreeToCache ： メソッドは、対応する言語のコードと構文ツリーを自動的にキャッシュし、オーバーロードできます。
+  - フィールド:
+    - フィールド TreeCache ： 文字列コードと構文ツリーのキャッシュを保持します。
+    - フィールド ReferenceCache : 参照キャッシュ.
 
-- `CompilerBase<TCompilation, TCompilationOptions>` where TCompilation : Compilation where TCompilationOptions : CompilationOptions: コンパイラ抽象化、TCompilation はコンパイルの基になるクラスとして制約され、コンパイル情報を構築するときに各言語が継承するため、コンパイルベースになります。TCompilationOptions は CompilationOptions 型に制約され、コンパイル情報を構築するオプションクラスにクラス変更され、コンパイル情報を構築するときに、
+  - 方法:
+    - メソッド Clear : 上記の 2 つのキャッシュをクリアします。
 
-  - AssemblyName : コンパイラは、現在のコードをアセンブリ全体にコンパイルし、アセンブリ名を指定する必要があります。
-  - AssemblyResult : コンパイル結果。
-  - AssemblyOutputKind は、Assembly ：を使用して、ファイル file / ストリーム stream にコンパイルします。
-  - Domain : このプロパティは DomainBase インスタンスをホストします。
-  - PreComplier ： コンパイル前に実行され、false が返された場合はコンパイルがブロックされ、オーバーライド可能です。
-  - CompileToFile ： メソッドは、上記の情報をファイルにコンパイルする機能を実装し、オーバーライドできます。
-  - CompileToStream : このメソッドは、上記の情報をストリームにコンパイルする機能を実装し、オーバーライドできます。
-  - Compile ：メソッドは、出力方法 (AssemblyOutputKind) に基づいて自動コンパイルを実装し、file は CompileToFile メソッドを呼び出し、stream は CompileToStream メソッドを呼び出します。
-  - CompileTrees ： コンパイルする必要がある構文ツリーです。
+  - 抽象メソッド:
+    - 抽象メソッド ConvertToTree : スクリプトを構文ツリーに変換します。
+    - 抽象メソッド FormartTree : 構文ツリーを読み込んでフォーマットします。
 
-  - GetCompilationOptions ：オプションを返し、オーバーライドする必要があります。
-  - AddOption ：メソッドを設定し、CompilationOptions を取得した後にアクションをカスタマイズします。
-  - GetCompilation ：取得した CompilationOptions に基づいて異なる言語のコンパイル情報セットを返すには、オーバーライドする必要があります。
+  - 仮想メソッド:
+    - 仮想メソッド AddTreeToCache : ツリーをキャッシュに追加するには、構文ツリー変換のために ConvertToTree をオーバーロードする必要があります。
+    - 仮想メソッド AddTreeToCache : 構文ツリーをロードしてキャッシュし、内部機能を実装するために LoadTree をオーバーロードする必要があります。
 
-  - CompileEmitToFile： compilation をファイルにコンパイルし、再書き込みする必要があります。
-  - CompileEmitToStream: compilation をメモリ ストリームにコンパイルし、オーバーライドする必要があります。
 
-  - FileCompileSucceedHandler ： ファイル形式のコンパイルが成功した後に発生するイベントです。
-  - StreamCompileSucceedHandler ：コンパイルが成功した後に発生するイベントです。
+<br/>
 
-  - FileCompileFailedHandler ： コンパイルが失敗した後に発生するイベントです。
-  - StreamCompileFailedHandler ： コンパイルが失敗した後に発生するイベントです。
+- `CompilerBase<TCompilation, TCompilationOptions>` where TCompilation : Compilation where TCompilationOptions : CompilationOptions: コンパイラ抽象化、TCompilation はコンパイルされた基本クラスである Compilation 型に制約され、コンパイル情報の構築時に各言語が継承および変換されるため、コンパイルの基礎となります。TCompilationOptions は CompilationOptions 型に拘束される.
+
+  - フィールド:
+    - フィールド AllowUnsafe : セキュリティで保護されていないコードのコンパイルを許可するかどうか。
+    - フィールド AssemblyName : コンパイラは、現在のコードをアセンブリ全体にコンパイルし、アセンブリ名を指定する必要があります。
+    - フィールド OutputFilePath : DLL ファイル出力パス。
+    - フィールド OutputPdbPath : PDB ファイル出力パス.
+    - フィールド Compilation : コンパイル単位.
+    - フィールド AssemblyKind : アセンブリ出力タイプ、コンソール、Windows、DLL など
+    - フィールドProcessorPlatform : プロセッサプラットフォーム, x86, x64など.
+    - フィールド AssemblyOutputKind : アセンブリの構築方法, ファイル / ストリーム.
+    - フィールド CodeOptimizationLevel : コードの最適化の程度, Debug / Release.
+    - フィールド OptionAction : 外部コンパイル オプション デリゲート。
+    - フィールド CompileSucceedEvent : ストリームのコンパイルが成功した後にトリガーされるイベント。
+    - フィールド CompileFailedEvent : ストリームのコンパイルに失敗した後にトリガーされるイベント。
+    - フィールド _semanticAnalysistor : ユーザー定義のセマンティック アナライザー。
+
+  - プロパティ:
+    - プロパティ Domain : ドメイン。
+    - プロパティ SyntaxTrees : コンパイル単位に存在する構文ツリーのコレクション。
+
+  - 方法:
+    - メソッド AddOption : オプションを構築した後のオプションの操作。
+    - 方法 AppendSemanticAnalysistor : 追加意味解析依頼.
+    - メソッド SetSemanticAnalysistor : セマンティック解析デリゲートを空にして設定します。
+
+  - 仮想メソッド:
+    - 仮想メソッド ComplieToAssembly : コンパイルロジックの具体的な実装は、コンパイルユニットをアセンブリに出力します。
+    - 仮想メソッド PreCompiler : コンパイルされた情報を構築する前に行う必要がある処理。
+
+  - 抽象メソッド:
+    - 抽象メソッド GetCompilation : Option で構成されている必要がある特定の種類のコンパイル単位を取得します。
+    - 抽象メソッド GetCompilationOptions : コンパイル単位のコンパイル オプションを準備します。
 
 上記のクラスをオーバーライドすると、Engine 実装の詳細については、言語の動的コンパイルが完了します。
