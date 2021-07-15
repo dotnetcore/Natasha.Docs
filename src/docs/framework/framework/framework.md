@@ -6,56 +6,96 @@ title: "Natasha 3.0+ 抽象了引擎结构，分离出了框架以及各个模�
 
 - DomainBase: 继承自 AssemblyLoadContext 类，完成了部分域功能及部分抽象标准。
 
-  - AssemblyReferences ： 编译需要的引用库，该字段以程序集/引用字典的形式储存了程序集对应的引用。
-  - GetInstance ： 该方法需要重载，以便于 DomainManagement 类的 Create 操作， 需要返回你当前类的实例，需要重载。
-  - Default_Resolving ： 在系统域加载时触发的方法，需要重载。
-  - Default_ResolvingUnmanagedDll ： 在系统域加载非安代码时触发的方法，需要重载。
-  - CompileStreamHandler ： 当以流的方式成功编译时触发的方法，需要重载。
-  - CompileFileHandler : 当以文件的方式成功编译时触发的方法，需要重载。
-  - Remove ： 删除引用时触发的方法，需要重载。
+  - 字段 : 
+    - 字段 DefaultDomain : 默认域的实现, 程序主域不可卸载.
+    - 字段 AddAssemblyEvent : 程序集加载时触发的事件.
+    - 字段 RemoveAssemblyEvent : 程序集删除时触发的事件.
+    - 字段 UseNewVersionAssmebly : 如果发现有较新的引用则使用版本更新的引用.
+    - 字段 AssemblyReferencesCache : 存放内存流编译过来的程序集与引用.
+    - 字段 OtherReferencesFromFile : 存放由外部文件单独加载的引用.
+    - 字段 Count : 当前域的引用数量.
+  
+  - 抽象方法 :
+    - 抽象方法 GetReferenceElements : 返回当前域的引用元素集合, 例如: using System; 
+    - 抽象方法 LoadPlugin : 加载插件.
+    - 抽象方法 RemovePlugin : 移除插件.
+    - 抽象方法 GetPluginAssemblies : 获取当前域内的插件程序集集合.
+    - 抽象方法 Default_Resolving : 默认域加载事件.
+    - 抽象方法 Default_ResolvingUnmanagedDll : 默认域非托管程序集加载事件.
+    - 抽象方法 GetCompileReferences : 获取系统域+当前域的所有引用.
+    - 抽象方法 CompileStreamCallback : 内存编译流过来之后需要如何处理.
+  
+  - 虚方法:
+    - 虚方法 RemoveReference : 移除外部文件对应的引用.
+    - 虚方法 RemoveReference : 移除程序集对应的引用.
+    - 虚方法 AddReferencesFromAssembly : 添加该程序集的引用.
+    - 虚方法 AddReferencesFromDllFile : 根据 DLL 路径添加单个引用,以文件方式加载成引用.
+    - 虚方法 AddReferencesFromFileStream : 根据 DLL 路径添加单个引用,以流方式加载成引用.
+    - 虚方法 AddReferencesFromAssemblyStream : 将程序集和内存流添加到引用缓存.
+    - 虚方法 AddReferencesFromFolder : 扫描文件夹，并将文件夹下的DLL文件添加到引用.
+    - 虚方法 LoadAssemblyFromFile : 将文件转换为程序集, 缓存引用并将程序集加载到域.
+    - 虚方法 LoadAssemblyFromStream : 将流转换为程序集, 缓存引用并将程序集加载到域.
+    - 虚方法 LoadAssemblyFromStream : 将文件流转换为程序集，缓存引用并将程序集加载到域.
+    - 虚方法 Dispose : 清楚引用,销毁函数.
+  
+  - 保护重载:
+    - 保护重载 Load : 必须实现的方法.
+    - 保护重载 LoadUnmanagedDll : 必须实现的方法.
 
-  - AddDeps ： 该方法默认实现通过文件路径添加依赖，3.0+ 将解析 deps.json, 2.0+ 将只添加单个文件。
-  - AddReferencesFromFolder ： 从一个文件夹中添加引用库，可重载。
-  - AddReferencesFromDepsJsonFile ： 从 deps.json 文件中解析引用库，可重载。
-  - AddReferencesFromDllFile ： 从单个 dll 文件中获取引用库，可重载。
-  - LoadPluginFromFile ： 默认实现，加载插件调用 AddDeps 方法加载引用依赖，调用 GetAssemblyFromFile 从文件加载程序集到域，可重载。
-  - LoadPluginFromStream ： 默认实现，加载插件调用 AddDeps 方法加载引用依赖，调用 GetAssemblyFromStream 从流加载程序集到域，可重载。
-  - GetAssemblyFromStream ： 默认实现，区分了系统域和自定义域，从流中加载程序集到域，可重载。
-  - GetAssemblyFromFile ： 默认实现，区分了系统域和自定义域，从文件中加载程序集到域，可重载。
-  - GetDefaultReferences ： 该方法返回一个系统域的所有引用，可重载。
-  - GetCompileReferences ： 该方法返回了系统域及非系统域组合的引用， 可重载。
-  - LoadPluginFromFile ： 当插件以文件方式加载时触发的方法，可重载。
-  - LoadPluginFromStream ： 当插件以流方式加载时触发的方法，可重载。
+<br/>  
 
 - SyntaxBase: 作为语法转换的基础类，提供了代码及语法树缓存，规定了一些抽象方法，实现了自动添加缓存的方法。
+  
+  - 字段 : 
+    - 字段 TreeCache ： 存放字符串代码及语法树的缓存.
+    - 字段 ReferenceCache : 引用缓存.
+  
+  - 方法 :
+    - 方法 Clear : 清除以上两个缓存.
+  
+  - 抽象方法 :
+    - 抽象方法 ConvertToTree : 将脚本转换为语法树.
+    - 抽象方法 FormartTree : 加载语法树并格式化.
+  
+  - 虚方法 :
+    - 虚方法 AddTreeToCache : 将树添加到缓存, 需要重载 ConvertToTree 进行语法树转换.
+    - 虚方法 AddTreeToCache : 加载语法树并缓存, 需要重载 LoadTree 来实现内部功能.
 
-  - TreeCache ： 存放字符串代码及语法树的缓存。
-  - LoadTree / LoadTreeFromScript ： 每个语言都有自己的转换方法，但最终需要返回 SyntaxTree ,当您继承该类时，需要实现该方法，返回对应语言的语法树，需要重载。
-  - AddTreeToCache ： 该方法会自动将对应语言的代码及语法树缓存起来，可重载。
 
-- `CompilerBase<TCompilation, TCompilationOptions>` where TCompilation : Compilation where TCompilationOptions : CompilationOptions: 编译器抽象， TCompilation 被约束为 Compilation 类型，该类为编译的基础类，在构建编译信息时，每种语言都会对该类进行继承改造，因此它是编译基础。TCompilationOptions 被约束为 CompilationOptions 类型, 改类为构建编译信息的选项类，在构建编译信息时，
+<br/>  
 
-  - AssemblyName : 编译器会对当前代码进行整程序集编译，需要指定程序集名。
-  - AssemblyResult : 编译结果。
-  - AssemblyOutputKind ：Assembly 输出的方式，编译到文件 file / 编译到流 stream。
-  - Domain : 该属性承载了 DomainBase 实例。
-  - PreComplier ： 该方法在编译前执行，如果返回 false 将阻止编译， 可重写。
-  - CompileToFile ： 该方法实现了将以上信息编译到文件的功能，可重写。
-  - CompileToStream : 该方法实现了将以上信息编译到流的功能，可重写。
-  - Compile ：该方法实现了根据输出方式（AssemblyOutputKind）进行自动编译，file 调用 CompileToFile 方法， stream 调用 CompileToStream 方法。
-  - CompileTrees ： 需要被编译的语法树。
+- `CompilerBase<TCompilation, TCompilationOptions>` where TCompilation : Compilation where TCompilationOptions : CompilationOptions: 编译器抽象， TCompilation 被约束为 Compilation 类型，该类为编译的基础类，在构建编译信息时，每种语言都会对该类进行继承改造，因此它是编译基础。TCompilationOptions 被约束为 CompilationOptions 类型.
 
-  - GetCompilationOptions ：返回编译选项，必须重写。
-  - AddOption ：选项设置方法，在获取到 CompilationOptions 之后对其进行自定义操作。
-  - GetCompilation ：根据拿到的 CompilationOptions 返回不同语言的编译信息集，必须重写。
+  - 字段:
+    - 字段 AllowUnsafe : 是否允许非安全代码编译.
+    - 字段 AssemblyName : 编译器会对当前代码进行整程序集编译，需要指定程序集名.
+    - 字段 OutputFilePath : DLL 文件输出路径.
+    - 字段 OutputPdbPath : PDB 文件输出路径.
+    - 字段 Compilation : 编译单元.
+    - 字段 AssemblyKind : 程序集输出类型, 控制台, Windows, DLL等.
+    - 字段 ProcessorPlatform : 处理器平台, x86, x64等.
+    - 字段 AssemblyOutputKind : 程序集构建方式, 文件 / 流.
+    - 字段 CodeOptimizationLevel : 代码优化程度, Debug / Release.
+    - 字段 OptionAction : 外传的编译选项委托.
+    - 字段 CompileSucceedEvent : 流编译成功之后触发的事件.
+    - 字段 CompileFailedEvent : 流编译失败之后触发的事件.
+    - 字段 _semanticAnalysistor : 用户定义的语义分析器.
+  
+  - 属性 :
+    - 属性 Domain : 域.
+    - 属性 SyntaxTrees : 编译单元中存有的语法树集合.
+  
+  - 方法 :
+    - 方法 AddOption : 在构建选项之后对选项进行的操作.
+    - 方法 AppendSemanticAnalysistor : 追加语义分析委托.
+    - 方法 SetSemanticAnalysistor : 清空并设置语义分析委托.
+  
+  - 虚方法 :
+    - 虚方法 ComplieToAssembly : 编译逻辑的具体实现,将编译单元输出成程序集.
+    - 虚方法 PreCompiler : 构建编译信息之前需要做什么.
 
-  - CompileEmitToFile： 将 compilation 编译到文件，必须重新写。
-  - CompileEmitToStream: 将 compilation 编译到内存流，必须重写。
-
-  - FileCompileSucceedHandler ： 当文件形式编译成功之后引发的事件。
-  - StreamCompileSucceedHandler ：当流形式编译成功之后引发的事件。
-
-  - FileCompileFailedHandler ： 当文件形式编译失败之后引发的事件。
-  - StreamCompileFailedHandler ： 当流形式编译失败之后引发的事件。
+  - 抽象方法 : 
+    - 抽象方法 GetCompilation : 获取具体类型的编译单元, 该编译单元应该已经配置好 Option.
+    - 抽象方法 GetCompilationOptions : 为编译单元准备 编译选项.
 
 对以上类进行重写，即可完成一门语言的动态编译，详情请看 Engine 实现篇。
