@@ -7,8 +7,15 @@ title: "Use Natasha's type extension"
 Example:
 
 
+        typeof(Dictionary<string,List<int>>[]). GetRuntimeName();
+        //result: "Dictionary<String,List<Int32>>[]"        
+
+
         typeof(Dictionary<string,List<int>>[]). GetDevelopName();
-        //result: "System.Collections.Generic.Dictionary<System.String,System.Collections.Generic.List<Int32>>[]"
+        //result: "System.Collections.Generic.Dictionary<System.String,System.Collections.Generic.List<System.Int32>>[]"
+
+        typeof(Dictionary<,>). GetDevelopNameWithoutFlag();
+        //result: "System.Collections.Generic.Dictionary<,>"
 
 
         typeof(Dictionary<string,List<int>>[]). GetAvailableName();

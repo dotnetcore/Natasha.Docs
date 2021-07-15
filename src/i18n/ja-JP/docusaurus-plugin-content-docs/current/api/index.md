@@ -11,8 +11,9 @@ title: "API のチェックリスト"
 |     NDelegate      |  指定したドメインの Action/Func デリゲートをすばやく作成します  |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
 |       NClass       |           パブリック クラスをすばやく作成します           |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
 |     NInterface     |        パブリック インターフェイスをすばやく作成します         |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
-|       NEnum        |          パブリック列挙クラスをすばやく作成します           |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
-|      NStruct       |           パブリック構造体をすばやく作成します            |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|       NEnum        |             列挙クラスをすばやく作成します             |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|      NRecord       |           レコード クラスをすばやく作成します            |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
+|      NStruct       |              構造体をすばやく作成します              |     Natasha.CSharp      | 静的初期化、動的インスタンス化 |
 | FakeMethodOperator |         MethodInfo 作成メソッドを模倣します         | Natasha.CSharp.Operator | 静的初期化、動的インスタンス化 |
 | FastMethodOperator |             メソッドをすばやく作成します              | Natasha.CSharp.Operator | 静的初期化、動的インスタンス化 |
 |  DelegateOperator  |             デリゲートをすばやく実装します             | Natasha.CSharp.Operator |      静的です       |
