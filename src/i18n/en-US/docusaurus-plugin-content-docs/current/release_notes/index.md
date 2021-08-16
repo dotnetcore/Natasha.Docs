@@ -6,4 +6,6 @@ title: "Upgrade logs"
 
 Logs are broken down by year dimension.
 
-
+- [2019](/release_notes/2019.md)
+- [2020](/release_notes/2020.md)
+- [2021](/release_notes/2021.md)
