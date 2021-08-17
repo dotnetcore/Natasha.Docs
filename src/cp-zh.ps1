@@ -7,8 +7,8 @@ cp -r docs/** "i18n/zh-Hans/docusaurus-plugin-content-docs/current"
 # cp -r blog/** "i18n/zh-Hans/docusaurus-plugin-content-blog"
 
 
-Get-ChildItem versioned_docs | ForEach-Object {
-    rm "i18n/zh-Hans/docusaurus-plugin-content-docs/$($_.Name)" -Recurse
-    mkdir "i18n/zh-Hans/docusaurus-plugin-content-docs/$($_.Name)"
-    cp -r versioned_docs/$($_.Name)/** "i18n/zh-Hans/docusaurus-plugin-content-docs/$($_.Name)"  -Force
-}
+# Get-ChildItem versioned_docs | ForEach-Object {
+#     rm "i18n/zh-Hans/docusaurus-plugin-content-docs/$($_.Name)" -Recurse
+#     mkdir "i18n/zh-Hans/docusaurus-plugin-content-docs/$($_.Name)"
+#     cp -r versioned_docs/$($_.Name)/** "i18n/zh-Hans/docusaurus-plugin-content-docs/$($_.Name)"  -Force
+# }
