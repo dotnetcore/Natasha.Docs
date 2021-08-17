@@ -4,11 +4,11 @@
     "description": "The label for version current"
   },
   "sidebar.someSidebar.category.基础内容": {
-    "message": "The underlying content",
+    "message": "Base content",
     "description": "The label for category 基础内容 in sidebar someSidebar"
   },
   "sidebar.mySidebar.category.更新记录": {
-    "message": "Update the record",
+    "message": "Changelog",
     "description": "The label for category 更新记录 in sidebar mySidebar"
   },
   "sidebar.mySidebar.category.api": {
@@ -46,5 +46,41 @@
   "sidebar.mySidebar.category.template": {
     "message": "template",
     "description": "The label for category template in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.快速入门": {
+    "message": "Getting started",
+    "description": "The label for category 快速入门 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.核心部件": {
+    "message": "Components",
+    "description": "The label for category 核心部件 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.周边生态": {
+    "message": "Ecosystem",
+    "description": "The label for category 周边生态 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.关键API": {
+    "message": "Key Api",
+    "description": "The label for category 关键API in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.框架知识": {
+    "message": "Framework knowledge",
+    "description": "The label for category 框架知识 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.常见问题": {
+    "message": "FAQ",
+    "description": "The label for category 常见问题 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.术语表": {
+    "message": "Glossary",
+    "description": "The label for category 术语表 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.编写文档": {
+    "message": "Documentation and Writing",
+    "description": "The label for category 编写文档 in sidebar mySidebar"
+  },
+  "sidebar.mySidebar.category.更新历史": {
+    "message": "History of changes",
+    "description": "The label for category 更新历史 in sidebar mySidebar"
   }
 }
