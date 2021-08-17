@@ -26,5 +26,9 @@
   "link.item.label.China .NET Core Community (NCC)": {
     "message": "China .NET Core Community (NCC)",
     "description": "The label of footer link with label=China .NET Core Community (NCC) linking to https://github.com/dotnetcore"
+  },
+  "link.item.label..NET Core Community (NCC)": {
+    "message": ".NET Core Community (NCC)",
+    "description": "The label of footer link with label=.NET Core Community (NCC) linking to https://github.com/dotnetcore"
   }
 }
