@@ -34,14 +34,14 @@ using (DomainManagement.Create("myDomain"). CreateScope()){ var domain = DomainM
 
 ### プラグインの読み込み:
 ```c#
-プラグインが依存する dll がメイン ドメインにロードされた dll と競合する場合に
-domain. LoadPluginBehavior = LoadBehaviorEnum.UseHighVersion;
-var assembly = domain. LoadPlugin(dllPath);
-var assembly = domain. LoadPlugin(dllPath,item=>item. Contain("xxx"));
+//决定插件所依赖的dll 在与主域加载的dll发生冲突时所
+domain.LoadPluginBehavior = LoadBehaviorEnum.UseHighVersion;
+var assembly = domain.LoadPlugin(dllPath);
+var assembly = domain.LoadPlugin(dllPath,item=>item.Contain("xxx"));
 
-//または
-domain. LoadPluginWithHighDependency(dllPath,item=>item. StartWith("xxx"));
-domain. LoadPluginWithLowDependency(dllPath,item=>item. Name!="xxx");
-domain. LoadPluginWithNewDependency(dllPath,item=>true);
-domain. LoadPluginSkipDefaultDependency(dllPath);
+//或
+domain.LoadPluginWithHighDependency(dllPath,item=>item.StartWith("xxx"));
+domain.LoadPluginWithLowDependency(dllPath,item=>item.Name!="xxx");
+domain.LoadPluginWithNewDependency(dllPath,item=>true);
+domain.LoadPluginSkipDefaultDependency(dllPath);
 ```
