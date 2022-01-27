@@ -156,9 +156,6 @@ module.exports = {
       ],
       copyright: `MIT ${new Date().getFullYear()} dotnetcore. Built with Docusaurus.`,
     },
-    gtag: {
-      trackingID: "xxxxxxxxxx",
-    },
   },
   presets: [
     [
