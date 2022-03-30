@@ -2,8 +2,16 @@
 title: "API の使用法を示します"
 ---
 
-- **NDomain**
 
+- **導入**
+
+NUGET `DotNetCore.Natasha.CSharp` ウォームアップ:
+```C#
+NatashaInitializer.Preheating();
+```
+
+
+- **NDomain**
 
 ```cs 
 NDelegate サポート：
@@ -15,7 +23,7 @@ NDelegate サポート：
 
 var func = NDelegate
   //ドメイン
-  . CreateDomain ("NDomain2")    
+  を作成します。 CreateDomain("NDomain2")    
   // システム定義の Func<T1,T> パラメータ名と同じパラメータを持つ Func<string,int> メソッドをドメインに作成します。
   . Func<string,int>("return arg. Length; "); 
 
@@ -64,10 +72,6 @@ string result = await action("Hello", "World1!");
 //result = "Hello World1!"
 ```
 
-#### OopOperator : [UT テスト](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/BuilderUT)
-
-#### OopComplier : [UT テスト](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OopComplierTest.cs)
-
 <br/>
 
 <br/>
@@ -88,7 +92,7 @@ var action = FastMethodOperator.DefaultDomain()
              . Return<string>()
              . Complie<Func<string,string,string>>();
 
-var result = action("Hello ","World!");    result: "Hello World!"
+var result = action("Hello ","World!");    result:   "Hello World!"
 ```
 
 <br/>
@@ -107,7 +111,7 @@ var delegateAction = FastMethodOperator.Random()
 
        . Complie<Func<string, string, Task<string>>>();
 
-string result = await delegateAction?. Invoke("Hello", "World2!");   result: "Hello World2!"
+string result = await delegateAction?. Invoke("Hello", "World2!");   result:   "Hello World2!"
 ```
 
 <br/>
@@ -123,7 +127,7 @@ string result = await delegateAction?. Invoke("Hello", "World2!");   result: "He
 public delegate string GetterDelegate(int value) を定義します。
 
 //メソッド 1
-var action = DelegateOperator<GetterDelegate>. Delegate("value += 101; return value. ToString(); ");
+var action = NDelegate.RandomDomain(). Delegate<GetterDelegate>("value += 101; return value. ToString(); ");
 string result = action(1);
 //result: "102"
 ```
@@ -154,8 +158,6 @@ var action = FakeMethodOperator.RandomDomain()
 string result = action("xiao");
 //result: "hello"              
 ```
-
-> [UT テストを参照してください](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OperatorUT/FakeOperatorUT.cs#L96-L196)
 
 <br/>
 <br/>

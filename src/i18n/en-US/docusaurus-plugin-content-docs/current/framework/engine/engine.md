@@ -22,7 +22,7 @@ As for the outer template API and the flat Script Utils are both processed for s
 Natasha.CSharp.All integrates all Natasha CSharp dynamic compilation related components, and provides initialization functions to complete component registration and dynamic compilation of warm-up loading.
 
 ```cs
-NatashaInitializer.InitializeAndPreheating();
+NatashaInitializer.Preheating();
 ```
 
 ![png](/images/framework-natasha-component.svg)

@@ -45,10 +45,24 @@ Handler.RandomDomain(compiler => { 编译器配置 })
 builder =>
 {
      builder
-       . CustomerUsing() //ユーザ定義のUsingを使用して
-       . SetAssemblyName("MyAssemblyName") //アセンブリ名の設定
-       . ThrowAndLogCompilerError() // コンパイラの例外をスローして記録する
-       . ThrowSyntaxError() //構文ツリー例外をスロー
-       . UseStreamCompile();                ストリームを使用して
+       . ClearInnerSemanticAnalysistor() // 明確に組み込まれたセマンティックフィルタ
+       . AddSemanticAnalysistor((asmBuilder,asmCompiltion)=>newCompiltion) //独自のセマンティックフィルタ
+       を追加します。 DisableSemanticCheck() // セマンティック チェックを無効にする (パフォーマンスを少し向上させる)
+       。 DisableNullableCompile() //null 参照可能なプロパティを無効にする
+       . CompileWithAssemblyLoadBehavior (LoadBehaviorEnum.UseHighVersion) // コンパイル結果にアセンブリを読み込むときに、アセンブリ依存が高いバージョンがある場合は、高いバージョン依存
+       . CompileWithReferenceLoadBehavior (LoadBehaviorEnum.UseHighVersion) //参照をマージするときに参照バージョンが上位バージョンにある場合は、上位バージョンの参照
+       . CompileWithReferencesFilter((defaultAsmName, targetAsmName)=> LoadVersionResultEnum.UseDefault) //参照フィルタリングロジック
+       . SetDllFilePath(path) //設定生成された DLL ファイルパス c:/1.dll
+       . SetPdbFilePath(path) //設定生成されたPDBファイルパスc:/1.pdb
+       . SetXmlFilePath(path) //設定生成された XML ファイルパス c:/1.xml
+       . SetOutputFolder(outputfolder) //外部出力ディレクトリ
+       . UseNatashaFileOut() //使用 outputfolder + assemblyname .dll/.pdb/.xml
+       . ConfigCompilerOption(opt=>opt) //Roslyn コンパイラ オプションは、現在、専門家がニーズに合わせて
+       を調整できる、ほぼ最も適切な構成です。 ConfigSyntaxOptions(opt=>opt) //構文ツリーオプションは、現在、専門家がニーズに合わせて 
+
+       //次のバージョンプランサポート
+       を調整することができる、ほぼ最も適切な構成です。 UseNatashaFileOut(outputfolder) //マージ SetOutputFolder と UseNatashaFileOut の 2 つの API
+       . AddLogEvent(nlog=>nlog.xxx) // メソッドを使用してログ イベント
+       を増やします。 SetAssemblyName("MyAssemblyName") //メソッドによるアセンブリ名の設定
 }
 ```
