@@ -2,42 +2,50 @@
 title: "API usage is demonstrated"
 ---
 
-- **NDomain**
 
+- **induct**
+
+NUGET `DotNetCore.Natasha.CSharp` warm-up:
+```C#
+NatashaInitializer.Preheating();
+```
+
+
+- **NDomain**
 
 ```cs 
 NDelegate supports：
 
-// Common methods：      Func/Action
-// asynchronous methods：      Async Func/Action
-//non-secure methods：    Unsafe Func/Action
+// normal methods：      Func/Action
+// Asynchronous methods：      Async Func/Action
+// Non-secure methods：    Unsafe Func/Action
 // Non-secure asynchronous methods： UnsafeAsync Func/Action
 
-var func snr. NDelegate
-  //create domains
-  . CreateDomain ("NDomain2")    
-  // Create a Func<string,int> method in the domain, with the same parameter name as the system-defined Func<T1,T> parameter.
+var func = NDelegate
+  //Create Domain
+  . CreateDomain("NDomain2")    
+  // creates a Func<string,int> method in a domain with the same parameters as the system-defined Func<T1,T> parameter names.
   . Func<string,int>("return arg. Length; "); 
 
 Assert.Equal(3, func("abc"));
 //Uninstall
-NDomain.Delete ("NDomain2");
+NDomain.Delete("NDomain2");
 ```
 
 or
 
 ```cs
 Or
-var func s NDelegate
-    // Use random domain
+var func = NDelegate
+    //use the random domain
     . RandomDomain()
     //Ignore the first argument call instance
     . WithFirstArgInvisible()
-    // Create func<string,int> method in the domain, with the same parameter name as the system-defined Func<T1,T> parameter.
+    // Creates a Func<string,int> method in a domain with the same parameter name as the system-defined Func<T1,T> parameter name.
     . Func<string,int>("return Length;" ); 
 
 Assert.Equal(3, func("abc"));
-// Uninstall
+//Uninstall
 func. DisposeDomain();
 ```
 
@@ -64,10 +72,6 @@ string result = await action("Hello", "World1!");
 //result = "Hello World1!"
 ```
 
-#### OopOperator : [see UT Test](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/BuilderUT)
-
-#### OopComplier :[ see UT Test](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OopComplierTest.cs)
-
 <br/>
 
 <br/>
@@ -88,7 +92,7 @@ var action = FastMethodOperator.DefaultDomain()
              . Return<string>()
              . Complie<Func<string,string,string>>();
 
-var result = action("Hello ","World!");    result: "Hello World!"
+var result = action("Hello ","World!");    result:   "Hello World!"
 ```
 
 <br/>
@@ -98,7 +102,7 @@ var result = action("Hello ","World!");    result: "Hello World!"
 var delegateAction = FastMethodOperator.Random()
 
        . Async()
-       // If Param and Return are not specified, func<string,string,Task<string>> system-defined parameter names are used by default, and F12 can be seen as
+       // If you do not specify Param and Return, you use Func<string,string,Task<string>> system-defined parameter names by default, F12 can see
        . Body(@"
                await Task.Delay(100);
                string result = arg1 +"" ""+ arg2;
@@ -107,7 +111,7 @@ var delegateAction = FastMethodOperator.Random()
 
        . Complie<Func<string, string, Task<string>>>();
 
-string result = await delegateAction?. Invoke("Hello", "World2!");   result: "Hello World2!"
+string result = await delegateAction?. Invoke("Hello", "World2!");   result:   "Hello World2!"
 ```
 
 <br/>
@@ -120,10 +124,10 @@ string result = await delegateAction?. Invoke("Hello", "World2!");   result: "He
 ```cs
 
 Define a delegate
-public delegate string GetterDelegate (int value);
+public delegate string GetterDelegate(int value);
 
-//Method One
-var action . . . DelegateOperator<GetterDelegate>. Delegate("value += 101; return value. ToString(); ");
+//Method 1
+var action = NDelegate.RandomDomain(). Delegate<GetterDelegate>("value += 101; return value. ToString(); ");
 string result = action(1);
 //result: "102"
 ```
@@ -154,8 +158,6 @@ var action = FakeMethodOperator.RandomDomain()
 string result = action("xiao");
 //result: "hello"              
 ```
-
-> [See UT test](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OperatorUT/FakeOperatorUT.cs#L96-L196)
 
 <br/>
 <br/>

@@ -22,7 +22,7 @@ Natasha は Natasha.CSharp.Engine で、Framework プロジェクトによって
 Natasha.CSharp.All は、すべての Natasha CSharp 動的コンパイル関連コンポーネントを統合し、コンポーネントの登録と動的コンパイルのウォームアップ読み込みを完了する初期化関数を提供します。
 
 ```cs
-NatashaInitializer.InitializeAndPreheating();
+NatashaInitializer.Preheating();
 ```
 
 ![png](/images/framework-natasha-component.svg)

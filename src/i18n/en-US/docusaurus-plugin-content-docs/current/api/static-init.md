@@ -45,10 +45,24 @@ Handler.RandomDomain (compiler s> { 编译器配置 });
 builder =>
 {
      builder
-       . CustomerUsing() // Use user-defined
-       . SetAssemblyName ("MyAssemblyName") // Set assembly name
-       . ThrowAndLogCompilerErrRor() // Throw and record the compiler's exception
-       . ThrowSyntaxError() //Throw syntax tree exception
-       . UseStreamCompile();                Compile
-with a stream
+       . ClearInnerSemanticAnalysistor() //Clear built-in semantic filter
+       . AddSemanticAnalysistor((asmBuilder, asmCompiltion)=>newCompiltion) //Add your own semantic filter
+       . DisableSemanticCheck() //Disable semantic checking (improves performance a bit)
+       . DisableNullableCompile() //Disable nullable reference feature
+       . CompileWithAssemblyLoadBehavior(LoadBehaviorEnum.UseHighVersion) // If a higher version exists in the assembly dependency when the assembly is loaded as a result of compilation, a higher version dependency is used
+       . CompileWithReferenceLoadBehavior(LoadBehaviorEnum.UseHighVersion) // If a higher version exists for the reference version when merging references, a reference from a higher version is used
+       . CompileWithReferencesFilter((defaultAsmName, targetAsmName)=> LoadVersionResultEnum.UseDefault) //Add reference filtering logic
+       . SetDllFilePath(path) //Sets the generated DLL file path c:/1.dll
+       . SetPdbFilePath(path) //Set the generated PDB file path c:/1.pdb
+       . SetXmlFilePath(path) //Sets the generated XML file path c:/1.xml
+       . SetOutputFolder(outputfolder) //External Output Directory
+       . UseNatashaFileOut() //Use outputfolder + assemblyname .dll/.pdb/.xml
+       . ConfigCompilerOption(opt=>opt) //Roslyn compiler option, currently almost the most suitable configuration, professionals can adjust the
+       according to their needs . ConfigSyntaxOptions(opt=>opt) //syntax tree option, currently almost the most suitable configuration for professionals to adjust to their needs 
+
+       // Next release plan support
+       . UseNatashaFileOut(outputfolder) //Merge setOutputFolder and UseNatashaFileOut two APIs
+       . AddLogEvent(nlog=>nlog.xxx) // Increase log events by
+       . SetAssemblyName("MyAssemblyName") // Set assembly name by method
+}
 ```
