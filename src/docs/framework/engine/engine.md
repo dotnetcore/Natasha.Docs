@@ -22,7 +22,7 @@ Natasha 在 Natasha.CSharp.Engine 它使用 Framework 项目提供的抽象类�
 Natasha.CSharp.All 整合了所有 Natasha CSharp 动态编译相关的组件, 并提供初始化函数来完成组件的注册和动态编译的预热加载.
 
 ```cs
-NatashaInitializer.InitializeAndPreheating();
+NatashaInitializer.Preheating();
 ```
 
 ![png](/images/framework-natasha-component.svg)

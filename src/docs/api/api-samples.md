@@ -2,8 +2,17 @@
 title: "API 用法展示"
 ---
 
-- **NDomain**
 
+- **引入**
+
+NUGET `DotNetCore.Natasha.CSharp`
+预热:
+```C#
+NatashaInitializer.Preheating();
+```
+
+
+- **NDomain**
 
 ```cs 
 //NDelegate 支持：
@@ -64,10 +73,6 @@ string result = await action("Hello", "World1!");
 //result = "Hello World1!"
 ```
 
-#### OopOperator : [参见 UT 测试](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/BuilderUT)
-
-#### OopComplier : [参见 UT 测试](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OopComplierTest.cs)
-
 <br/>
 
 <br/>
@@ -123,7 +128,7 @@ string result = await delegateAction?.Invoke("Hello", "World2!");   //result:   
 public delegate string GetterDelegate(int value);
 
 //方法一
-var action = DelegateOperator<GetterDelegate>.Delegate("value += 101; return value.ToString();");
+var action = NDelegate.RandomDomain().Delegate<GetterDelegate>("value += 101; return value.ToString();");
 string result = action(1);
 //result: "102"
 ```
@@ -154,8 +159,6 @@ var action = FakeMethodOperator.RandomDomain()
 string result = action("xiao");
 //result: "hello"              
 ```
-
-> [参见 UT 测试](https://github.com/dotnetcore/Natasha/blob/master/test/NatashaUT/OperatorUT/FakeOperatorUT.cs#L96-L196)
 
 <br/>
 <br/>
