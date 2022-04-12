@@ -29,10 +29,10 @@ Although Natasha is easy to get started, you don't know where it can be used if 
 If your project is . NetCore project, then you can use Natasha .
 
 - Command  
-  `Install-Package DotNetCore.Natasha.CSharp.All -Version xxxx`
+  `Install-Package DotNetCore.Natasha.CSharp -Version xxxx`
 
 - nuget  
-  `DotNetCore.Natasha.CSharp.All`
+  `DotNetCore.Natasha.CSharp`
 
 <br/>
 
@@ -41,7 +41,7 @@ If your project is . NetCore project, then you can use Natasha .
 You need to initialize the Natasha component at the beginning of the program：
 
 ```cs
-NatashaInitializer.InitializeAndPreheating();
+NatashaInitializer.Preheating();
 ```
 
 <br/>

@@ -28,10 +28,10 @@ Emit とエクスプレッション ツリーの使用シナリオは、Natasha 
 NetCore プロジェクトでは、Natasha .
 
 - コマンド  
-  `Install-Package DotNetCore.Natasha.CSharp.All -Version xxxx コマンド`
+  `Install-Package DotNetCore.Natasha.CSharp -Version xxxx`
 
 - nuget  
-  `DotNetCore.Natasha.CSharp.All`
+  `DotNetCore.Natasha.CSharp`
 
 <br/>
 
@@ -40,7 +40,7 @@ NetCore プロジェクトでは、Natasha .
 プログラムの初めに Natasha コンポーネントの初期化を行う必要があります：
 
 ```cs
-NatashaInitializer.InitializeAndPreheating();
+NatashaInitializer.Preheating();
 ```
 
 <br/>

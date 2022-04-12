@@ -25,21 +25,19 @@ Emit とエクスプレッション ツリーの使用シナリオは、Natasha 
 
 ## バージョン通知
 
-DotNetCore.Natasha.CSharp.All v2.0.0.0 を使用して、安定版を統合してください。
+DotNetCore.Natasha.CSharp 統合安定版をご利用ください。
 
 <br/>
 
 ## 準備をする
 
-- パッケージ化された動的ビルド ライブラリを導入： DotNetCore.Natasha.CSharp.All をインストールします
+- 導入 パッケージ化された動的ビルド ライブラリ： DotNetCore.Natasha.CSharp
 
 - 初期化操作：
 
   ```cs
-  コンポーネントのみを登録
-  NatashaInitializer.Initialize();
-  /登録+ ウォームアップコンポーネントを追加すると、コンパイルが速くなる
-  await NatashaInitializer.InitializeAndPreheating();
+  +ウォームアップコンポーネントを登録すると、コンパイルが速くなります
+  await NatashaInitializer.Preheating();
   ```
 
 - コードをノックします
@@ -50,69 +48,41 @@ DotNetCore.Natasha.CSharp.All v2.0.0.0 を使用して、安定版を統合し�
 
 ```cs
 
-Natasha の CSharp コンパイラを使用して文字列を直接コンパイルします
+Natasha を使用した CSharp コンパイラは、文字列
 AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
 
-// コンパイラにランダムドメインを割り当
-sharpBuilder.Compiler.Domain = DomainManagement.Random;
+// コンパイラにランダムドメインを割り当て
+sharpBuilder.Compiler.Domain = DomainManagement.Random();
 
-//ファイル コンパイル モードを使用すると、動的アセンブリは DLL ファイルにコンパイルされ、もちろんメモリ ストリーム モードを使用することもできます。
-sharpBuilder.UseFileCompile();
+//ファイルコンパイルモードを使用
+sharpBuilder.UseNatashaFileOut("c:/output");;
 
-// コードのコンパイルが間違っている場合は、スローされ、ログが記録されます。
-sharpBuilder.ThrowAndLogCompilerError();
-// 構文検出でエラーが発生した場合は、コンパイル前にログがスローされ、ログが記録されます。
-Natasha の CSharp コンパイラを使用して文字列を直接コンパイルします
-AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
-
-// コンパイラにランダムドメインを割り当
-sharpBuilder.Compiler.Domain = DomainManagement.Random;
-
-//ファイル コンパイル モードを使用すると、動的アセンブリは DLL ファイルにコンパイルされ、もちろんメモリ ストリーム モードを使用することもできます。
-sharpBuilder.UseFileCompile();
-
-// コードのコンパイルが間違っている場合は、スローされ、ログが記録されます。
-sharpBuilder.ThrowAndLogCompilerError();
-// 構文検出でエラーが発生した場合は、コンパイル前にログがスローされ、ログが記録されます。
-Natasha の CSharp コンパイラを使用して文字列を直接コンパイルします
-AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
-
-// コンパイラにランダムドメインを割り当
-sharpBuilder.Compiler.Domain = DomainManagement.Random;
-
-//ファイル コンパイル モードを使用すると、動的アセンブリは DLL ファイルにコンパイルされ、もちろんメモリ ストリーム モードを使用することもできます。
-sharpBuilder.UseFileCompile();
-
-// コードのコンパイルが間違っている場合は、スローされ、ログが記録されます。
-sharpBuilder.ThrowAndLogCompilerError();
-// 構文検出でエラーが発生した場合は、コンパイル前にログがスローされ、ログが記録されます。
-sharpBuilder.ThrowAndLogSyntaxError();
+// コードのコンパイルが間違っている場合は、ログをスローしてログを記録します。
+sharpBuilder.CompileFailedEvent += (compilation, errors) =>
+{
+    var errorLog = compilation. GetNatashaLog();
+};
 
 
-//追加文字列
+// 文字列を追加
 sharpBuilder.Add("using System; public static class Test{ public static void Show(){ Console.WriteLine(\"Hello World!\"); }}");
-//アセンブリをコンパイルします
+// コンパイルアセンブリ
 var assembly = sharpBuilder.GetAssembly();
 
 
-//型
-var type = sharpBuilder.GetTypeFromShortName("Test") を直接取得する場合)。
-type = sharpBuilder.GetTypeFromFullName("xxNamespace.xxClassName");
-//また、
-GetMethodFromShortName
-getMethodFromFullName
-GetDelegateFromFullName
-GetDelegateFromFullName<T>
-GetDelegateFromSho rtName
-GetDelegateFromShortName<T>
+// 型
+var type = sharpBuilder.GetTypeFromShortName ("Test") を直接取得したい場合)
+//または
+type = sharpBuilder.GetTypeFromFullName("xxNamespace.xxClassName"););
 
 
-// Action デリゲートを作成する
-// は同じドメイン内にある必要があるため、ドメイン
-// 書き込み呼び出しスクリプトを指定し、先ほどのアセンブリをスローして、using 参照を自動的に追加します
-var action = NDelegate.UseDomain(sharpBuilder.Compiler.Domain). Action("Test.Show();" , assembly);
+// Action デリゲート
+// は同じドメイン内にある必要があるため、指定されたドメイン
+//書き込み呼び出しスクリプトを作成し、直前のアセンブリをスローして、using 参照
+var action = NDelegate.UseDomain (sharpBuilder.Compiler.Domain) を自動的に追加します。 Action("Test.Show();" , assembly);
 
-//実行し、ハローワールドを参照してください! action();
+//実行し、Hello Worldを参照してください!
+action();
 
 ```
 
