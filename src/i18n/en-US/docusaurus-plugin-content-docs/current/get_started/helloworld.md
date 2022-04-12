@@ -28,21 +28,19 @@ Although Natasha is easy to get started, you don't know where it can be used if 
 
 ## Version announcement
 
-Use DotNetCore.Natasha.CSharp.All v2.0.0.0 Consolidated Stability.
+Please use DotNetCore.Natasha.CSharp to consolidate the stable version.
 
 <br/>
 
 ## Preparations
 
-- Introduce a packaged dynamic build library： DotNetCore.Natasha.CSharp.All
+- Introduces the packaged dynamic build library： DotNetCore.Natasha.CSharp
 
 - Initialization operation：
 
   ```cs
-  Register components only
-  NatashaInitializer.Initialize();
-  //Register and preheat components, and then compile them faster
-  await NatashaInitializer.InitialIzeAndPreheating ();
+  Register + warm up components, after which compilation will be faster
+  await NatashaInitializer.Preheating();
   ```
 
 - Knock the code
@@ -54,44 +52,40 @@ Use DotNetCore.Natasha.CSharp.All v2.0.0.0 Consolidated Stability.
 ```cs
 
 Compile strings directly using Natasha's CSharp compiler
-AssemblyCSharpBuilder sharpBuilder , new AssemblyCSharpBuilder();
+AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
 
-// Assign the compiler a random domain
-sharpBuilder.Compiler.Domain s domainmanagement.Random;
+// Assign a random domain to the compiler
+sharpBuilder.Compiler.Domain = DomainManagement.Random();
 
-// Use file compilation mode, dynamic assemblies will compile into DLL files, and of course you can use memory streaming mode.
-sharpBuilder.UseFileCompile();
+//Using file compilation mode
+sharpBuilder.UseNatashaFileOut("c:/output");
 
-// If the code compiles incorrectly, throw and log.
-sharpBuilder.ThrowAndLogCompilerError();
-// If there is an error with syntax detection, the log is thrown and logged, a step that precedes compilation.
-sharpBuilder.ThrowAndLogSyntaxError();
+// If the code compiles incorrectly, it is thrown and logged.
+sharpBuilder.CompileFailedEvent += (compilation, errors) =>
+{
+    var errorLog = compilation. GetNatashaLog();
+};
 
 
 //Add your string
-sharpBuilder.Add ("using System; public static class Test{ public static void Show(){ Console.WriteLine(\"Hello World!\"); }}");
-//compile an assembly
-var assembly s sharpBuilder.GetAssembly();
+sharpBuilder.Add("using System; public static class Test{ public static void Show(){ Console.WriteLine(\"Hello World!\"); }}");
+//Compile an assembly
+var assembly = sharpBuilder.GetAssembly();
 
 
-//If you want to get directly to type
-var type s sharpBuilder.GetTypeFromShortName ("Test");
+// If you want to get the type directly
+var type = sharpBuilder.GetTypeFromShortName("Test");
+//or
 type = sharpBuilder.GetTypeFromFullName("xxNamespace.xxClassName");
-//and
-GetMethod FromShortName
-GetMethod FromFullName
-GetDelegate FromFullName
-GetDelegate FromFullName<T>
-Get DelegateFro mShortName
-GetDelegate FromShortName<T>
 
 
 // Create an Action delegate
-//must be in the same domain, so specify the domain
-//write the calling script, throw in the assembly you just had, and automatically add the using reference
+// must be in the same domain, so specify the domain
+// Write the calling script and throw in the assembly just now, which will automatically add a using reference
 var action = NDelegate.UseDomain(sharpBuilder.Compiler.Domain). Action("Test.Show();" , assembly);
 
-//Run and see Hello World!
+//Run, see Hello World!
+action();
 
 ```
 
