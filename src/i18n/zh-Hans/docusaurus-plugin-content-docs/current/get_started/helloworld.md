@@ -30,21 +30,19 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 
 ## 版本通告
 
-请使用 DotNetCore.Natasha.CSharp.All v2.0.0.0 整合稳定版。
+请使用 DotNetCore.Natasha.CSharp 整合稳定版。
 
 <br/>
 
 ## 准备工作
 
-- 引入 打包好的动态构建库： DotNetCore.Natasha.CSharp.All
+- 引入 打包好的动态构建库： DotNetCore.Natasha.CSharp
 
 - 初始化操作：
 
   ```cs
-  //仅仅注册组件
-  NatashaInitializer.Initialize();
   //注册+预热组件 , 之后编译会更加快速
-  await NatashaInitializer.InitializeAndPreheating();
+  await NatashaInitializer.Preheating();
   ```
 
 - 敲代码
@@ -59,15 +57,16 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
 
 //给编译器指定一个随机域
-sharpBuilder.Compiler.Domain = DomainManagement.Random;
+sharpBuilder.Compiler.Domain = DomainManagement.Random();
 
-//使用文件编译模式，动态的程序集将编译进入DLL文件中，当然了你也可以使用内存流模式。
-sharpBuilder.UseFileCompile();
+//使用文件编译模式
+sharpBuilder.UseNatashaFileOut("c:/output");
 
 //如果代码编译错误，那么抛出并且记录日志。
-sharpBuilder.ThrowAndLogCompilerError();
-//如果语法检测时出错，那么抛出并记录日志，该步骤在编译之前。
-sharpBuilder.ThrowAndLogSyntaxError();
+sharpBuilder.CompileFailedEvent += (compilation, errors) =>
+{
+    var errorLog = compilation.GetNatashaLog();
+};
 
 
 //添加你的字符串
@@ -78,14 +77,8 @@ var assembly = sharpBuilder.GetAssembly();
 
 //如果你想直接获取到类型
 var type = sharpBuilder.GetTypeFromShortName("Test");
+//或
 type = sharpBuilder.GetTypeFromFullName("xxNamespace.xxClassName");
-//同时还有
-GetMethodFromShortName
-GetMethodFromFullName
-GetDelegateFromFullName
-GetDelegateFromFullName<T>
-GetDelegateFromShortName
-GetDelegateFromShortName<T>
 
 
 //创建一个 Action 委托

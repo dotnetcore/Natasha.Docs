@@ -33,10 +33,10 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 如果您的项目是 .NetCore 项目，那么您可以使用 Natasha .
 
 - 命令  
-  `Install-Package DotNetCore.Natasha.CSharp.All -Version xxxx`
+  `Install-Package DotNetCore.Natasha.CSharp -Version xxxx`
 
 - nuget  
-  `DotNetCore.Natasha.CSharp.All`
+  `DotNetCore.Natasha.CSharp`
 
 <br/>
 
@@ -45,7 +45,7 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 您需要在程序之初进行 Natasha 组件的初始化：
 
 ```cs
-NatashaInitializer.InitializeAndPreheating();
+NatashaInitializer.Preheating();
 ```
 
 <br/>
