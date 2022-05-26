@@ -34,21 +34,6 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 
 <br/>
 
-## 准备工作
-
-- 引入 打包好的动态构建库： DotNetCore.Natasha.CSharp
-
-- 初始化操作：
-
-  ```cs
-  //注册+预热组件 , 之后编译会更加快速
-  await NatashaInitializer.Preheating();
-  ```
-
-- 敲代码
-
-<br/>
-
 ## 第一个 HelloWorld
 
 ```cs
