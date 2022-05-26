@@ -40,13 +40,11 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 
 <br/>
 
-## 准备工作
+# 用前必看
 
-您需要在程序之初进行 Natasha 组件的初始化：
-
-```cs
-NatashaInitializer.Preheating();
-```
+1. Natasha 自 4.2.0.0 起开始支持轻量化编译,如果需要覆盖全部引用,请引入`DotNetCore.Compile.Environment`包.
+2. Natasha 生成文件较多可以在项目文件中增加 `<SatelliteResourceLanguages>en</SatelliteResourceLanguages>` 来指定默认的资源语言.
+3. Natasha 使用前必须预热: `NatashaManagement/NatashaInitializer.Preheating();` 选择任何一个类初始化都可以.
 
 <br/>
 
