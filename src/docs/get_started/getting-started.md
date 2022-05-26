@@ -40,7 +40,7 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 
 <br/>
 
-# 用前必看
+## 用前必看
 
 1. Natasha 自 4.2.0.0 起开始支持轻量化编译,如果需要覆盖全部引用,请引入`DotNetCore.Compile.Environment`包.
 2. Natasha 生成文件较多可以在项目文件中增加 `<SatelliteResourceLanguages>en</SatelliteResourceLanguages>` 来指定默认的资源语言.
