@@ -4,7 +4,7 @@ title: "引用处理与多域组合"
 
 ## 创建域
 
-```c#
+```cs
 //获取默认域
 NatashaManagement.GetDefaultDomain();
 //获取随机域
@@ -15,7 +15,7 @@ NatashaManagement.CreateDomain();
 
 ## 同域编译
 
-```c#
+```cs
 
 //预热 Natasha
 NatashaManagement.Preheating();
