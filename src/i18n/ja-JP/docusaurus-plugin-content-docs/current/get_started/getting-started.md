@@ -35,13 +35,11 @@ NetCore プロジェクトでは、Natasha .
 
 <br/>
 
-## 準備をする
+## 使用前に必見です
 
-プログラムの初めに Natasha コンポーネントの初期化を行う必要があります：
-
-```cs
-NatashaInitializer.Preheating();
-```
+1. Natasha は 4.2.0.0 から軽量コンパイルをサポートしており、すべての参照を上書きする必要がある場合は、`DotNetCore.Compile.Environment`パッケージを導入してください。
+2. Natasha ビルド ファイルの多くでは、プロジェクト ファイルに `<SatelliteResourceLanguages>en</SatelliteResourceLanguages>` を追加して、既定のリソース言語を指定できます。
+3. Natasha は、使用前にウォームアップする必要があります: `NatashaManagement/NatashaInitializer.Preheating();` 任意のクラス初期化を選択できます。
 
 <br/>
 
@@ -49,16 +47,16 @@ NatashaInitializer.Preheating();
 
 ```cs
 
-文字列を準備する必要があります
-string script = "Console.WriteLine("Hello World!");";
+文字列
+string script = "Console.WriteLine""Hello World!");" を準備する必要があります。
 
 
-// を使用して、
-var action = NDomain.Random() を使用します。 Delegate(script);
+// そして、このように
+var action = NDomain.Random(). Delegate(script);
 action();  
 
-//後で action を使用しない場合は、
-action. DisposeDomain();
+// 後で action を使用しない場合は、
+action をアンインストールできます。 DisposeDomain();
 
 ```
 
@@ -68,8 +66,8 @@ action. DisposeDomain();
 
 ```cs
 
-NDomain1 ドメイン内にデリゲートを作成します
-var func = NDomain.Create ("NDomain1")。 Func<string>("return \"Hello World!\"; ");
+NDomain1 ドメイン内にデリゲート
+var func = NDomain.Create ("NDomain1") を作成します。 Func<string>("return \"Hello World!\"; ");
 func();
 func. DisposeDomain();
 
