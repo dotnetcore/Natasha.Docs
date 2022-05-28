@@ -32,21 +32,6 @@ Please use DotNetCore.Natasha.CSharp to consolidate the stable version.
 
 <br/>
 
-## Preparations
-
-- Introduces the packaged dynamic build library： DotNetCore.Natasha.CSharp
-
-- Initialization operation：
-
-  ```cs
-  Register + warm up components, after which compilation will be faster
-  await NatashaInitializer.Preheating();
-  ```
-
-- Knock the code
-
-<br/>
-
 ## The first HelloWorld
 
 ```cs

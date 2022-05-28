@@ -29,21 +29,6 @@ DotNetCore.Natasha.CSharp 統合安定版をご利用ください。
 
 <br/>
 
-## 準備をする
-
-- 導入 パッケージ化された動的ビルド ライブラリ： DotNetCore.Natasha.CSharp
-
-- 初期化操作：
-
-  ```cs
-  +ウォームアップコンポーネントを登録すると、コンパイルが速くなります
-  await NatashaInitializer.Preheating();
-  ```
-
-- コードをノックします
-
-<br/>
-
 ## 最初のハローワールド
 
 ```cs

@@ -36,13 +36,11 @@ If your project is . NetCore project, then you can use Natasha .
 
 <br/>
 
-## Preparations
+## A must see before use
 
-You need to initialize the Natasha component at the beginning of the program：
-
-```cs
-NatashaInitializer.Preheating();
-```
+1. Natasha supports lightweight compilation starting at 4.2.0.0, if you need to override all references, please introduce the`DotNetCore.Compile.Environment`package.
+2. The more Natasha make files can be added to the project file `<SatelliteResourceLanguages>en</SatelliteResourceLanguages>` to specify the default resource language.
+3. Natasha must be warmed up before use: `NatashaManagement/NatashaInitializer.Preheating();` select any one of the classes to initialize.
 
 <br/>
 
@@ -51,15 +49,15 @@ NatashaInitializer.Preheating();
 ```cs
 
 You need to prepare a string
-string script s "Console.WriteLine" ("Hello World!");
+string script = "Console.WriteLine(""Hello World!");";
 
 
-// and then use
-var action s NDomain.Random() like this. Delegate(script);
+// then use
+var action = NDomain.Random(). Delegate(script);
 action();  
 
-// If you don't use action again in the future you can uninstall
-action. DisposeDomain();
+// You can uninstall
+action if you will not use action again in the future. DisposeDomain();
 
 ```
 
@@ -70,7 +68,7 @@ action. DisposeDomain();
 ```cs
 
 Create a delegate within the NDomain1 domain
-var func s NDomain.Create ("NDomain1"). Func<string>("return \"Hello World!\"; ");
+var func = NDomain.Create("NDomain1"). Func<string>("return \"Hello World!\"; ");
 func();
 func. DisposeDomain();
 
