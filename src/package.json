@@ -14,13 +14,13 @@
     "zh": "docusaurus write-translations --locale zh-Hans --override"
   },
   "dependencies": {
-    "@docusaurus/core": "2.0.0-beta.21",
-    "@docusaurus/plugin-pwa": "2.0.0-beta.21",
-    "@docusaurus/preset-classic": "2.0.0-beta.21",
+    "@docusaurus/core": "2.0.0-rc.1",
+    "@docusaurus/plugin-pwa": "2.0.0-rc.1",
+    "@docusaurus/preset-classic": "2.0.0-rc.1",
     "@mdx-js/react": "1.6.22",
-    "clsx": "1.1.1",
-    "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "clsx": "1.2.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "browserslist": {
     "production": [
