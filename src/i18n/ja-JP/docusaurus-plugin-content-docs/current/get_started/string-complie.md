@@ -1,5 +1,5 @@
 ---
-title: "文字列からコンパイルします"
+title: "コンパイル単位"
 ---
 
 文字列全体をコンパイルに渡して、Natasha の最小コンパイル単位はアセンブリです。 AssemblyCSharpBuilder を使用してください。
@@ -15,19 +15,48 @@ string text = @"
   }";
 
 
-//スクリプトから動的クラスを作成する
-AssemblyCSharpBuilder oop = new AssemblyCSharpBuilder();
+// Natasha を使用する CSharp コンパイラは、文字列
+AssemblyCSharpBuilder sharpBuilder = new AssemblyCSharpBuilder();
 
-//ここでは 100 クラスを追加しても、最終的にコンパイルされ、アセンブリに oop
-されます。 Add(text);
+// コンパイラにランダムドメインを割り当て
+sharpBuilder.Compiler.Domain = DomainManagement.Random();
 
-//以下のアセンブリには、Syntax で追加したクラス
-Assembly assembly = oop があります。 GetAssembly();
+//指定されたファイル出力パス
+//指定されたパラメータは、指定されたパスの下に出力されます, そうでなければ、デフォルトパスに出力
+sharpBuilder.UseNatashaFileOut ("c:/output");
+
+// コードのコンパイルが間違っている場合は、ログをスローしてログを記録します。
+sharpBuilder.CompileFailedEvent += (compilation, errors) =>
+{
+    var errorLog = compilation. GetNatashaLog();
+};
 
 
-/または第 2 レベルの API NAssembly
-//このアクションクラスには CreateClass / CreateInterface などの API 関数がありますが、最終的なビルドコンパイルは同じ AssemblyCSharpBuilder で行います
-var asm = new NAssembly("MyAssembly");
+// スクリプト文字列を追加
+sharpBuilder.Add ("using System; public static class Test{ public static void Show(){ Console.WriteLine(\"Hello World!\"); }}");
+
+// コンパイルアセンブリ
+var assembly = sharpBuilder.GetAssembly();
+
+
+// 型
+var type = sharpBuilder.GetTypeFromShortName ("Test") を直接取得したい場合)
+//または
+type = sharpBuilder.GetTypeFromFullName("xxNamespace.xxClassName"););
+
+
+// Action デリゲート
+// は同じドメイン内にある必要があるため、指定されたドメイン
+//書き込み呼び出しスクリプトを作成し、直前のアセンブリをスローして、using 参照
+var action = NDelegate.UseDomain (sharpBuilder.Compiler.Domain) を自動的に追加します。 Action("Test.Show();" , assembly);
+
+//実行し、Hello Worldを参照してください!
+action();
+
+
+//または第 2 レベルの API NAssembly
+// 操作クラスには CreateClass / CreateInterface などの API 関数がありますが、最終的なビルド コンパイルはすべて同じ AssemblyCSharpBuilder で
+var asm = new NAssembly ("MyAssembly"))。
 asm. AddScript(text);
 var type = asm. GetTypeFromShortName("Test");
 var type = asm. GetTypeFromFullName("HelloWorld.Test");
