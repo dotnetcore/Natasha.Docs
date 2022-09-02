@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
+title: "Use required reading"
 ---
 
 ## Brief introduction

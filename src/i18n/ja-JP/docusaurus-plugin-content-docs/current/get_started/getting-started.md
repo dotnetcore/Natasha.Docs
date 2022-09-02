@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
+title: "必読を使用してください"
 ---
 
 ## はじめに
