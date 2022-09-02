@@ -1,5 +1,5 @@
 ---
-title: "Get Started"
+title: "使用必读"
 ---
 
 ## 简介
