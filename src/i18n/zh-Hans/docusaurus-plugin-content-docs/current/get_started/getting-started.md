@@ -57,7 +57,7 @@ string script = "Console.WriteLine(""Hello World!"");";
 
 
 //然后像这样用
-var action = NDomain.Random().Delegate(script);
+var action = NDomain.RandomDomain().Delegate(script);
 action();  
 
 //如果以后都不会再用 action 可以卸载
@@ -72,7 +72,7 @@ action.DisposeDomain();
 ```cs
 
 //在 NDomain1 域内创建一个委托
-var func = NDomain.Create("NDomain1").Func<string>("return \"Hello World!\";");
+var func = NDomain.CreateDomain("NDomain1").Func<string>("return \"Hello World!\";");
 func();
 func.DisposeDomain();
 
