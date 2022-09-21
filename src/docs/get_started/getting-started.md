@@ -53,7 +53,7 @@ Emit 和表达式树的使用场景，Natasha 均适用。
 ```cs
 
 //你需要准备一个字符串
-string script = "Console.WriteLine(""Hello World!"");";
+string script = "Console.WriteLine(\"Hello World!\");";
 
 
 //然后像这样用
