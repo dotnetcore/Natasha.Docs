@@ -49,15 +49,15 @@ If your project is . NetCore project, then you can use Natasha .
 ```cs
 
 You need to prepare a string
-string script = "Console.WriteLine(""Hello World!");";
+string script = "Console.WriteLine(\"Hello World!\"); ";
 
 
 // then use
-var action = NDomain.Random(). Delegate(script);
+var action like this = NDomain.RandomDomain(). Delegate(script);
 action();  
 
-// You can uninstall
-action if you will not use action again in the future. DisposeDomain();
+// If you will not use action again in the future, you can uninstall
+action. DisposeDomain();
 
 ```
 
@@ -68,7 +68,7 @@ action if you will not use action again in the future. DisposeDomain();
 ```cs
 
 Create a delegate within the NDomain1 domain
-var func = NDomain.Create("NDomain1"). Func<string>("return \"Hello World!\"; ");
+var func = NDomain.CreateDomain ("NDomain1"). Func<string>("return \"Hello World!\"; ");
 func();
 func. DisposeDomain();
 
