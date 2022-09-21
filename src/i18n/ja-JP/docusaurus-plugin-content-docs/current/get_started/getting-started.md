@@ -48,11 +48,11 @@ NetCore プロジェクトでは、Natasha .
 ```cs
 
 文字列
-string script = "Console.WriteLine""Hello World!");" を準備する必要があります。
+string script = "Console.WriteLine(\"Hello World!\") を準備する必要があります。 ";
 
 
 // そして、このように
-var action = NDomain.Random(). Delegate(script);
+var action = NDomain.RandomDomain(). Delegate(script);
 action();  
 
 // 後で action を使用しない場合は、
@@ -67,7 +67,7 @@ action をアンインストールできます。 DisposeDomain();
 ```cs
 
 NDomain1 ドメイン内にデリゲート
-var func = NDomain.Create ("NDomain1") を作成します。 Func<string>("return \"Hello World!\"; ");
+var func = NDomain.CreateDomain ("NDomain1") を作成します。 Func<string>("return \"Hello World!\"; ");
 func();
 func. DisposeDomain();
 
