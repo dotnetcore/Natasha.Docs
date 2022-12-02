@@ -52,7 +52,7 @@ string script = "Console.WriteLine(\"Hello World!\") を準備する必要があ
 
 
 // そして、このように
-var action = NDomain.RandomDomain(). Delegate(script);
+var action = NDelegate.RandomDomain(). Delegate<Action>(script);
 action();  
 
 // 後で action を使用しない場合は、
@@ -67,7 +67,7 @@ action をアンインストールできます。 DisposeDomain();
 ```cs
 
 NDomain1 ドメイン内にデリゲート
-var func = NDomain.CreateDomain ("NDomain1") を作成します。 Func<string>("return \"Hello World!\"; ");
+var func = NDelegate.CreateDomain ("NDomain1") を作成します。 Func<string>("return \"Hello World!\"; ");
 func();
 func. DisposeDomain();
 
