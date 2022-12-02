@@ -30,7 +30,7 @@ var func = NDelegate
 
 Assert.Equal(3, func("abc"));
 //卸载
-NDomain.Delete("NDomain2");
+DomainManagement.Remove("NDomain2");
 ```
 
 或者
@@ -61,7 +61,7 @@ Assert.Equal(3, model.Age);
 
 案例2：
 ```cs
-var action = NDomain
+var action = NDelegate
   .DefaultDomain()
   .UnsafeAsyncFunc<string, string, Task<string>>(@"
       string result = arg1 +"" ""+ arg2;
