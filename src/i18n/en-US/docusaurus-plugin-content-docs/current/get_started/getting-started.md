@@ -52,11 +52,11 @@ You need to prepare a string
 string script = "Console.WriteLine(\"Hello World!\"); ";
 
 
-// then use
-var action like this = NDomain.RandomDomain(). Delegate(script);
+// Then use
+var action = NDelegate.RandomDomain() like this. Delegate<Action>(script);
 action();  
 
-// If you will not use action again in the future, you can uninstall
+// If you don't use action in the future, you can uninstall
 action. DisposeDomain();
 
 ```
@@ -68,7 +68,7 @@ action. DisposeDomain();
 ```cs
 
 Create a delegate within the NDomain1 domain
-var func = NDomain.CreateDomain ("NDomain1"). Func<string>("return \"Hello World!\"; ");
+var func = NDelegate.CreateDomain("NDomain1"). Func<string>("return \"Hello World!\"; ");
 func();
 func. DisposeDomain();
 

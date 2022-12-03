@@ -17,19 +17,19 @@ NatashaInitializer.Preheating();
 NDelegate supports：
 
 // normal methods：      Func/Action
-// Asynchronous methods：      Async Func/Action
-// Non-secure methods：    Unsafe Func/Action
-// Non-secure asynchronous methods： UnsafeAsync Func/Action
+// Asynchronous Methods：      Async Func/Action
+// Non-Secure Methods：    Unsafe Func/Action
+// Non-Secure Asynchronous Methods： UnsafeAsync Func/Action
 
 var func = NDelegate
-  //Create Domain
+  //Create domain
   . CreateDomain("NDomain2")    
-  // creates a Func<string,int> method in a domain with the same parameters as the system-defined Func<T1,T> parameter names.
+  // Create a Func<string,int> method in the domain with the same parameters as the system-defined Func<T1,T> parameter name.
   . Func<string,int>("return arg. Length; "); 
 
 Assert.Equal(3, func("abc"));
-//Uninstall
-NDomain.Delete("NDomain2");
+//uninstall
+DomainManagement.Remove("NDomain2");
 ```
 
 or
@@ -60,7 +60,7 @@ Assert.Equal(3, model. Age);
 
 Case 2：
 ```cs
-var action = NDomain
+var action = NDelegate
   . DefaultDomain()
   . UnsafeAsyncFunc<string, string, Task<string>>(@"
       string result = arg1 +"" ""+ arg2;

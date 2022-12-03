@@ -29,7 +29,7 @@ var func = NDelegate
 
 Assert.Equal(3, func("abc"));
 //アンインストール
-NDomain.Delete ("NDomain2");
+DomainManagement.Remove ("NDomain2");
 ```
 
 または
@@ -60,7 +60,7 @@ Assert.Equal(3, model. Age);
 
 ケース2：
 ```cs
-var action = NDomain
+var action = NDelegate
   . DefaultDomain()
   . UnsafeAsyncFunc<string, string, Task<string>>(@"
       string result = arg1 +"" ""+ arg2;
