@@ -1,5 +1,5 @@
 ---
-title: "使用 Natasha 的类型扩展"
+title: "6. 使用 Natasha 的类型扩展"
 ---
 
 ```cs
