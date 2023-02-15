@@ -61,6 +61,12 @@ builder.ClearInnerSemanticAnalysistor();
 builder.Add(DefaultUsing.UsingScript + "public class A{}");
 //获取编译后的动态程序集
 var asm = builder.GetAssembly();
+
+
+//如果你想直接获取到类型
+var type = builder.GetTypeFromShortName("Test");
+//或
+type = builder.GetTypeFromFullName("xxNamespace.xxClassName");
 ```
 
 - *** 已知问题 ***

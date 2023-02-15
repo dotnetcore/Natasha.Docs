@@ -1,5 +1,5 @@
 ---
-title: "如何使用 Natasha 封装类库 "
+title: "建议的封装规范"
 ---
 
 ## Natasha 封装规约
@@ -15,6 +15,9 @@ Operator 作为动态构建对外使用的操作类，一个 Operator 可大致�
 - Template
 - Builder
 - Package / Extension
+
+Template + Compiler => Builder
+Package(Builder) + API + Extension => Operator  
 
 <br/>
 
