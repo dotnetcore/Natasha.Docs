@@ -1,5 +1,5 @@
 ---
-title: "Natasha を使用してクラス ライブラリをカプセル化する方法"
+title: "推奨されるカプセル化仕様"
 ---
 
 ## ナタシャのパッケージングプロトコル
@@ -16,12 +16,14 @@ Operator は、外部で使用されるアクションクラスを動的に構�
 - Builder
 - Package / Extension
 
+Template + Compiler => Builder Package(Builder) + API + Extension => Operator
+
 <br/>
 
 ## スクリプト ビルダー (Builder)
 
-Operator の最も重要なコア部分である Builder は、主に Operator にデリゲートを提供し、外部から構成を受け取り、テンプレートを内部的に結合してコンパイルします。  
-、Compiler コンパイラとの Template テンプレートの 2 つの部分に大：
+Operator の最も重要なコア部分として、Builder は主に Operator にデリゲートを提供し、外部から構成を受信し、テンプレートを内部的に組み合わせてコンパイルできます。  
+これは、Compiler コンパイラを使用して Template テンプレートの 2 つの部分に大別されます：
 
 <br/>
 
@@ -53,12 +55,12 @@ Operator の最も重要なコア部分である Builder は、主に Operator �
 
 ## アクション クラス (Operator)
 
-Operator は Builder ベースに Package カプセル化され、Operator は Builder が提供するコンパイル結果を格納し、ユーザーレベルの API を外部に漏らします。
+Operator は Builder に基づいて Package カプセル化され、Operator は Builder が提供するコンパイル結果を格納し、ユーザー レベルの API を外部にリークします。
 <br/>
 
 #### ケース
 
-たとえば、Natasha に組み込まれた [FastMethodOperator](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Api/Level1/Operator/FastMethodOperator.cs) は、 [MethodBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs) に基づいてラップおよび簡略化され、FastMethodOperaartor の初期化関数では、テンプレートを `public static に翻訳する独自のスクリプト構築プロセスをカスタマイズします` ：
+たとえば、Natasha に組み込まれています [FastMethodOperator](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Api/Level1/Operator/FastMethodOperator.cs) で [MethodBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs) ラップと簡素化に基づいて、FastMethodOpeartor の初期化関数は、次のテンプレートに翻訳された独自のスクリプト構築プロセスをカスタマイズします `public static` ：
 
 ```cs
 this. Access(AccessFlags.Public)
