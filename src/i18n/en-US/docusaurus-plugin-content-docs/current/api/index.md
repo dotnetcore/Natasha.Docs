@@ -1,5 +1,5 @@
 ---
-title: "API quick checklist"
+title: "3. Advanced compilation class API cheat sheet"
 ---
 
 <br/>

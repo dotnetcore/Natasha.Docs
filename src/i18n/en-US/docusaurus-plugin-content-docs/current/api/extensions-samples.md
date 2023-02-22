@@ -1,5 +1,5 @@
 ---
-title: "Use Natasha's type extension"
+title: "6. Use Natasha's type extensions"
 ---
 
 ```cs

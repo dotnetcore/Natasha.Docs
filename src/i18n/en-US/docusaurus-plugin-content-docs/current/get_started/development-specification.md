@@ -1,5 +1,5 @@
 ---
-title: "How to encapsulate the class library using Natasha"
+title: "Recommended encapsulation specifications"
 ---
 
 ## Natasha encapsulation protocol
@@ -16,6 +16,8 @@ Operator, as a dynamically built operation class for external use, can consist o
 - Builder
 - Package / Extension
 
+Template + Compiler => Builder Package(Builder) + API + Extension => Operator
+
 <br/>
 
 ## Script Builder
@@ -23,7 +25,7 @@ Operator, as a dynamically built operation class for external use, can consist o
 As the most important core part of Operator, Builder primarily provides delegates for Operator, can receive configurations from outside, can combine templates internally, and compiles them.  
 it is roughly divided into two parts, the Template template and the Compiler compiler：  
 it is roughly divided into two parts, the Template template and the Compiler compiler：  
-it is roughly divided into two parts, the Template template and the Compiler compiler：
+It is roughly divided into two parts: the Template template and the Compiler compiler：
 
 <br/>
 
@@ -53,12 +55,12 @@ it is roughly divided into two parts, the Template template and the Compiler com
 
 ## Operator
 
-Operator is packaged on the basis of Builder, which stores the compilation results provided by Builder and leaks user-level APIs.
+The Operator is packaged on the basis of Builder, and the Operator stores the compilation results provided by the Builder, exposing user-level APIs to the outside world.
 <br/>
 
 #### Case
 
-For example, Natasha's built-in [FastMethodOperator](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Api/Level1/Operator/FastMethodOperator.cs) is packaged and simplified on the basis of [MethodBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs) , and FastMethodOpearor customizes its own scripting process in its initialization function, as translated into `public static` ：
+For example, Natasha built-in [FastMethodOperator](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Api/Level1/Operator/FastMethodOperator.cs) at [MethodBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs) Based on packaging and simplification, FastMethodOpeartor's initialization function has customized its own script construction process, which is translated into the following template `public static` ：
 
 ```cs
 this. Access(AccessFlags.Public)
