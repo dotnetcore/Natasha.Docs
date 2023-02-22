@@ -1,5 +1,5 @@
 ---
-title: "API usage is demonstrated"
+title: "5. Other API usage display"
 ---
 
 
