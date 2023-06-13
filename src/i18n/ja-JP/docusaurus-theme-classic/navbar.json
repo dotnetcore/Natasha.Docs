@@ -1,14 +1,14 @@
 {
   "title": {
-    "message": "Natasha",
+    "message": "ナターシャ",
     "description": "The title in the navbar"
   },
   "item.label.开发文档": {
-    "message": "开发文档",
+    "message": "開発ドキュメント",
     "description": "Navbar item with label 开发文档"
   },
   "item.label.GitHub": {
-    "message": "GitHub",
+    "message": "ティッカー",
     "description": "Navbar item with label GitHub"
   }
 }
