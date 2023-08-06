@@ -1,80 +1,80 @@
 ---
-title: "1. 予熱します"
+title: "1.予熱する"
 ---
 
 
-- **導入**
+- **徴兵する**
 
-NUGET `DotNetCore.Natasha.CSharp`
+ナゲット `DotNetCore.Natasha.CSharp`
 
 - すべての参照ファイルを上書きする ***
 
-初心者は、参照ファイルの上書きが完全にエラーを報告しないように、このパッケージを導入することをお勧めします。 NUGET `DotNetCore.Compile.Environment`
+初心者は、参照ファイルのカバレッジが包括的であり、エラーを報告しないようにするために、このパッケージを導入することをお勧めします。 ナゲット `DotNetCore.Compile.Environment`
 
-- 名前に基づいて既定のドメインに読み込まれるアセンブリ参照ファイルを選択します***
+- 名前に基づいて既定のドメインにロードするアセンブリ参照ファイルを選択する
 
-この例では、DLL ファイルの大部分が読み込まれます `return false` アセンブリがこの時点でスキャンされると、メソッドが No を返すと、アセンブリは既定のドメインに読み込まれます。 その後、ランダム ドメイン/カスタム ドメインでビルドすると、このアセンブリを使用するには、既定のドメインのアセンブリが自動的に使用されます。 デリゲート コードが Yes を返すと、アセンブリが除外され、ランダム ドメイン/カスタム ドメインがアセンブリを使用する場合は、手動で読み込む必要があります。 [参考-引用管理章节]
+このサンプルでは、ほとんどの DLL ファイルの読み込みは除外されています。 `偽を返す` アセンブリがこの時点までスキャンされると、メソッドが 'No' を返し、アセンブリがバックアップ用の既定のドメインに読み込まれることを示します。 後でランダムなドメイン/カスタム ドメインでビルドするときにこのアセンブリを使用するには、プログラムは既定のドメインでアセンブリを自動的に使用します。 デリゲート コードが 'Yes' を返す場合は、アセンブリが除外されていることを意味し、アセンブリを使用する場合は、ランダム フィールド/ユーザー設定フィールドを手動で読み込む必要があります。 [参考-引用管理章节]
 
 ```cs
-NatashaInitializer.Preheating((asmName, name) => {
+ナターシャイニシャライザー予熱((asm名前、名前)=> {
     if (name != null)
     {
-        if (name. Contains("System"))
+        if (名前。 含む("システム"))
         {
             if (
-            name. Contains("Net") ||
-            name. Contains("Xml") ||
-            name. Contains("IO") ||
-            name. Contains("Reflection") ||
-            name. Contains("Threading") ||
-            name. Contains("Security") ||
-            name. Contains("Diagnostics") ||
-            name. Contains("Data") ||
-            name. Contains("Resources.") ||
-            name. Contains("Drawing") ||
-            name. Contains("Text") ||
-            name. Contains("Globalization") ||
-            name. Contains("Service") ||
-            name. Contains("Web") ||
-            name. Contains("Window") ||
-            name. Contains("ComponentModel")
+            名前。 含む("ネット") ||
+            名前。 含む ("xml") ||
+            名前。 含む("IO") ||
+            名前。 含む("リフレクション") ||
+            名前。 含む("スレッド") ||
+            名前。 含む("セキュリティ") ||
+            名前。 含まれるもの("診断") ||
+            名前。 次を含む("データ") ||
+            名前。 含む("リソース") ||
+            名前。 含む("図面") ||
+            名前。 含む("テキスト") ||
+            名前。 含む("グローバリゼーション") ||
+            名前。 含む("サービス") ||
+            名前。 含む("ウェブ") ||
+            名前。 含む("ウィンドウ") ||
+            名前。 含む("コンポーネントモデル")
             )
             {
-                除外します
-                return true;
+                除外する
+                真を返します。
             }
-            return false;
+            偽を返します。
         }
-        if (name. Contains("Natasha"))
+        if (名前。 含む("ナターシャ"))
         {
-            読み込みます
-            return false;
+            負荷
+            偽を返します。
         }
-        if (name. Contains("ConsoleApp3"))
+        if (名前。 Contains("ConsoleApp3"))
         {
-            読み込みます
-            return false;
+            負荷
+            偽を返します。
         }
     }
-    return true;
+    真を返します。
 });
 ```
 
-- 名前とバージョンに基づいて、アセンブリの参照ファイルが読み込まれているかどうかを判断します。***
+- アセンブリの参照ファイルを名前とバージョンに基づいて読み込むかどうかを決定します***
 
-この例では、AssemblyName を使用してアセンブリ名とバージョンを判断し、次のコードは dapper のメジャー バージョン番号 12 のアセンブリ参照ファイルを除外します。
+この例では、AssemblyName を使用してアセンブリ名とバージョンを確認し、次のコードでは、dapper メジャー バージョン番号が 12 のアセンブリ参照ファイルを除外します。
 
 ```cs
-NatashaInitializer.Preheating((asmName, name) => {
+ナターシャイニシャライザー予熱((asm名前、名前)=> {
     if (asmName.Name != null)
     {
-        if (asmName.Name.Contains("Dapper") && asmName.Version!. Major > 12)
+        if (asmName.Name.Contains("Dapper") && asmName.Version!. 少佐 > 12)
         {
-            return true;
+            真を返します。
         }
     }
-    return false;
+    偽を返します。
 });
 ```
 
-> アセンブリ参照ファイルの読み込みを減らすと、メモリの増加を効果的に制御できます。
+> アセンブリ参照ファイルの読み込みを減らすことで、メモリの増加を効果的に制御できます。

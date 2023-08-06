@@ -1,75 +1,75 @@
 ---
-title: "5. その他の API 使用法が示されています"
+title: "5. その他のAPI利用状況の表示"
 ---
 
 
-- **導入**
+- **徴兵する**
 
-NUGET `DotNetCore.Natasha.CSharp` ウォームアップ:
+ナゲット `DotNetCore.Natasha.CSharp` 予熱：
 ```C#
-NatashaInitializer.Preheating();
+ナターシャイニシャライザー.プレヒート();
 ```
 
 
-- **NDomain**
+- **ンドメイン**
 
 ```cs 
-NDelegate サポート：
+サポート解除：
 
-// 通常のメソッド：      Func/Action
-// 非同期メソッド：      Async Func/Action
-// 非安全メソッド：    Unsafe Func/Action
-// 非セキュア非同期メソッド： UnsafeAsync Func/Action
+通常の方法：      機能/アクション
+非同期メソッド：      非同期機能/アクション
+安全でない方法：    安全でない機能/アクション
+セキュリティで保護されていない非同期メソッド： 安全でない非同期関数/アクション
 
 var func = NDelegate
-  //ドメイン
-  を作成します。 CreateDomain("NDomain2")    
-  // システム定義の Func<T1,T> パラメータ名と同じパラメータを持つ Func<string,int> メソッドをドメインに作成します。
-  . Func<string,int>("return arg. Length; "); 
+  ドメインを作成する
+  . CreateDomain("NDomain2")    
+  ドメインに関数を作成する<string,int> メソッド、パラメーター、およびシステム定義の関数<T1,T> パラメーター名は同じです。
+  . ファンク<string,int>("引数を返します。 長さ; "); 
 
 Assert.Equal(3, func("abc"));
-//アンインストール
-DomainManagement.Remove ("NDomain2");
+降ろす
+DomainManagement.Remove("NDomain2");
 ```
 
-または
+又は
 
 ```cs
-または
+又は
 var func = NDelegate
-    // ランダム ドメイン
-    . RandomDomain()
-    //最初の引数呼び出しインスタンス
-    を無視します。 WithFirstArgInvisible()
-    // は、システム定義の Func<T1,T> パラメータ名と同じパラメータを持つ Func<string,int> メソッドをドメイン内に作成します。
-    . Func<string,int>("return Length;" ); 
+    ランダムフィールドを使用する
+    . ランダムドメイン()
+    最初のパラメーターは、インスタンスを呼び出すために無視されます。
+    . WithFirstArgInvisible()
+    ドメインに関数を作成する<string,int> メソッド、パラメーター、およびシステム定義の関数<T1,T> パラメーター名は同じです。
+    . ファンク<string,int>("戻り値の長さ;" ); 
 
 Assert.Equal(3, func("abc"));
-//アンインストール
-func. DisposeDomain();
+降ろす
+ファンク。 DisposeDomain();
 ```
 
 ```cs
 NormalTestModel model = new NormalTestModel();
 var func = NDelegate
   . CreateDomain("NDomain6")
-  . Action<NormalTestModel, int, int>("arg1. Age=arg2+arg3; ");
-func(model,1,2);
-Assert.Equal(3, model. Age);
+  . アクション<NormalTestModel, int, int>("arg1. 年齢= arg2 + arg3; ");
+関数(モデル、1,2);
+Assert.Equal(3, model. 年齢);
 ```
 
 ケース2：
 ```cs
-var action = NDelegate
-  . DefaultDomain()
+var アクション = NDelegate
+  . デフォルトドメイン()
   . UnsafeAsyncFunc<string, string, Task<string>>(@"
-      string result = arg1 +"" ""+ arg2;
-      await Task.Delay(1000);
+      文字列の結果 = arg1 +"" ""+ arg2;
+      待機タスク.遅延(1000);
       Console.WriteLine(result);
-      return result; ");
+      結果を返します。 ");
 
-string result = await action("Hello", "World1!");
-//result = "Hello World1!"
+文字列結果 = アクションを待つ("こんにちは", "World1!");
+結果 = "こんにちは世界1!"
 ```
 
 <br/>
@@ -82,17 +82,17 @@ string result = await action("Hello", "World1!");
 
 - 通常のカスタマイズ
 
-> メソッドをすばやくカスタマイズします
+> メソッドをすばやくカスタマイズする
 
 ```cs
 var action = FastMethodOperator.DefaultDomain()
-             . Param<string>("str1")
+             . パラメータ<string>("str1")
              . Param(typeof(string),"str2")
              . Body("return str1+str2;" )
-             . Return<string>()
-             . Complie<Func<string,string,string>>();
+             . 帰る<string>()
+             . 準拠<Func<string,string,string>>();
 
-var result = action("Hello ","World!");    result:   "Hello World!"
+var result = action("Hello ","World!");    結果:「こんにちは世界!」
 ```
 
 <br/>
@@ -101,35 +101,35 @@ var result = action("Hello ","World!");    result:   "Hello World!"
 ```cs
 var delegateAction = FastMethodOperator.Random()
 
-       . Async()
-       //Param と Return を指定しない場合、デフォルトでは Func<string,string,Task<string>> システム定義のパラメータ名が使用
-       されます。 Body(@"
-               await Task.Delay(100);
-               string result = arg1 +"" ""+ arg2;
+       . 非同期()
+       パラメータとリターンを指定しない場合、デフォルトでFuncが使用されます<string,string,Task<string>> システム定義のパラメーター名、F12 が表示されます
+       . ボディ(@"
+               タスク.遅延(100)を待ちます。
+               文字列の結果 = arg1 +"" ""+ arg2;
                Console.WriteLine(result);
-               return result; ")
+               結果を返します。 ")
 
-       . Complie<Func<string, string, Task<string>>>();
+       . 準拠<Func<string, string, Task<string>>>();
 
-string result = await delegateAction?. Invoke("Hello", "World2!");   result:   "Hello World2!"
+文字列結果=デリゲートアクションを待ちますか? Invoke("Hello", "World2!");   結果: "こんにちはワールド2!"
 ```
 
 <br/>
 <br/>
 
-#### DelegateOperator
+#### デリゲートオペレーター
 
-> デリゲートをすばやく実装します
+> 代理人を迅速かつ迅速に実装する
 
 ```cs
 
-デリゲート
-public delegate string GetterDelegate(int value) を定義します。
+代理人を定義する
+パブリック デリゲート文字列 GetterDelegate(int 値);
 
-//メソッド 1
-var action = NDelegate.RandomDomain(). Delegate<GetterDelegate>("value += 101; return value. ToString(); ");
-string result = action(1);
-//result: "102"
+方法1
+var action = NDelegate.RandomDomain(). 代表<GetterDelegate>("値 += 101; 戻り値。 ToString(); ");
+文字列結果 = アクション(1);
+結果: "102"
 ```
 
 <br/>
@@ -137,26 +137,26 @@ string result = action(1);
 
 #### FakeMethodOperator
 
-> メソッドをすばやくコピーして実装します
+> メソッドをすばやくコピーして実装する
 
 ```cs
-public class Test
+パブリッククラスのテスト
 {
-   public string Handler(string str)
+   パブリック文字列ハンドラ(文字列str)
    {
-        return null;
+        ヌルを返します。
    }
 }
 ```
 
 ```cs
 var action = FakeMethodOperator.RandomDomain()
-             . UseMethod(typeof(Test). GetMethod("Handler"))
-             . StaticMethodContent(" str += \"hello\"; return str; ")
-             . Complie<Func<string,string>>();
+             . 使用方法(タイプオブ(テスト)。 GetMethod("Handler"))
+             . StaticMethodContent(" str += \"hello\"; strを返します。 ")
+             . 準拠<Func<string,string>>();
 
-string result = action("xiao");
-//result: "hello"              
+文字列の結果=アクション("シャオ");
+結果: "こんにちは"              
 ```
 
 <br/>

@@ -1,14 +1,14 @@
 ---
-title: "4. 高度なコンパイルクラスの初期化操作"
+title: "4. 高度なコンパイルクラスの初期化"
 ---
 
-Natasha のすべてのテンプレートは ComplierTemplate から継承され、ComplierTemplate 自体は静的構築メソッドを提供します。したがって、上層 API もサポートされます。
+ナターシャのすべてのテンプレートは、それ自体が静的コンストラクターを提供する ComplierTemplate から継承します。したがって、上位レベルの API もサポートされます。
 
 <br/>
 
-## 使用
+## 使う
 
-NDelegate / NAssembly / NClass.. /xxx_Oerator等を以下「Handler」という.
+Nエレゲート/ナッセンブリー/NClass.. /xxx_Oerator等を以下「ハンドラ」という。
 
 <br/>
 
@@ -16,24 +16,24 @@ NDelegate / NAssembly / NClass.. /xxx_Oerator等を以下「Handler」という.
 
 ```cs
 
-domain ドメインを使用
-Handler.UseDomain(domian.compiler => { 编译器配置 })
+ドメイン ドメインを使用する
+Handler.UseDomain(domian, compiler => { 编译器配置 });
 
 
-//コンパイラを使用するドメイン
+コンパイラーが使用されているドメイン
 Handler.UseCompiler(assemblyCSharpCompiler, compiler => { 编译器配置 }));
 
 
-//"domainJim" ドメインを作成します
-Handler.CreateDomain( "domianJim", compiler => { 编译器配置 })
+「ドメインジム」ドメインを作成する
+Handler.CreateDomain("domianJim", compiler => { 编译器配置 });
 
 
-//デフォルトドメインを使用
-Handler.DefaultDomain(compiler => { 编译器配置 })
+既定のドメインを使用する
+Handler.DefaultDomain(compiler => { 编译器配置 });
 
 
-//ランダムドメインの使用
-Handler.RandomDomain(compiler => { 编译器配置 })
+ランダムフィールドを使用する
+Handler.RandomDomain(compiler => { 编译器配置 });
 
 ```
 
@@ -42,27 +42,27 @@ Handler.RandomDomain(compiler => { 编译器配置 })
 #### コンパイラ構成：
 
 ```cs
-builder =>
+ビルダー=>
 {
-     builder
-       . ClearInnerSemanticAnalysistor() //クリア組み込みのセマンティックフィルタ
-       . AddSemanticAnalysistor((asmBuilder,asmCompiltion)=>newCompiltion) // 独自のセマンティックフィルタを追加します
-       . DisableSemanticCheck() //セマンティック チェックを無効にする (パフォーマンスを少し向上)
-       . DisableNullableCompile() //null 参照可能属性を無効にします
-       . CompileWithAssemblyLoadBehavior (LoadBehaviorEnum.UseHighVersion) // コンパイル後にアセンブリを読み込むときに、アセンブリ依存のバージョンが高い場合は、高いバージョン依存が使用されます
-       . CompileWithReferenceLoadBehavior(LoadBehaviorEnum.UseHighVersion) //参照をマージするときに参照バージョンが上位バージョンにある場合は、上位バージョンの参照が使用されます
-       . CompileWithReferencesFilter((defaultAsmName, targetAsmName)=> LoadVersionResultEnum.UseDefault) //参照フィルタリングロジックを追加します
-       . SetDllFilePath(path) //設定によって生成された DLL ファイルパス c:/1.dll
-       . SetPdbFilePath(path) //設定によって生成される PDB ファイルパス c:/1.pdb
-       . SetXmlFilePath(path) //設定によって生成される XML ファイルパス c:/1.xml
-       . SetOutputFolder(outputfolder) //外部出力ディレクトリ
-       . UseNatashaFileOut() //使用 outputfolder + assemblyname .dll/.pdb/.xml
-       . ConfigCompilerOption(opt=>opt) //Roslyn コンパイラ オプションは、現在、専門家がニーズに合わせて調整できる、ほぼ最適な構成です
-       . ConfigSyntaxOptions(opt=>opt) //構文ツリーオプションは、現在、専門家がニーズに合わせて調整できる最も適切な構成です 
+     ビルダ
+       . ClearInnerSemanticAnalysistor() // 組み込みのセマンティックフィルタをクリアします
+       . AddSemanticAnalysistor((asmBuilder,asmCompiltion)=>新しいコンパイル) // 独自のセマンティックフィルターを追加する
+       . セマンティックチェックを無効にする() // セマンティックチェックを無効にする (パフォーマンスを少し改善)
+       . DisableNullableCompile() // null 許容参照属性を無効にします。
+       . CompileWithAssemblyLoadBehavior(LoadBehaviorEnum.UseHighVersion) // コンパイル後にアセンブリが読み込まれるときにアセンブリ依存関係の上位バージョンが存在する場合は、上位バージョンの依存関係が使用されます。
+       . CompileWithReferenceLoadBehavior(LoadBehaviorEnum.UseHighVersion) // 参照がマージされるときに参照バージョンに新しいバージョンが存在する場合は、参照の上位バージョンが使用されます
+       . CompileWithReferencesFilter((defaultAsmName, targetAsmName)=> LoadVersionResultEnum.UseDefault) // 参照フィルタリングロジックを追加
+       . SetDllFilePath(path) // 生成された DLL ファイルのパス c:/1 を設定します.dll
+       . SetPdbFilePath(path) // 生成された PDB ファイルのパス c:/1.pdb を設定します。
+       . SetXmlFilePath(path) // 生成された XML ファイルのパス c:/1 を設定します.xml
+       . SetOutputFolder(outputfolder) //Output directory
+       . 使用ナターシャファイルアウト() // 出力フォルダ+アセンブリ名を使用 .dll/.pdb/.xml
+       . ConfigCompilerOption(opt=>opt) //Roslyn コンパイラー・オプションは、現在ほぼ最適な構成であり、専門家がニーズに応じて調整できます。
+       . ConfigSyntaxOptions(opt=>opt) //構文ツリーオプション、これは現在ほぼ最適な構成であり、専門家がニーズに応じて調整できます 
 
-       次のバージョンのサポートが計画されています
-       . UseNatashaFileOut(outputfolder) //UseNatashaFileOut の 2 つの API を持つ SetOutputFolder をマージします
-       . AddLogEvent(nlog=>nlog.xxx) // メソッドを使用してログ イベントを増やします
-       . SetAssemblyName ("MyAssemblyName") // メソッドを使用してアセンブリ名を設定します
+       サポートは次のリリースで計画されています
+       . UseNatashaFileOut(outputfolder) // SetOutputFolder API と UseNatashaFileOut API を結合します。
+       . AddLogEvent(nlog=>nlog.xxx) // メソッド別にログイベントを増やす
+       . SetAssemblyName("MyAssemblyName") // メソッドを使用してアセンブリ名を設定する
 }
 ```
