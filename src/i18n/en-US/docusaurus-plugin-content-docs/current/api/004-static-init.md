@@ -2,13 +2,13 @@
 title: "4. Initialization of advanced compilation classes"
 ---
 
-Natasha 的所有模板均继承自 ComplierTemplate ，ComplierTemplate 本身会提供静态构造方法。因此上层 API 也会被支持。Therefore, the upper-level API is also supported.Therefore, the upper-level API is also supported.
+Natasha 的所有模板均继承自 ComplierTemplate ，ComplierTemplate 本身会提供静态构造方法。因此上层 API 也会被支持。Therefore, the upper-level API is also supported.Therefore, upper-level APIs will also be supported.
 
 <br/>
 
 ## use
 
-NDelegate / NAssembly / NClass.. / xxx_Oerator and so on is called "Handler".
+NDelegate / NAssembly / NClass.. / xxx_Oerator etc. are hereinafter referred to as "handler".
 
 <br/>
 
@@ -16,24 +16,24 @@ NDelegate / NAssembly / NClass.. / xxx_Oerator and so on is called "Handler".
 
 ```cs
 
-Use domain domain
-Handler.UseDomain (domian, compiler s> { 编译器配置 });
+Use the domain domain
+Handler.UseDomain(domian, compiler => { 编译器配置 });
 
 
-// Use a compiler's domain
-Handler.UseCompiler (assemblyCSharpCompiler, compiler s> { 编译器配置 }));
+The domain in which a compiler is used
+Handler.UseCompiler(assemblyCSharpCompiler, compiler => { 编译器配置 }));
 
 
-// Create a "domainJim" domain
-Handler.CreateDomain ("domian Jim", compiler s> { 编译器配置 });
+Create a "domainJim" domain
+Handler.CreateDomain("domianJim", compiler => { 编译器配置 });
 
 
-// Use the default domain
-Handler.DefaultDomain (compiler s> { 编译器配置 });
+Use the default domain
+Handler.DefaultDomain(compiler => { 编译器配置 });
 
 
-// Use random domain
-Handler.RandomDomain (compiler s> { 编译器配置 });
+Use a random field
+Handler.RandomDomain(compiler => { 编译器配置 });
 
 ```
 

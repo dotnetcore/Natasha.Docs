@@ -5,7 +5,7 @@ title: "5. Other API usage display"
 
 - **induct**
 
-NUGET `DotNetCore.Natasha.CSharp` warm-up:
+NUGET `DotNetCore.Natasha.CSharp` Preheat:
 ```C#
 NatashaInitializer.Preheating();
 ```
@@ -14,38 +14,38 @@ NatashaInitializer.Preheating();
 - **NDomain**
 
 ```cs 
-NDelegate supports：
+NDelegate support：
 
-// normal methods：      Func/Action
-// Asynchronous Methods：      Async Func/Action
-// Non-Secure Methods：    Unsafe Func/Action
-// Non-Secure Asynchronous Methods： UnsafeAsync Func/Action
+Normal method：      Func/Action
+Asynchronous methods：      Async Func/Action
+Non-secure methods：    Unsafe Func/Action
+Non-secure asynchronous methods： UnsafeAsync Func/Action
 
 var func = NDelegate
-  //Create domain
+  Create a domain
   . CreateDomain("NDomain2")    
-  // Create a Func<string,int> method in the domain with the same parameters as the system-defined Func<T1,T> parameter name.
+  Create a func in your domain<string,int> methods, parameters, and system-defined func<T1,T> The parameter names are the same.
   . Func<string,int>("return arg. Length; "); 
 
 Assert.Equal(3, func("abc"));
-//uninstall
+unload
 DomainManagement.Remove("NDomain2");
 ```
 
 or
 
 ```cs
-Or
+or
 var func = NDelegate
-    //use the random domain
+    Use a random field
     . RandomDomain()
-    //Ignore the first argument call instance
+    The first parameter is ignored to call the instance
     . WithFirstArgInvisible()
-    // Creates a Func<string,int> method in a domain with the same parameter name as the system-defined Func<T1,T> parameter name.
+    Create a func in your domain<string,int> methods, parameters, and system-defined func<T1,T> The parameter names are the same.
     . Func<string,int>("return Length;" ); 
 
 Assert.Equal(3, func("abc"));
-//Uninstall
+unload
 func. DisposeDomain();
 ```
 
@@ -69,7 +69,7 @@ var action = NDelegate
       return result; ");
 
 string result = await action("Hello", "World1!");
-//result = "Hello World1!"
+result = "Hello World1!"
 ```
 
 <br/>
@@ -80,7 +80,7 @@ string result = await action("Hello", "World1!");
 
   <br/>
 
-- General customization
+- Normal customization
 
 > Quickly customize a method
 
@@ -102,7 +102,7 @@ var result = action("Hello ","World!");    result:   "Hello World!"
 var delegateAction = FastMethodOperator.Random()
 
        . Async()
-       // If you do not specify Param and Return, you use Func<string,string,Task<string>> system-defined parameter names by default, F12 can see
+       If you do not specify Param and Return, Func is used by default<string,string,Task<string>> System-defined parameter names, F12 can be seen
        . Body(@"
                await Task.Delay(100);
                string result = arg1 +"" ""+ arg2;
@@ -119,17 +119,17 @@ string result = await delegateAction?. Invoke("Hello", "World2!");   result:   "
 
 #### DelegateOperator
 
-> Enable delegates quickly and quickly
+> Implement delegates quickly and quickly
 
 ```cs
 
 Define a delegate
 public delegate string GetterDelegate(int value);
 
-//Method 1
+Method one
 var action = NDelegate.RandomDomain(). Delegate<GetterDelegate>("value += 101; return value. ToString(); ");
 string result = action(1);
-//result: "102"
+result: "102"
 ```
 
 <br/>
@@ -137,7 +137,7 @@ string result = action(1);
 
 #### FakeMethodOperator
 
-> Quickly copy the method and implement it
+> Quickly copy the method and implement
 
 ```cs
 public class Test
@@ -156,7 +156,7 @@ var action = FakeMethodOperator.RandomDomain()
              . Complie<Func<string,string>>();
 
 string result = action("xiao");
-//result: "hello"              
+result: "hello"              
 ```
 
 <br/>

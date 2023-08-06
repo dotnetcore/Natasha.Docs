@@ -1,10 +1,10 @@
 ---
-title: "7. 基礎となる事例"
+title: "7.基本的なケース"
 ---
 
-## 前提
+## 前提条件
 
-この記事は持っている必要があります [使用必读] 章の基礎。
+この記事には [使用必读] 章の基礎。
 
 ## グループを使用します
 
@@ -15,7 +15,7 @@ title: "7. 基礎となる事例"
 
 ## バージョン通知
 
-DotNetCore.Natasha.CSharp 安定版をご利用ください。
+DotNetCore.Natasha.CSharp stable を使用してください。
 
 <br/>
 
@@ -24,48 +24,48 @@ DotNetCore.Natasha.CSharp 安定版をご利用ください。
 ```cs
 
 var action1 = NDelegate
-        ランダムドメインを使用するか、CreateDomain / UseDomain / DefaultDomain を使用することもできます 
-        . RandomDomain()
-        //[可选API] 必要に応じて ConfigBuilder を使用してコンパイルユニットを構成します (以下は API のみを示しており、実用的ではありません)。
-        . ConfigBuilder(builder => builder
-            出力には Natasha パスを使用します
-            . UseNatashaFileOut()
-            コンパイラ オプションを構成します
-            . ConfigCompilerOption(opt => opt
-                プラットフォームを構成します
+        ドメインの作成/ドメインの使用/デフォルトドメインを使用することもできます 
+        . ランダムドメイン()
+        //[可选API] 必要に応じて ConfigBuilder を使用してコンパイル単位を構成します (以下は API を示すためのものであり、実用的な意味はありません)。
+        . ConfigBuilder(ビルダー=> ビルダ
+            出力にナターシャパスを使用する
+            . 使用するナターシャファイルアウト()
+            コンパイラ オプションの構成
+            . ConfigCompilerOption(opt => 選ぶ
+                プラットフォームを構成する
                 . SetPlatform(Microsoft.CodeAnalysis.Platform.AnyCpu)
-                Release 方式でコンパイルします
+                リリースモードでコンパイルする
                 . CompileAsRelease()
-                空の警告をオンにします
+                null 許容警告を有効にする
                 . SetNullableCompile(Microsoft.CodeAnalysis.NullableContextOptions.Warnings))
-            構文オプションを構成します
-            . ConfigSyntaxOptions(opt => opt
-                サポートされているスクリプト言語のバージョンを構成します
+            構文オプションの構成
+            . ConfigSyntaxOptions(opt => 選ぶ
+                サポートされているスクリプト言語のバージョンを構成する
                 . WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp8))
-            セマンティック チェックを無効にします
-            . DisableSemanticCheck()
-            コンパイルが完了した後のアセンブリは、ドメインのプライマリ ドメイン内の同じ名前のアセンブリの読み込み方法と比較されます
+            セマンティック チェックを無効にする
+            . セマンティックチェックを無効にする()
+            コンパイル後に同じ名前のアセンブリをドメイン ホーム ドメイン内の同じ名前のアセンブリと比較する方法
             . CompileWithAssemblyLoadBehavior(LoadBehaviorEnum.None)
-            コンパイル前にプライマリ ドメインで同じ名前の参照が見つかった場合の読み込み方法 
+            コンパイル前にメインドメインで同じ名前の参照が検出された場合のロード方法 
             . CompileWithReferenceLoadBehavior(LoadBehaviorEnum.UseCustom)
             )
-        //[可选API] メソッドが存在するクラス テンプレートを構成します
-        . ConfigClass(item => item
-            クラスに名前を設定します
-            . Name("myClass")
-            ドメイン内の Using レコードは使用されません
+        //[可选API] メソッドが存在するクラス テンプレートを構成する
+        . コンフィグクラス(アイテム=> アイテム
+            即時名ではなくクラス名を構成する
+            . 名前("マイクラス")
+            ドメイン内のレコードの使用は使用されません
             . NotLoadDomainUsing()
-            既定のドメインの Using キャッシュは使用されません
+            既定のドメインの使用キャッシュは使用されません。
             . NoGlobalUsing()
             )
-        このテンプレートの USING を構成します
+        このテンプレートの使用を構成する
         . ConfigUsing("System")
-        ここでの API は、デリゲートのパラメーターを含む、定義されたデリゲートを参照します
-        例如 Action<int> / Func<int,int> 引数を指定し、引数の名前を Action に指定します<int> / Func<int,int> 定義を見るには、F12 を参照してください。
+        ここでの API は、デリゲートのパラメーターを含む、定義されたデリゲートを参照します。
+        たとえば、アクション<int> / ファンク<int,int> パラメータがあり、パラメータの名前はアクションにあります<int> / ファンク<int,int> F12 では定義を参照してください。
         . Action("Console.WriteLine(\"Hello World!\"); ");
 
-action1();
-action1. DisposeDomain();
+アクション1();
+アクション1。 DisposeDomain();
 ```
 
 <br/>
@@ -74,13 +74,13 @@ action1. DisposeDomain();
 
 ```cs
 非同期デリゲート
-var action = NDelegate
-           . RandomDomain()
-           . AsyncFunc<Task>("Console.WriteLine(Thread.CurrentThread.ManagedThreadId);" )();
+var アクション = NDelegate
+           . ランダムドメイン()
+           . 非同期機能<Task>("Console.WriteLine(Thread.CurrentThread.ManagedThreadId);" )();
 
-public static async void Test()
+パブリック静的非同期 void Test()
 {
-    await action();
+    アクション();
 }
 ```
 
@@ -92,14 +92,14 @@ public static async void Test()
 ```cs
 
 var @operator = FastMethodOperator.DefaultDomain();
-var actionDelegate = @operator
+var アクションデリゲート = @operator
                 . Param(typeof(string), "parameter")
                 . Body("Console.WriteLine(parameter);" )
-                . Compile();
+                . コンパイル();
 
-var action = (Action<string>)actionDelegate;
-action("HelloWorld!");
-action. DisposeDomain();
+var アクション = (アクション<string>)アクションデリゲート;
+アクション("ハローワールド!");
+アクション。 DisposeDomain();
 ```
 
 <br/>
@@ -122,47 +122,47 @@ Console.WriteLine(hwFunc("Hello"," World!"));
 ## 5番目のハローワールド
 
 ```cs
-クラス テンプレートを自分でアセンブルします
+クラス テンプレートを自分で組み立てる
 NClass nClass = NClass.DefaultDomain();
-nClass
-  . Namespace("MyNamespace")
-  . Public()
-  . Name("MyClass")
-  . Ctor(ctor => ctor. Public(). Body("MyField=\"Hello\"; "))
-  . Property(prop => prop
-    . Type(typeof(string))
-    . Name("MyProperty")
-    . Public()
+nクラス
+  . 名前空間("MyNamespace")
+  . パブリック()
+  . 名前("マイクラス")
+  . Ctor(ctor => クター。 パブリック()。 Body("MyField=\"Hello\"; "))
+  . プロパティ(prop => 支柱
+    . 型(型(文字列))
+    . 名前("マイプロパティ")
+    . パブリック()
     . OnlyGetter("return \"World!\"; ")
   );
 
 
-メソッドを追加します
+メソッドを追加する
 MethodBuilder mb = new MethodBuilder();
-mb
-  . Public()
-  . Override()
-  . Name("ToString")
+メガバイト
+  . パブリック()
+  . オーバーライド()
+  . 名前("文字列変換先")
   . Body("return MyField+\" \"+MyProperty; ")
-  . Return(typeof(string));
+  . 戻り値(型(文字列));
 nClass.Method(mb);
 
 
-フィールドを追加します
-nClass.Field(fb => fb. Public()
-  . Name("MyField")
-  . Type<string>());
+フィールドの追加
+nClass.Field(fb => FB。 パブリック()
+  . 名前("マイフィールド")
+  . 種類<string>());
 
 
 
-動的に作成されたクラスを動的に呼び出します
+動的に作成されたクラスを動的に呼び出す
 var action3 = NDelegate
-  . RandomDomain()
+  . ランダムドメイン()
   . ConfigUsing(nClass.GetType())
   . Action("Console.WriteLine((new MyClass()). ToString()); ");
 
-action3();
-action. DisposeDomain();
+アクション3();
+アクション。 DisposeDomain();
 ```
 
 

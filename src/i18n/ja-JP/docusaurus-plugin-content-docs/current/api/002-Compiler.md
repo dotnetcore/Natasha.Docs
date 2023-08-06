@@ -3,76 +3,76 @@ title: "2. 基本コンパイル単位"
 ---
 
 
-- **導入**
+- **徴兵する**
 
-NUGET `DotNetCore.Natasha.CSharp`
+ナゲット `DotNetCore.Natasha.CSharp`
 
 
-- 名前に基づいて既定のドメインに読み込まれるアセンブリ参照ファイルを選択します***
+- 名前に基づいて既定のドメインにロードするアセンブリ参照ファイルを選択する
 
 次の例は、コンパイル単位の最も一般的な機能を示しています。
 
 ```cs
 AssemblyCSharpBuilder builder = new AssemblyCSharpBuilder();
 
-アセンブリが生成されるドメインをコンパイラに割り当てます。
-builder. Domain = NatashaManagement.CreateRandomDomain();
-ログを検出する場合は、ここでログ イベントを追加できます
-builder. LogCompilationEvent += Builder_LogCompilationEvent;
+アセンブリが生成されるコンパイラにドメインを割り当てます。
+ビルダ。 Domain = NatashaManagement.CreateRandomDomain();
+ログを検出する場合は、ここにログイベントを追加すると、デバッグはパラメータの各プロパティ値を確認できます
+ビルダ。 LogCompilationEvent += Builder_LogCompilationEvent;
 
 
-ファイルからそのドメインに DLL ファイルを読み込みます。
-builder. Domain.LoadAssemblyFromFile("x://xxx/x.dll");
-他のユーザーが配信したプラグイン (dll+deps.json) ファイルを読み込み、既定のドメインに同じ名前のファイルが存在する場合はスキップします。
-同様の API には、次のものがあります。
+DLL ファイルをファイルからドメインに読み込みます。
+ビルダ。 Domain.LoadAssemblyFromFile("x://xxx/x.dll");
+他の人から提供されたプラグイン(dll+deps.json)ファイルをロードし、同じ名前のファイルがデフォルトドメインに存在する場合はスキップします。
+同様の API は次のとおりです。
 LoadPluginWithAllDependency [全加载]
 LoadPluginWithHighDependency[高版本加载]
 LoadPluginWithLowDependency [低版本加载]
-builder. Domain.LoadPluginUseDefaultDependency("x://xxx/x.dll");
-コンパイル後にアセンブリを読み込むときに、アセンブリの依存関係が高いバージョンが存在する場合は、高いバージョン依存が使用されます
-builder. CompileWithAssemblyLoadBehavior(LoadBehaviorEnum.UseHighVersion) 
-参照をマージするときに参照バージョンが上位バージョンにある場合は、上位バージョンの参照が使用されます           
-builder. CompileWithReferenceLoadBehavior(LoadBehaviorEnum.UseHighVersion)
-参照フィルタ ロジックを追加します          
-builder. CompileWithReferencesFilter((defaultAsmName, targetAsmName)=> LoadVersionResultEnum.UseDefault) 
+ビルダ。 Domain.LoadPluginUseDefaultDependency("x://xxx/x.dll");
+コンパイル後にアセンブリが読み込まれるときに、より高いバージョンのアセンブリ依存関係が存在する場合は、より高いバージョンの依存関係が使用されます。
+ビルダ。 CompileWithAssemblyLoadBehavior(LoadBehaviorEnum.UseHighVersion) 
+参照がマージされるときに参照バージョンに上位バージョンが存在する場合は、参照の上位バージョンが使用されます。           
+ビルダ。 CompileWithReferenceLoadBehavior(LoadBehaviorEnum.UseHighVersion)
+参照フィルター ロジックの追加          
+ビルダ。 CompileWithReferencesFilter((defaultAsmName, targetAsmName)=> LoadVersionResultEnum.UseDefault) 
 
 
-Natahsha の既定の出力ディレクトリとファイル名を使用して、動的アセンブリのファイル出力を行います
-パラメータはカタログを置き換えることができます
-builder. UseNatashaFileOut();
-builder. SetDllFilePath(path);               生成された DLL ファイル パス c:/1.dllを設定します
-builder. SetPdbFilePath(path);               生成された PDB ファイル パス c:/1.pdbを設定します
-builder. SetXmlFilePath(path);              生成された XML ファイル パス c:/1.xmlを設定します
+動的アセンブリのファイル出力に Natahsha の既定の出力ディレクトリとファイル名を使用する
+パラメータはディレクトリに置き換えることができます
+ビルダ。 使用するナターシャファイルアウト();
+ビルダ。 SetDllFilePath(path);               生成されたDLLファイルのパスc:/1を設定します.dll
+ビルダ。 SetPdbFilePath(path);               生成されたPDBファイルのパスを設定します c:/1.pdb
+ビルダ。 SetXmlFilePath(path);              生成された XML ファイルのパス c:/1 を設定します.xml
 
 
-コンパイラ パラメータを構成し、専門家以外のユーザーは変更しないでください
-builder. ConfigCompilerOption(opt => { });
-構文ツリー パラメータを構成し、専門家以外のユーザーは変更しないでください
-builder. ConfigSyntaxOptions(opt => opt);
+コンパイラパラメータを設定し、非専門家が変更しないでください
+ビルダ。 ConfigCompilerOption(opt => { });
+構文ツリーパラメータを設定し、専門家以外が変更しない
+ビルダ。 ConfigSyntaxOptions(opt => オプト);
 
 
-コンパイル前のセマンティック フィルタの追加 (デリゲート)
-builder. AddSemanticAnalysistor((currentBuilder, currentCompiler) => currentCompiler);
-すべてのセマンティック フィルタを明確にし、パフォーマンスを向上させます
-builder. ClearInnerSemanticAnalysistor();
+コンパイル前のセマンティック フィルター (デリゲート) を追加する
+ビルダ。 AddSemanticAnalysistor((currentBuilder, currentCompiler) => 現在のコンパイラ);
+すべてのセマンティックフィルターをクリアして、パフォーマンスを少し向上させます
+ビルダ。 ClearInnerSemanticAnalysistor();
 
 
-ここでは、DefaultUsing.UsingScript を使用してウォームアップによって生成された using コードを取得する、組み立てられたスクリプトを追加します。
-builder. Add(DefaultUsing.UsingScript + "public class A{}");
-コンパイルされた動的アセンブリを取得します
+アセンブルされたスクリプトをここに追加し、DefaultUsing.UsingScript を使用して、予熱された使用コードを取得します。
+ビルダ。 Add(DefaultUsing.UsingScript + "public class A{}");
+コンパイルされた動的アセンブリを取得します。
 var asm = builder. GetAssembly();
 
 
-型に直接取得する場合
-var type = builder. GetTypeFromShortName("Test");
-または
-type = builder. GetTypeFromFullName("xxNamespace.xxClassName");
+型を直接取得したい場合
+var タイプ = ビルダー。 GetTypeFromShortName("Test");
+又は
+タイプ = ビルダー。 GetTypeFromFullName("xxNamespace.xxClassName");
 ```
 
-- 既知の問題 ***
-  - 参照ファイル エラー NatashaExceptionがありません: "RuntimeMetadataVersion の値が見つかりません。System.Object を含むアセンブリが見つからないか、オプションによって RuntimeMetadataVersion に値が指定されていません。 ”
-    - 使用します `NatashaManagement.AddGlobalReference();` 既定のドメインの参照ファイルを手動で追加します。
-    - 使用します `domain. LoadAssemblyFromFile / LoadPluginXXXDependency` 他のドメインの参照ファイルを追加するために手を取る.
-  - Using 参照がありません。
-    - 使用します `NatashaManagement.AddGlobalUsing("mynamespace")` を使用して、グローバル using を手動で追加します。
-    - 使用します `domain. UsingRecorder.Using("mynamespace")` を使用して、他のドメインの using を手動で追加します。
+- 既知の問題***
+  - 参照ファイルが見つからないエラー ナターシャ例外: "ランタイム メタデータ バージョンの値が見つかりませんでした。オブジェクトを含むアセンブリが見つからなかったか、オプションを使用して RuntimeMetadataVersion に値が指定されませんでした。 "
+    - 使う `NatashaManagement.AddGlobalReference();` をクリックして、既定のドメインの参照ファイルを手動で追加します。
+    - 使う `ドメイン。 LoadAssemblyFromFile / LoadPluginXXXデペンデンシー` 他のドメインへの参照を追加します。
+  - 参照を使用して欠落しています。
+    - 使う `NatashaManagement.AddGlobalUsing("mynamespace")` を使用してグローバルを手動で追加します。
+    - 使う `ドメイン。 UsingRecorder.Using("mynamespace")` を使用して他のドメインを手動で追加します。
