@@ -1,5 +1,5 @@
 ---
-title: "10. 模板初始化操作"
+title: "1. 模板初始化操作"
 ---
 
 Natasha 的所有模板均继承自 ComplierTemplate ，ComplierTemplate 本身会提供静态构造方法。因此上层 API 也会被支持。
