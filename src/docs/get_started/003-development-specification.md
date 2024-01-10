@@ -44,7 +44,7 @@ Package(Builder) + API + Extension => Operator
 
 <br/>
 
-  直接使用 Natasha 内置的 Builder 可以快速实现定制，例如： OopBuilder<TOperator> ，MethodBuilder<TOperator>。
+  直接使用 Natasha 内置的 Builder 可以快速实现定制，例如： `OopBuilder<TOperator>` ，`MethodBuilder<TOperator>`。
   前者为其提供对象构造模板，后者专注构建方法。
 
 <br/>
