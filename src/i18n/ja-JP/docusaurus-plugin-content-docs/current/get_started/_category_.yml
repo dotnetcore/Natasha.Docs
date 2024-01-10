@@ -1,0 +1,4 @@
+---
+label: '封装规范入门'
+position: 100000 #float position is supported
+collapsed: true #keep the category open by default
