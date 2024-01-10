@@ -1,18 +1,25 @@
 ---
-title: 11. 编译模板 API速查表
+title: 包说明
 ---
 
 <br/>
 
-|         类名         |            作用           |   Namespaces   |     操作类型    |
-| :----------------: | :---------------------: | :------------: | :---------: |
-|      NAssembly     |  快速创建同程序集的 oop 及委托等操作类  |       全局       | 静态初始化,动态实例化 |
-|      NInstance     |    根据类型，提供一个初始化实例的委托    |       全局       |      静态     |
-|      NDelegate     | 快速创建指定域的 Action/Func 委托 |       全局       | 静态初始化,动态实例化 |
-|       NClass       |        快速创建一个公有类        |       全局       | 静态初始化,动态实例化 |
-|     NInterface     |        快速创建一个公有接口       |       全局       | 静态初始化,动态实例化 |
-|        NEnum       |        快速创建一个枚举类        |       全局       | 静态初始化,动态实例化 |
-|       NRecord      |        快速创建一个记录类        |       全局       | 静态初始化,动态实例化 |
-|       NStruct      |        快速创建一个结构体        |       全局       | 静态初始化,动态实例化 |
-| FakeMethodOperator |    仿造 MethodInfo 创建方法   | Natasha.CSharp | 静态初始化,动态实例化 |
-| FastMethodOperator |          快速创建方法         | Natasha.CSharp | 静态初始化,动态实例化 |
+### 域实现包
+
+`DotNetCore.Natasha.DynamicLoad.Base` 包为编译单元与域的粘合接口包，自定义实现域并给 Natasha 编译单元用。
+
+`DotNetCore.Natasha.Domain` Natasha 官方的 Core3.0+ 域操作包。
+
+`Natasha.CSharp.Compiler.Domain` 继承自 `DotNetCore.Natasha.Domain` 并实现了 `DotNetCore.Natasha.DynamicLoad.Base` 编译粘合接口包。
+
+## 编译单元包
+
+`DotNetCore.Natasha.CSharp.Compiler` Natasha 基础编译单元包。
+
+### 扩展包
+
+`DotNetCore.Natasha.CSharp.Template.Core` 在编译单元基础上构建的模板编译包。
+
+`DotNetCore.Natasha.CSharp.Extension.Ambiguity` 在编译单元基础上扩展的解决二义性引用的包。
+
+`DotNetCore.Natasha.CSharp.Extension.Codecov` 在编译单元基础上扩展的统计动态程序集使用率的包。
