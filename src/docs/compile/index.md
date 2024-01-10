@@ -13,9 +13,9 @@ title: "包说明"
 
 `Natasha.CSharp.Compiler.Domain` 继承自 `DotNetCore.Natasha.Domain` 并实现了 `DotNetCore.Natasha.DynamicLoad.Base` 编译粘合接口包。
 
-## 编译单元包
+### 编译单元包
 
-`DotNetCore.Natasha.CSharp.Compiler` Natasha 基础编译单元包。
+`DotNetCore.Natasha.CSharp.Compiler` Natasha 基础编译单元包, 如果您不使用模板包，可以单独引用此包进行编译。
 
 
 ### 扩展包
