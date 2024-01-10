@@ -1,4 +1,0 @@
----
-label: '履歴を更新します'
-position: 999999 #float position is supported
-collapsed: true #keep the category open by default
