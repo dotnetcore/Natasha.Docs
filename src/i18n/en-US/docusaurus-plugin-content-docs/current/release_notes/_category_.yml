@@ -1,4 +1,0 @@
----
-label: 'Update the history'
-position: 999999 #float position is supported
-collapsed: true #keep the category open by default
