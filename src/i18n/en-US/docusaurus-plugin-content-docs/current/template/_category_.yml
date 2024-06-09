@@ -1,3 +1,3 @@
-label: '模板教程'
+label: 'Template Tutorial'
 position: 300000 #float position is supported
 collapsed: true #keep the category open by default

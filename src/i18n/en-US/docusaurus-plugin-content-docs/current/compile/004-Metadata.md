@@ -1,36 +1,36 @@
 ---
-title: 4 元数据管理与微调
+title: 4 Metadata Management and Fine-tuning
 ---
 
-## 元数据管理
+## Metadata Management
 
-### 增加元数据
+### Add Metadata
 
-新版 Natasha 新增了 NatashaLoadContext 操作类来接管编译所需的 [元数据引用] 以及 [Using Code];
+The new version of Natasha has added the NatashaLoadContext operation class to take over the [metadata references] and [Using Code] required for compilation;
 
-首先获取 NatashaLoadContext 实例;
+First, get an instance of NatashaLoadContext;
 
 ```cs
 var loadContext = DomainManagement.Random();
-//或
+//or
 var loadContext = (new AssemblyCSharpBuilder().UseRandomDomain()).LoadContext;
 ```
 
-从实现程序集中寻找 [元数据引用] 和 [Using Code] 并添加
+Find [metadata references] and [Using Code] from the implementing assembly and add them
 
 ```CS
 loadContext.AddReferenceAndUsingCode(myType/myAssembly);
 ```
 
-从引用程序集中寻找 [元数据引用] 和 [Using Code] 并添加
+Find [metadata references] and [Using Code] from the referenced assembly and add them
 
 ```cs
 loadContext.AddReferenceAndUsingCode(refAssemblyFilePath);
 ```
 
-### 单独增加 [元数据引用]
+### Add [metadata references] separately
 
-单独添加 [元数据引用]
+Add [metadata references] separately
 
 ```cs
 loadContext.ReferenceRecorder.AddReference(
@@ -39,9 +39,9 @@ loadContext.ReferenceRecorder.AddReference(
     AssemblyCompareInfomation loadReferenceBehavior)
 ```
 
-第三个参数的作用是：当域中已存在 assemblyName 时，用那个版本好。
+The purpose of the third parameter is: when the assemblyName already exists in the domain, use the better version.
 
-### 单独增加 [Using Code]
+### Add [Using Code] separately
 
 ```cs
 loadContext.UsingRecorder.Using(string? @using);
@@ -53,31 +53,31 @@ loadContext.UsingRecorder.Using(IEnumerable<Type> namespaces);
 loadContext.UsingRecorder.Using(Type type);
 ```
 
-## 元数据微调
+## Metadata Fine-tuning
 
-### 完整覆盖
+### Complete Override
 
-合并共享域的 [元数据引用] 和 [Using Code]
+Merge [metadata references] and [Using Code] of shared domain
 
 ```cs
- builder.WithCombineReferences(item => item.UseAllReferences())
+builder.WithCombineReferences(item => item.UseAllReferences())
  builder.WithCombineUsingCode(UsingLoadBehavior.WithAll)
 ```
 
-### 部分覆盖
+### Partial Override
 
-合并当前域的 [元数据引用] 和 [Using Code]
+Merge [metadata references] and [Using Code] of the current domain
 
 ```cs
- builder.WithCurrentReferences()
+builder.WithCurrentReferences()
  builder.WithCombineUsingCode(UsingLoadBehavior.WithCurrent)
 ```
 
-### 自定义
+### Custom
 
-不覆盖 [Using Code]，使用自己传入的 [元数据引用]
+Do not override [Using Code] and use the [metadata references] passed in
 
 ```cs
- builder.WithSpecifiedReferences(IEnumerable<MetadataReference> metadataReferences)
+builder.WithSpecifiedReferences(IEnumerable<MetadataReference> metadataReferences)
  builder.WithoutCombineUsingCode()
 ```

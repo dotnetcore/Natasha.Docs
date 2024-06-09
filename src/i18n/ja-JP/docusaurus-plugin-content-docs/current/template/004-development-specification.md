@@ -2,7 +2,7 @@
 title: 4. 建议的封装规范
 ---
 
-## Natasha 封装规约
+## Natasha 封装规約
 
 Natasha 有自己的封装规则，这可以让封装者思路更加清晰，并让作品更加容易维护。
 
@@ -29,7 +29,7 @@ Package(Builder) + API + Extension => Operator
 <br/>
 
 - Template 构建模板
-  使用 Template 模板构建运行时脚本字符串，模板对外暴漏 API 以方便使用者组成编译字符串。
+  使用 Template 模板构建运行时脚本字符串，模板对外暴露 API 以方便使用者组成编译字符串。
   - UsingTemplat 是 Natasha 内置模板，提供了从命名空间到完整对象的代码构建。
   - DelegateTemplate 是 Natasha 内置模板，提供了方法代码的构建。
   - FieldTemplate 是 Natasha 内置模板，提供了字段代码的构建。
@@ -43,7 +43,7 @@ Package(Builder) + API + Extension => Operator
 
 <br/>
 
-直接使用 Natasha 内置的 Builder 可以快速实现定制，例如： OopBuilder[TOperator] ，MethodBuilder[Operator] 泛型方法。
+直接使用Natasha内置的Builder可以快速实现定制，例如：OopBuilder<TOperator>，MethodBuilder<TOperator>泛型方法。
 前者为其提供对象构造模板，后者专注构建方法。
 
 <br/>

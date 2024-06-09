@@ -1,16 +1,16 @@
 ---
-title: 4. 建议的封装规范
+title: 4. Recommended Encapsulation Specification
 ---
 
-## Natasha 封装规约
+## Natasha Encapsulation Specification
 
-Natasha 有自己的封装规则，这可以让封装者思路更加清晰，并让作品更加容易维护。
+Natasha has its own encapsulation rules, which can make the encapsulator's ideas clearer and make the work easier to maintain.
 
 <br/>
 
-## 一个完整的 Operator
+## A complete Operator
 
-Operator 作为动态构建对外使用的操作类，一个 Operator 可大致由以下 3 部分组成：
+Operator is a dynamic construction class used for external use. An Operator can roughly consist of the following 3 parts:
 
 - Template
 - Builder
@@ -21,42 +21,42 @@ Package(Builder) + API + Extension => Operator
 
 <br/>
 
-## 脚本构建器（Builder）
+## ScriptBuilder (Builder)
 
 As the most important core part of Operator, Builder primarily provides delegates for Operator, can receive configurations from outside, can combine templates internally, and compiles them.<br x-id="2" />
 it is roughly divided into two parts, the Template template and the Compiler compiler：<br x-id="2" />
 it is roughly divided into two parts, the Template template and the Compiler compiler：\
-其大致分为两部分 Template 模板与 Compiler 编译器：
+It is roughly divided into two parts: Template and Compiler:
 
 <br/>
 
-- Template 构建模板
-  使用 Template 模板构建运行时脚本字符串，模板对外暴漏 API 以方便使用者组成编译字符串。
-  - UsingTemplat 是 Natasha 内置模板，提供了从命名空间到完整对象的代码构建。
-  - DelegateTemplate 是 Natasha 内置模板，提供了方法代码的构建。
-  - FieldTemplate 是 Natasha 内置模板，提供了字段代码的构建。
-  - PropertyTemplate 是 Natasha 内置模板，提供了属性代码的构建。
+- Template Build Template
+  Use template templates to build runtime script strings, and templates leak OUT of the API to make it easier for consumers to compose compilation strings.
+  - UsingTemplate is a built-in template in Natasha, which provides code construction from namespaces to complete objects.
+  - DelegateTemplate is a built-in template in Natasha, which provides method code construction.
+  - FieldTemplate is a built-in template in Natasha, which provides field code construction.
+  - PropertyTemplate is a built-in template in Natasha, which provides property code construction.
 
 <br/>  
 
-- Compiler 编译器
-  编译器接收模板提供的字符串并进行编译，完成 Builder 的编译任务。
-  - AssemblyCSharpBuilder  : 使用 Natasha 的 CSharp 编译器可以轻松的完成字符串的编译和元数据的提取。
+- Compiler
+  The compiler receives the string provided by the template and compiles it to complete the compilation task of the Builder.
+  - AssemblyCSharpBuilder: With the CSharp compiler of Natasha, it is easy to compile strings and extract metadata.
 
 <br/>
 
-直接使用 Natasha 内置的 Builder 可以快速实现定制，例如： OopBuilder[TOperator] ，MethodBuilder[Operator] 泛型方法。
-前者为其提供对象构造模板，后者专注构建方法。
+You can quickly achieve customization by directly using the built-in Builder of Natasha, such as OopBuilder[TOperator], MethodBuilder[Operator] generic method.
+The former provides object construction templates, while the latter focuses on method construction.
 
 <br/>
 
-## 操作类（Operator）
+## Operator
 
-Operator 在 Builder 的基础上进行了 Package 封装，Operator 存储了 Builder 提供的编译结果，对外暴漏用户级别的 API 。 <br/>
+Operator encapsulates Builder based on Package, and Operator stores the compilation results provided by Builder, exposing API to users. <br/>
 
-#### 案例
+#### Case
 
-例如 Natasha 内置的 [FastMethodOperator](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Api/Level1/Operator/FastMethodOperator.cs) 在 [MethodBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs) 的基础上进行了包装和简化，FastMethodOpeartor 的初始化函数中定制了一个专属自己的脚本构建流程，如下模板翻译成 `public static` ：
+For example, the built-in [FastMethodOperator](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Api/Level1/Operator/FastMethodOperator.cs) in Natasha is wrapped and simplified based on [MethodBuilder](https://github.com/dotnetcore/Natasha/blob/master/src/Natasha.CSharp/Natasha.CSharp.Template/Builder/MethodBuilder.cs). The initialization function of FastMethodOperator customizes its own script construction process. The following template is translated into `public static`:
 
 ```cs
 this.Access(AccessFlags.Public)

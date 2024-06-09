@@ -1,54 +1,54 @@
 ---
-title: 2.1 智能编译模式 - 实现程序集
+title: 2.1 Smart Compilation Mode - Implementing Assemblies
 ---
 
-## 为何使用实现程序集
+## Why Use Implementing Assemblies
 
-实现程序集包括逻辑的具体实现和私有字段，预热内存涨幅较少，但实现程序集具有敏感的依赖关系，需要小心使用。
+Implementing assemblies include the specific implementation and private fields of logic, with less memory growth during warm-up. However, implementing assemblies have sensitive dependencies and should be used with caution.
 
 ## Prerequisite
 
-1. 引入 `DotNetCore.Natasha.CSharp.Compiler.Domain` Core 版本的编译域包。
-2. 使用预热方法为智能编译做准备。
-3. 智能编译。
+1. Introduce the `DotNetCore.Natasha.CSharp.Compiler.Domain` Core version of the compilation domain package.
+2. Prepare for intelligent compilation using the preheating method.
+3. Intelligent Compilation.
 
-## 预热案例
+## Preheating Examples
 
-### 普通预热
+### Ordinary Preheating
 
-1. 泛型预热方法将自动创建 编译域创建者 单例。
-2. 传入 true 参数以达到禁用运行时程序集的作用，Natasha 将会选择内存程序集预热。
-3. 第一个参数指是否从内存程序集中提取 Using Code， 设置为 true 将从实现程序集中提取 Using。
-4. 第二个参数指是否从内存程序集中提取 元数据，设置为 true 将从实现程序集中提取 元数据。
+1. The generic preheating method will automatically create a singleton for the compilation domain creator.
+2. Passing the true parameter to disable runtime assemblies, Natasha will choose to preheat memory assemblies.
+3. The first parameter indicates whether to extract 'Using Code' from memory assemblies. Set it to true to extract 'Using' from implementing assemblies.
+4. The second parameter indicates whether to extract 'Metadata' from memory assemblies. Set it to true to extract 'Metadata' from implementing assemblies.
 
 ```cs
-//注册编译域并预热方法
+//Register the compilation domain and preheat method
 NatashaManagement.Preheating<NatashaDomainCreator>(true, true);
 ```
 
-### Using缓存预热
+### Using Cache Preheating
 
-第一次生成将 Using Code 写入缓存文件  Natasha.Namespace.cache 中，后续重启会自动从文件中加载。
+The first generation will write the 'Using Code' into the cache file 'Natasha.Namespace.cache', and subsequent restarts will automatically load it from the file.
 
 ```cs
-//注册编译域并预热方法
-NatashaManagement.Preheating<NatashaDomainCreator>(true, true，true);
+//Register the compilation domain and preheat method
+NatashaManagement.Preheating<NatashaDomainCreator>(true, true, true);
 ```
 
-### 分开预热
+### Separate Preheating
 
 ```cs
-//注册编译域
+//Register the compilation domain
 NatashaManagement.RegistDomainCreator<NatashaDomainCreator>();
-//预热方法
+//Preheat method
 NatashaManagement.Preheating(true, true);
 ```
 
-### 过滤预热
+### Filter Preheating
 
 ```cs
-//如果存在 Dapper 主版本高于 12 的程序集，则不要将它加入缓存。
-//传入排除方法
+//Exclude the assembly if there is a Dapper assembly with a major version greater than 12.
+//Pass the exclusion method
 NatashaManagement.Preheating<NatashaDomainCreator>((asmName, name) => {
     if (asmName.Name != null)
     {
@@ -58,26 +58,26 @@ NatashaManagement.Preheating<NatashaDomainCreator>((asmName, name) => {
         }
     }
     return false;
-},true, true，true);
+}, true, true, true);
 ```
 
-> 也许您的环境过于复杂，从而遇到一些意外，请您精简代码之后，确保异常能够重现，提交 issue 给 Natasha。
+> Perhaps your environment is too complex, encountering some unexpected problems. Please simplify the code to ensure that the exception can be reproduced, and submit an issue to Natasha.
 
-## 智能编译
+## Intelligent Compilation
 
-在预热后请参考以下代码
+Please refer to the following code after preheating
 
 ```cs
 AssemblyCSharpBuilder builder = new();
 var myAssembly = builder
     .UseRandomDomain()
-    .UseSmartMode() //启用智能模式
+    .UseSmartMode() //Enable smart mode
     .Add("public class A{ }")
     .GetAssembly();
 ```
 
-智能模式将合并 共享域与当前域的 元数据以及 Using, 并启用语义检查.
-智能模式的 API 逻辑为：
+Smart mode will merge metadata and 'Using' code from shared domain and current domain, and enable semantic checks.
+The API logic for smart mode is as follows:
 
 ```cs
 .WithCombineReferences(item => item.UseAllReferences())
@@ -86,12 +86,12 @@ var myAssembly = builder
 .WithSemanticCheck();
 ```
 
-可以参考[元数据管理与微调] 对 元数据 的合并行为进行微调。
-可以参考[微调Using覆盖] 对 UsingCode 的合并行为进行微调。
+You can refer to [Metadata management and fine-tuning] to fine-tune the merging behavior of metadata.
+You can refer to [Fine-tuning Using override] to fine-tune the merging behavior of UsingCode.
 
-## 其他案例
+## Other cases
 
-#### 批量排除程序集
+#### Batch exclude assemblies
 
 ```cs
 NatashaInitializer.Preheating((asmName, name) => {
@@ -118,29 +118,29 @@ NatashaInitializer.Preheating((asmName, name) => {
             name.Contains("ComponentModel")
             )
             {
-                //排除
+                //Exclude
                 return true;
             }
             return false;
         }
         if (name.Contains("Natasha"))
         {
-            //加载
+            //Load
             return false;
         }
         if (name.Contains("ConsoleApp3"))
         {
-            //加载
+            //Load
             return false;
         }
     }
     return true;
-}，true, true);
+}, true, true);
 ```
 
-#### 根据版本排除程序集
+#### Exclude assemblies based on versions
 
-该示例使用 AssemblyName 进行判断程序集名称及版本, 以下代码排除了 dapper 主版本号为 12 的程序集引用文件;
+This example uses AssemblyName to determine the assembly name and version. The following code excludes the reference files of the dapper with major version 12;
 
 ```cs
 NatashaInitializer.Preheating((asmName, name) => {
@@ -155,4 +155,4 @@ NatashaInitializer.Preheating((asmName, name) => {
 });
 ```
 
-> 减少程序集引用文件的加载,可以有效的控制内存涨幅.
+> Reducing the loading of assembly reference files can effectively control memory consumption.

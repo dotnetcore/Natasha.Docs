@@ -88,39 +88,39 @@ builder.ConfigCompilerOption(opt=>opt);
     opt.WithoutUnsafeCompile()
 ```
 
-## 输出
+## 出力
 
-#### 文件输出
+#### ファイル出力
 
-Natasha 支持 dll/pdb/xml 文件输出，其中 xml 存储了程序集注释相关的信息。参考 API
+Natashaは、dll/pdb/xmlファイルの出力をサポートしており、xmlにはアセンブリのコメント関連情報が格納されています。APIを参照してください
 
 ```cs
-//该方法将使程序集输出到默认文件夹下的 dll/pdb/xml 文件中
-//可传入一个文件夹路径
-//可以传入三个文件的路径
+//このメソッドを使用すると、アセンブリがデフォルトのフォルダにdll/pdb/xmlファイルとして出力されます
+//フォルダのパスを渡すこともできます
+//また、3つのファイルのパスを渡すこともできます
 builder.WithFileOutput(string dllFilePath, string? pdbFilePath = null, string? commentFilePath = null)
 builder.WithFileOutput(string? folder = null);
-//分离的 API
+//分離されたAPI
 builder.SetDllFilePath/SetPdbFilePath/SetCommentFilePath();
 ```
 
-> 注意，在 Release 模式下将不会产生 pdb 文件。
+> 注意：Releaseモードでは、pdbファイルは生成されません。
 
-#### 程序集输出
+#### アセンブリの出力
 
-Natasha 配套有程序集相关的配置
+Natashaには、アセンブリに関連する設定があります
 
 ```cs
-//输出完整程序集
+//完全なアセンブリを出力
 builder.OutputAsFullAssembly();
-//输出引用程序集，此时将默认不包含私有成员
+//参照アセンブリを出力し、この時点ではプライベートメンバーはデフォルトで含まれません
 builder.OutputAsRefAssembly();
-//输出时包含私有成员
+//プライベートメンバーを含むように出力
 builder.WithPrivateMembers();
-//输出时不包含私有成员
+//プライベートメンバーを含まないように出力
 builder.WithoutPrivateMembers();
 
-//编译结果为引用程序集，且写入文件，且不会加载到域。
+//コンパイル結果は参照アセンブリとして出力され、ファイルに書き込まれ、ドメインにはロードされません。
 builder
   .OutputAsRefAssembly();
   .WithFileOutput()

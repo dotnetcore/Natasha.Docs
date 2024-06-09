@@ -1,25 +1,25 @@
 ---
-title: 5 脚本教程
+title: 5 Script Tutorial
 ---
 
-## 配置选项
+## Configuration Options
 
 ```cs
- builder.ConfigSyntaxOptions(opt=>opt.WithLanguageVersion(LanguageVersion.CSharp6))
+builder.ConfigSyntaxOptions(opt=>opt.WithLanguageVersion(LanguageVersion.CSharp6))
 ```
 
-## 添加脚本
+## Add Script
 
-### 跟随 Builder 的行为覆盖 Using Code
+### Override Using Code with Builder's Behavior
 
 ```cs
 builder.WithCombineUsingCode(UsingLoadBehavior.WithAll)
 builder.Add(myCode)
 ```
 
-### 自定义覆盖 Using Code
+### Customize Override Using Code
 
-第二个参数指定覆盖行为
+The second parameter specifies the override behavior
 
 ```cs
 builder.Add("script",UsingLoadBehavior.WithCurrent)

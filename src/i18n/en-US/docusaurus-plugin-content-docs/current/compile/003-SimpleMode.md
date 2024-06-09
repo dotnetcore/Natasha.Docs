@@ -1,27 +1,27 @@
 ---
-title: 3 轻便编译模式
+title: 3 Lightweight Compilation Mode
 ---
 
 ## Prerequisite
 
-1. 引入 `DotNetCore.Natasha.CSharp.Compiler.Domain` Core 版本的编译域包。
-2. 简洁编译。
+1. Introduce the `DotNetCore.Natasha.CSharp.Compiler.Domain` Core version of the compilation domain package.
+2. Concise compilation.
 
-## 简洁编译
+## Concise compilation
 
-在预热后请参考以下代码
+Please refer to the following code after preheating
 
 ```cs
 AssemblyCSharpBuilder builder = new();
 var myAssembly = builder
     .UseRandomDomain()
-    .UseSimpleMode() //启用轻便模式
+    .UseSimpleMode() //Enable lightweight mode
     .Add("public class A{ }")
     .GetAssembly();
 ```
 
-轻便模式将合并 [当前域]的 元数据以及 Using, 并关闭语义检查.
-简洁模式的 API 逻辑为：
+The lightweight mode merges the metadata of the current domain and the 'Using' statements, and disables semantic checks.
+The API logic for the concise mode is:
 
 ```cs
  .WithCurrentReferences()
@@ -30,5 +30,5 @@ var myAssembly = builder
  .WithoutSemanticCheck();
 ```
 
-可以参考[元数据管理与微调] 对 元数据 的合并行为进行微调。
-可以参考[微调Using覆盖] 对 UsingCode 的合并行为进行微调。
+You can refer to [Metadata management and fine-tuning] to fine-tune the merging behavior of metadata.
+You can refer to [Fine-tuning Using override] to fine-tune the merging behavior of UsingCode.
