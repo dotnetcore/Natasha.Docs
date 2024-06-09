@@ -1,18 +1,18 @@
 ---
-title: 3. 高级编译类 API速查表
+title: 3. Advanced Compilation Class API Cheat Sheet
 ---
 
 <br/>
 
-|         类名         |            作用           |           Namespaces           |     操作类型    |
-| :----------------: | :---------------------: | :----------------------------: | :---------: |
-|      NAssembly     |  快速创建同程序集的 oop 及委托等操作类  |               全局               | 静态初始化,动态实例化 |
-|      NInstance     |    根据类型，提供一个初始化实例的委托    |               全局               |      静态     |
-|      NDelegate     | 快速创建指定域的 Action/Func 委托 |               全局               | 静态初始化,动态实例化 |
-|       NClass       |        快速创建一个公有类        |               全局               | 静态初始化,动态实例化 |
-|     NInterface     |        快速创建一个公有接口       |               全局               | 静态初始化,动态实例化 |
-|        NEnum       |        快速创建一个枚举类        |               全局               | 静态初始化,动态实例化 |
-|       NRecord      |        快速创建一个记录类        |               全局               | 静态初始化,动态实例化 |
-|       NStruct      |        快速创建一个结构体        |               全局               | 静态初始化,动态实例化 |
-| FakeMethodOperator |    仿造 MethodInfo 创建方法   | Natasha.CSharp | 静态初始化,动态实例化 |
-| FastMethodOperator |          快速创建方法         | Natasha.CSharp | 静态初始化,动态实例化 |
+|     Class Name     |                                   Function                                   |           Namespaces           |                Operation Type                |
+| :----------------: | :--------------------------------------------------------------------------: | :----------------------------: | :------------------------------------------: |
+|      NAssembly     | Quickly create classes, delegates, and other operations in the same assembly |             Global             | Static initialization, dynamic instantiation |
+|      NInstance     |        Provides a delegate to initialize an instance based on its type       |             Global             |                    Static                    |
+|      NDelegate     |          Quickly create Action/Func delegates for a specified domain         |             Global             | Static initialization, dynamic instantiation |
+|       NClass       |                         Quickly create a public class                        |             Global             | Static initialization, dynamic instantiation |
+|     NInterface     |                       Quickly create a public interface                      |             Global             | Static initialization, dynamic instantiation |
+|        NEnum       |                      Quickly create an enumeration class                     |             Global             | Static initialization, dynamic instantiation |
+|       NRecord      |                         Quickly create a record class                        |             Global             | Static initialization, dynamic instantiation |
+|       NStruct      |                          Quickly create a structure                          |             Global             | Static initialization, dynamic instantiation |
+| FakeMethodOperator |                  Create methods by simulating the MethodInfo                 | Natasha.CSharp | Static initialization, dynamic instantiation |
+| FastMethodOperator |                            Quickly create methods                            | Natasha.CSharp | Static initialization, dynamic instantiation |

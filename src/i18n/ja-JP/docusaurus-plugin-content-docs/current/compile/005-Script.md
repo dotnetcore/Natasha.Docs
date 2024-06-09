@@ -1,25 +1,25 @@
 ---
-title: 5 脚本教程
+title: 5 スクリプトチュートリアル
 ---
 
-## 配置选项
+## 設定オプション
 
 ```cs
- builder.ConfigSyntaxOptions(opt=>opt.WithLanguageVersion(LanguageVersion.CSharp6))
+builder.ConfigSyntaxOptions(opt=>opt.WithLanguageVersion(LanguageVersion.CSharp6))
 ```
 
-## 添加脚本
+## スクリプトの追加
 
-### 跟随 Builder 的行为覆盖 Using Code
+### Using Codeの動作をBuilderに従ってオーバーライドする
 
 ```cs
 builder.WithCombineUsingCode(UsingLoadBehavior.WithAll)
 builder.Add(myCode)
 ```
 
-### 自定义覆盖 Using Code
+### カスタムなUsing Codeのオーバーライド
 
-第二个参数指定覆盖行为
+第2引数でオーバーライドの動作を指定します
 
 ```cs
 builder.Add("script",UsingLoadBehavior.WithCurrent)

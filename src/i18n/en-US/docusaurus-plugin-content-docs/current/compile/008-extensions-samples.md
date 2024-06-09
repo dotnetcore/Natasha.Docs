@@ -1,5 +1,5 @@
 ---
-title: 8. 使用 Natasha 的类型扩展
+title: 8. Use the type extensions of Natasha
 ---
 
 ```cs

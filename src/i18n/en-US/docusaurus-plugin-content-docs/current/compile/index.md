@@ -1,25 +1,25 @@
 ---
-title: 包说明
+title: Package Description
 ---
 
 <br/>
 
-### 域实现包
+### Domain Implementation Package
 
-`DotNetCore.Natasha.DynamicLoad.Base` 包为编译单元与域的粘合接口包，自定义实现域并给 Natasha 编译单元用。
+The `DotNetCore.Natasha.DynamicLoad.Base` package is the interface package that binds the compilation unit with the domain. It is used to customize the domain and provide it to the Natasha compilation unit.
 
-`DotNetCore.Natasha.Domain` Natasha 官方的 Core3.0+ 域操作包。
+The `DotNetCore.Natasha.Domain` package is the official Core 3.0+ domain operation package for Natasha.
 
-`Natasha.CSharp.Compiler.Domain` 继承自 `DotNetCore.Natasha.Domain` 并实现了 `DotNetCore.Natasha.DynamicLoad.Base` 编译粘合接口包。
+The `Natasha.CSharp.Compiler.Domain` package inherits from `DotNetCore.Natasha.Domain` and implements the `DotNetCore.Natasha.DynamicLoad.Base` compilation interface package.
 
-### 编译单元包
+### Compilation Unit Package
 
-`DotNetCore.Natasha.CSharp.Compiler` Natasha 基础编译单元包, 如果您不使用模板包，可以单独引用此包进行编译。
+The `DotNetCore.Natasha.CSharp.Compiler` package is the basic compilation unit package for Natasha. If you do not use the template package, you can reference this package separately for compilation.
 
-### 扩展包
+### Extension Package
 
-`DotNetCore.Natasha.CSharp.Template.Core` 在编译单元基础上构建的模板编译包。
+The `DotNetCore.Natasha.CSharp.Template.Core` package is a template compilation package based on the compilation unit.
 
-`DotNetCore.Natasha.CSharp.Extension.Ambiguity` 在编译单元基础上扩展的解决二义性引用的包。
+The `DotNetCore.Natasha.CSharp.Extension.Ambiguity` package is an extension package that resolves ambiguous references based on the compilation unit.
 
-`DotNetCore.Natasha.CSharp.Extension.Codecov` 在编译单元基础上扩展的统计动态程序集使用率的包。
+The `DotNetCore.Natasha.CSharp.Extension.Codecov` package is an extension package that calculates the dynamic assembly usage based on the compilation unit.

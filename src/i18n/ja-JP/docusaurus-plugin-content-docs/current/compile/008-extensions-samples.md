@@ -1,10 +1,10 @@
 ---
-title: 8. 使用 Natasha 的类型扩展
+title: 8. 使用Natasha的类型扩展
 ---
 
 ```cs
 
-Example:
+例子:
 
 
         typeof(Dictionary<string,List<int>>[]).GetRuntimeName();

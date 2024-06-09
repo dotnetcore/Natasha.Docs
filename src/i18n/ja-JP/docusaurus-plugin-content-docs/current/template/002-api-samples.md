@@ -1,11 +1,11 @@
 ---
-title: 2. 模板 API 用法展示(未更新)
+title: 2. テンプレートAPIの使用方法のデモ（未更新）
 ---
 
-- **引入**
+- **導入**
 
 NUGET `DotNetCore.Natasha.CSharp`
-预热:
+プレヒート:
 
 ```C#
 NatashaInitializer.Preheating();
@@ -14,38 +14,38 @@ NatashaInitializer.Preheating();
 - **NDelegate**
 
 ```cs
-//NDelegate 支持：
+//NDelegateは以下をサポートしています：
 
-// 普通方法：      Func/Action
-// 异步方法：      Async Func/Action
-// 非安全方法：    Unsafe Func/Action
-// 非安全异步方法： UnsafeAsync Func/Action
+// 通常のメソッド：Func/Action
+// 非同期メソッド：Async Func/Action
+// アンセーフメソッド：Unsafe Func/Action
+// アンセーフ非同期メソッド：UnsafeAsync Func/Action
 
 var func = NDelegate
-  //创建域
+  //ドメインの作成
   .CreateDomain("NDomain2")    
-  //在域中创建 Func<string,int> 方法, 参数与系统定义的 Func<T1,T> 参数名一样.
+  //ドメイン内でFunc<string,int>メソッドを作成します。引数はシステムで定義されたFunc<T1,T>の引数名と同じです。
   .Func<string,int>("return arg.Length;"); 
 
 Assert.Equal(3, func("abc"));
-//卸载
+//アンロード
 DomainManagement.Remove("NDomain2");
 ```
 
-或者
+または
 
 ```cs
-//或者
+//または
 var func = NDelegate
-    //使用随机域
+    //ランダムなドメインを使用
     .RandomDomain()
-    //忽略第一个参数调用实例
+    //最初の引数を非表示にする
     .WithFirstArgInvisible()
-    //在域中创建 Func<string,int> 方法, 参数与系统定义的 Func<T1,T> 参数名一样.
+    //ドメイン内でFunc<string,int>メソッドを作成します。引数はシステムで定義されたFunc<T1,T>の引数名と同じです。
     .Func<string,int>("return Length;"); 
 
 Assert.Equal(3, func("abc"));
-//卸载
+//アンロード
 func.DisposeDomain();
 ```
 
@@ -81,9 +81,9 @@ string result = await action("Hello", "World1!");
 
   <br/>
 
-- 普通定制
+- 通常のカスタマイズ
 
-> 快速定制一个方法
+> クイックにメソッドをカスタマイズする
 
 ```cs
 var action = FastMethodOperator.DefaultDomain()
@@ -102,7 +102,7 @@ var result = action("Hello ","World!");    //result:   "Hello World!"
 var delegateAction = FastMethodOperator.Random()
 
        .Async()
-       //如果不指定Param 和 Return 则默认使用 Func<string,string,Task<string>> 系统定义的参数名, F12 可看
+       //ParamとReturnを指定しない場合、デフォルトでFunc<string,string,Task<string>>の引数名が使用されます。F12で見ることができます
        .Body(@"
                await Task.Delay(100);
                string result = arg1 +"" ""+ arg2;
@@ -117,9 +117,9 @@ string result = await delegateAction?.Invoke("Hello", "World2!");   //result:   
 <br/>
 <br/>
 
-#### DelegateOperator
+#### デリゲート操作クラスDelegateOperator
 
-> 快速快速实现委托
+> クイックにデリゲートを実装する
 
 ```cs
 

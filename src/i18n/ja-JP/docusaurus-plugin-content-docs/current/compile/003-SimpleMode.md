@@ -1,27 +1,27 @@
 ---
-title: 3 轻便编译模式
+title: 3 軽量なコンパイルモード
 ---
 
 ## 前提条件
 
-1. 引入 `DotNetCore.Natasha.CSharp.Compiler.Domain` Core 版本的编译域包。
-2. 简洁编译。
+1. `DotNetCore.Natasha.CSharp.Compiler.Domain`コアバージョンのコンパイルドメインパッケージをインポートしてください。
+2. シンプルなコンパイル。
 
-## 简洁编译
+## シンプルなコンパイル
 
-在预热后请参考以下代码
+プレヒート後は、以下のコードを参照してください。
 
 ```cs
 AssemblyCSharpBuilder builder = new();
 var myAssembly = builder
     .UseRandomDomain()
-    .UseSimpleMode() //启用轻便模式
+    .UseSimpleMode() //軽量モードを有効にする
     .Add("public class A{ }")
     .GetAssembly();
 ```
 
-轻便模式将合并 [当前域]的 元数据以及 Using, 并关闭语义检查.
-简洁模式的 API 逻辑为：
+軽量モードでは、[現在のドメイン]のメタデータとUsingが統合され、意味チェックが無効になります。
+シンプルモードのAPIロジックは次のとおりです：
 
 ```cs
  .WithCurrentReferences()
