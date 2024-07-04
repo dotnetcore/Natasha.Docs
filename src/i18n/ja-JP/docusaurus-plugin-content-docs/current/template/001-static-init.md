@@ -1,39 +1,39 @@
 ---
-title: 1. 模板初始化操作
+title: 1. テンプレートの初期化操作
 ---
 
-Natasha 的所有模板均继承自 ComplierTemplate ，ComplierTemplate 本身会提供静态构造方法。因此上层 API 也会被支持。
+Natasha のすべてのテンプレートは ComplierTemplate を継承しています。ComplierTemplate は静的な構築メソッドを提供します。そのため、上位の API もサポートされます。
 
 <br/>
 
-## 使用
+## 使用する
 
-NDelegate / NAssembly / NClass.. / xxx_Oerator 等等以下称为 “Handler”.
+NDelegate / NAssembly / NClass.. / xxx_Oerator などはここでは「Handler」と呼ばれます。
 
 <br/>
 
-#### 静态初始化代码：
+#### 静的な初期化コード：
 
 ```cs
 
-//使用 domain 域
-Handler.UseDomain(domian, compiler => { 编译器配置 });
+// domain ドメインを使用
+Handler.UseDomain(domian, compiler => { コンパイラの設定 });
 
 
-//使用某编译器的域
-Handler.UseCompiler(assemblyCSharpCompiler, compiler => { 编译器配置 }));
+// 特定のコンパイラのドメインを使用
+Handler.UseCompiler(assemblyCSharpCompiler, compiler => { コンパイラの設定 });
 
 
-//创建一个 "domainJim" 域
-Handler.CreateDomain("domianJim", compiler => { 编译器配置 });
+// "domainJim" というドメインを作成
+Handler.CreateDomain("domianJim", compiler => { コンパイラの設定 });
 
 
-//使用默认域
-Handler.DefaultDomain(compiler => { 编译器配置 });
+// デフォルトのドメインを使用
+Handler.DefaultDomain(compiler => { コンパイラの設定 });
 
 
-//使用随机域
-Handler.RandomDomain(compiler => { 编译器配置 });
+// ランダムなドメインを使用
+Handler.RandomDomain(compiler => { コンパイラの設定 });
 
 ```
 

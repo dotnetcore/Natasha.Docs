@@ -1,25 +1,25 @@
 ---
-title: 包说明
+title: パッケージの説明
 ---
 
 <br/>
 
-### 域实现包
+### ドメイン実装パッケージ
 
-`DotNetCore.Natasha.DynamicLoad.Base` 包为编译单元与域的粘合接口包，自定义实现域并给 Natasha 编译单元用。
+`DotNetCore.Natasha.DynamicLoad.Base` パッケージは、コンパイルユニットとドメインを接続するためのインターフェースパッケージです。カスタムドメインを実装し、Natashaのコンパイルユニットに使用します。
 
-`DotNetCore.Natasha.Domain` Natasha 官方的 Core3.0+ 域操作包。
+`DotNetCore.Natasha.Domain` は、Natasha公式のCore3.0以上のドメイン操作パッケージです。
 
-`Natasha.CSharp.Compiler.Domain` 继承自 `DotNetCore.Natasha.Domain` 并实现了 `DotNetCore.Natasha.DynamicLoad.Base` 编译粘合接口包。
+`Natasha.CSharp.Compiler.Domain` は、`DotNetCore.Natasha.Domain` を継承し、`DotNetCore.Natasha.DynamicLoad.Base` のコンパイルインターフェースパッケージを実装しています。
 
-### 编译单元包
+### コンパイルユニットパッケージ
 
-`DotNetCore.Natasha.CSharp.Compiler` Natasha 基础编译单元包, 如果您不使用模板包，可以单独引用此包进行编译。
+`DotNetCore.Natasha.CSharp.Compiler` は、Natashaの基本的なコンパイルユニットパッケージです。テンプレートパッケージを使用しない場合は、このパッケージだけを参照してコンパイルすることができます。
 
-### 扩展包
+### 拡張パッケージ
 
-`DotNetCore.Natasha.CSharp.Template.Core` 在编译单元基础上构建的模板编译包。
+`DotNetCore.Natasha.CSharp.Template.Core` は、コンパイルユニットを基に構築されたテンプレートコンパイルパッケージです。
 
-`DotNetCore.Natasha.CSharp.Extension.Ambiguity` 在编译单元基础上扩展的解决二义性引用的包。
+`DotNetCore.Natasha.CSharp.Extension.Ambiguity` は、コンパイルユニットを基に拡張された二義性の解決パッケージです。
 
-`DotNetCore.Natasha.CSharp.Extension.Codecov` 在编译单元基础上扩展的统计动态程序集使用率的包。
+`DotNetCore.Natasha.CSharp.Extension.Codecov` は、コンパイルユニットを基に拡張された動的アセンブリ使用量の統計パッケージです。

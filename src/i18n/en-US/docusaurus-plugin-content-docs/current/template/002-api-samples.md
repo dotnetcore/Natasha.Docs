@@ -1,11 +1,11 @@
 ---
-title: 2. 模板 API 用法展示(未更新)
+title: 2. Template API Usage Demonstration (Not Updated)
 ---
 
-- **引入**
+- **Introduction**
 
 NUGET `DotNetCore.Natasha.CSharp`
-预热:
+Preheating:
 
 ```C#
 NatashaInitializer.Preheating();
@@ -14,38 +14,38 @@ NatashaInitializer.Preheating();
 - **NDelegate**
 
 ```cs
-//NDelegate 支持：
+//NDelegate supports:
 
-// 普通方法：      Func/Action
-// 异步方法：      Async Func/Action
-// 非安全方法：    Unsafe Func/Action
-// 非安全异步方法： UnsafeAsync Func/Action
+// Regular methods: Func/Action
+// Asynchronous methods: Async Func/Action
+// Unsafe methods: Unsafe Func/Action
+// Unsafe asynchronous methods: UnsafeAsync Func/Action
 
 var func = NDelegate
-  //创建域
+  //Create a domain
   .CreateDomain("NDomain2")    
-  //在域中创建 Func<string,int> 方法, 参数与系统定义的 Func<T1,T> 参数名一样.
+  //Create a Func<string,int> method in the domain, with the same parameter name as the Func<T1,T> defined in the system.
   .Func<string,int>("return arg.Length;"); 
 
 Assert.Equal(3, func("abc"));
-//卸载
+//Unload
 DomainManagement.Remove("NDomain2");
 ```
 
 Or
 
 ```cs
-//或者
+//Or
 var func = NDelegate
-    //使用随机域
+    //Use a random domain
     .RandomDomain()
-    //忽略第一个参数调用实例
+    //Invoke the instance with the first parameter invisible
     .WithFirstArgInvisible()
-    //在域中创建 Func<string,int> 方法, 参数与系统定义的 Func<T1,T> 参数名一样.
+    //Create a Func<string,int> method in the domain, with the same parameter name as the Func<T1,T> defined in the system.
     .Func<string,int>("return Length;"); 
 
 Assert.Equal(3, func("abc"));
-//卸载
+//Unload
 func.DisposeDomain();
 ```
 
@@ -58,7 +58,7 @@ func(model,1,2);
 Assert.Equal(3, model.Age);
 ```
 
-案例2：
+Case 2:
 
 ```cs
 var action = NDelegate
@@ -81,9 +81,9 @@ string result = await action("Hello", "World1!");
 
   <br/>
 
-- 普通定制
+- Customization
 
-> 快速定制一个方法
+> Quickly customize a method
 
 ```cs
 var action = FastMethodOperator.DefaultDomain()
@@ -102,7 +102,7 @@ var result = action("Hello ","World!");    //result:   "Hello World!"
 var delegateAction = FastMethodOperator.Random()
 
        .Async()
-       //如果不指定Param 和 Return 则默认使用 Func<string,string,Task<string>> 系统定义的参数名, F12 可看
+       //If you don't specify Param and Return, the default parameter names defined by the system Func<string,string,Task<string>> will be used. You can see it with F12.
        .Body(@"
                await Task.Delay(100);
                string result = arg1 +"" ""+ arg2;
@@ -119,14 +119,14 @@ string result = await delegateAction?.Invoke("Hello", "World2!");   //result:   
 
 #### DelegateOperator
 
-> 快速快速实现委托
+> Quickly implement a delegate
 
 ```cs
 
-//定义一个委托
+//Define a delegate
 public delegate string GetterDelegate(int value);
 
-//方法一
+//Method One
 var action = NDelegate.RandomDomain().Delegate<GetterDelegate>("value += 101; return value.ToString();");
 string result = action(1);
 //result: "102"
@@ -137,7 +137,7 @@ string result = action(1);
 
 #### FakeMethodOperator
 
-> 快速复制方法并实现
+> Copy the method quickly and implement it
 
 ```cs
 public class Test

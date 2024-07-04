@@ -1,54 +1,54 @@
 ---
-title: 2.1 智能编译模式 - 实现程序集
+title: 2.1 スマートコンパイルモード - 実装アセンブリ
 ---
 
-## 为何使用实现程序集
+## なぜ実装アセンブリを使用するのか
 
-实现程序集包括逻辑的具体实现和私有字段，预热内存涨幅较少，但实现程序集具有敏感的依赖关系，需要小心使用。
+実装アセンブリには、具体的な実装とプライベートフィールドが含まれます。メモリ使用量が少なくなりますが、実装アセンブリには依存関係がありますので、注意して使用する必要があります。
 
 ## 前提条件
 
-1. 引入 `DotNetCore.Natasha.CSharp.Compiler.Domain` Core 版本的编译域包。
-2. 使用预热方法为智能编译做准备。
-3. 智能编译。
+1. `DotNetCore.Natasha.CSharp.Compiler.Domain`コアバージョンのコンパイルドメインパッケージをインポートしてください。
+2. スマートコンパイルのためのプレヒートメソッドを使用します。
+3. スマートコンパイル。
 
-## 预热案例
+## プレヒートの例
 
-### 普通预热
+### 通常のプレヒート
 
-1. 泛型预热方法将自动创建 编译域创建者 单例。
-2. 传入 true 参数以达到禁用运行时程序集的作用，Natasha 将会选择内存程序集预热。
-3. 第一个参数指是否从内存程序集中提取 Using Code， 设置为 true 将从实现程序集中提取 Using。
-4. 第二个参数指是否从内存程序集中提取 元数据，设置为 true 将从实现程序集中提取 元数据。
+1. ジェネリックなプレヒートメソッドでコンパイルドメインクリエーターのシングルトンを自動的に作成します。
+2. true パラメータを渡すことで、ランタイムアセンブリを無効にすることができます。Natasha では、メモリアセンブリを選択します。
+3. 最初のパラメータは、メモリアセンブリから Using Code を抽出するかどうかを指定します。true を設定すると、実装アセンブリから Using を抽出します。
+4. 2番目のパラメータは、メモリアセンブリからメタデータを抽出するかどうかを指定します。true を設定すると、実装アセンブリからメタデータを抽出します。
 
 ```cs
-//注册编译域并预热方法
+//コンパイルドメインの登録と事前準備のメソッド
 NatashaManagement.Preheating<NatashaDomainCreator>(true, true);
 ```
 
-### Using缓存预热
+### Usingキャッシュのプレヒート
 
-第一次生成将 Using Code 写入缓存文件  Natasha.Namespace.cache 中，后续重启会自动从文件中加载。
+最初の生成時にUsing Codeをキャッシュファイル`Natasha.Namespace.cache`に書き込み、後続の再起動ではファイルから自動的に読み込みます。
 
 ```cs
-//注册编译域并预热方法
-NatashaManagement.Preheating<NatashaDomainCreator>(true, true，true);
+//コンパイルドメインの登録と事前準備のメソッド
+NatashaManagement.Preheating<NatashaDomainCreator>(true, true, true);
 ```
 
-### 分开预热
+### 分離プレヒート
 
 ```cs
-//注册编译域
+//コンパイルドメインの登録
 NatashaManagement.RegistDomainCreator<NatashaDomainCreator>();
-//预热方法
+//事前準備のメソッド
 NatashaManagement.Preheating(true, true);
 ```
 
-### 过滤预热
+### フィルタープレヒート
 
 ```cs
-//如果存在 Dapper 主版本高于 12 的程序集，则不要将它加入缓存。
-//传入排除方法
+//バージョン12よりも高いDapperのメインアセンブリが存在する場合、キャッシュに追加しないでください。
+//除外メソッドを渡す
 NatashaManagement.Preheating<NatashaDomainCreator>((asmName, name) => {
     if (asmName.Name != null)
     {
@@ -58,14 +58,14 @@ NatashaManagement.Preheating<NatashaDomainCreator>((asmName, name) => {
         }
     }
     return false;
-},true, true，true);
+}, true, true, true);
 ```
 
-> 也许您的环境过于复杂，从而遇到一些意外，请您精简代码之后，确保异常能够重现，提交 issue 给 Natasha。
+> 環境が複雑すぎて予期しない事態に遭遇した可能性がありますので、コードを簡素化して例外が再現可能かどうかを確認し、Natashaへ問題を報告してください。
 
-## 智能编译
+## スマートコンパイル
 
-在预热后请参考以下代码
+プレヒート後は、以下のコードを参照してください。
 
 ```cs
 AssemblyCSharpBuilder builder = new();
@@ -118,24 +118,24 @@ NatashaInitializer.Preheating((asmName, name) => {
             name.Contains("ComponentModel")
             )
             {
-                //排除
+                //除外
                 return true;
             }
             return false;
         }
         if (name.Contains("Natasha"))
         {
-            //加载
+            //読み込み
             return false;
         }
         if (name.Contains("ConsoleApp3"))
         {
-            //加载
+            //読み込み
             return false;
         }
     }
     return true;
-}，true, true);
+}, true, true);
 ```
 
 #### 根据版本排除程序集
