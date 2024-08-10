@@ -68,7 +68,7 @@ var simpleFunc = "return Math.Floor(arg1/0.3);"
 
 ### 我不想每次都编译，能否缓存脚本的结果？
 
-答：不可以，缓存结果需要您来完成，Natasha 走的是轻量化路线，`AssemblyCSharpBuilder` 为最小最基础的编译单元，如果你想缓存，可以自己实现一个 ConcurrentDictionary<string,Delegate/Action/Func> 来缓存结果。Natasha 不负责编译职责之外的事情。
+答：不可以，缓存结果需要您来完成，Natasha 走的是轻量化路线，`AssemblyCSharpBuilder` 为最小最基础的编译单元，如果你想缓存，可以自己实现一个 `ConcurrentDictionary<string,Delegate/Action/Func>` 来缓存结果。Natasha 不负责编译职责之外的事情。
 
 ### 我只想使用 using 全集，但不想添加那么多的引用。
 

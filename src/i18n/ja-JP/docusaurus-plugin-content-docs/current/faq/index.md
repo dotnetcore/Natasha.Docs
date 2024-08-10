@@ -67,7 +67,7 @@ var simpleFunc = "return Math.Floor(arg1/0.3);"
 
 ### スクリプトの結果をキャッシュしたくありません。毎回コンパイルするのは嫌ですか？
 
-答え：できません。結果をキャッシュするには、自分でConcurrentDictionary<string,Delegate/Action/Func>を実装する必要があります。Natashaは軽量化路線を歩んでおり、`AssemblyCSharpBuilder`が最小限の基本的なコンパイルユニットです。Natasha 不负责<span class="notranslate">编译职责之外</span>的事情。
+答え：できません。結果をキャッシュするには、自分で`ConcurrentDictionary<string,Delegate/Action/Func>`を実装する必要があります。Natashaは軽量化路線を歩んでおり、`AssemblyCSharpBuilder`が最小限の基本的なコンパイルユニットです。Natasha 不负责<span class="notranslate">编译职责之外</span>的事情。
 
 ### 我只想使用 <span class="notranslate">using</span> 全集，但不想添加那么多的引用。
 
