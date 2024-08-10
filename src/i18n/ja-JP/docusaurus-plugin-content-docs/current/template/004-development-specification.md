@@ -43,7 +43,7 @@ Package(Builder) + API + Extension => Operator
 
 <br/>
 
-直接使用Natasha内置的Builder可以快速实现定制，例如：OopBuilder<TOperator>，MethodBuilder<TOperator>泛型方法。
+直接使用Natasha内置的Builder可以快速实现定制，例如：`OopBuilder<TOperator>`，`MethodBuilder<TOperator>`泛型方法。
 前者为其提供对象构造模板，后者专注构建方法。
 
 <br/>
