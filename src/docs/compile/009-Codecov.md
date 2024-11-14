@@ -1,5 +1,5 @@
 ---
-title: "7. 使用 Codecov 的扩展"
+title: "9. 使用 Codecov 的扩展"
 ---
 
 ## 使用方法
