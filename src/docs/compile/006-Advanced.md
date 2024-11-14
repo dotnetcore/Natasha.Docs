@@ -123,5 +123,5 @@ builder.WithoutPrivateMembers();
 builder
   .OutputAsRefAssembly();
   .WithFileOutput()
-  .WithoutInjectToDomain();
+  .CompileWithoutAssembly();
 ```
