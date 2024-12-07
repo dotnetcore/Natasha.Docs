@@ -67,7 +67,7 @@ A: The dynamic construction ability of Natasha is very powerful. It can be used 
 
 ### I don't want to compile every time, can I cache the result of the script?
 
-A: No, caching the result needs to be done by you. Natasha follows the lightweight route. `AssemblyCSharpBuilder` is the smallest and most basic compilation unit. If you want to cache, you can implement a `ConcurrentDictionary<string,Delegate/Action/Func>` to cache the result.Natasha is not responsible for anything other than the compilation responsibility.
+A: No, you cannot. Caching the result requires your action. Natasha follows a lightweight approach, where `AssemblyCSharpBuilder` is the smallest and most basic compilation unit. If you want to cache, you can implement your own `ConcurrentDictionary<string,Delegate/Action/Func>` to cache the result.Natasha is not responsible for anything other than the compilation responsibility.
 
 ### I only want to use the using statement, but I don't want to add so many references.
 
