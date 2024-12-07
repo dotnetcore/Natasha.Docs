@@ -15,6 +15,32 @@ Reference Assembly does not include the implementation and will not cause unexpe
 
 ## Preheating Examples
 
+### 链式预热
+
+从 V9 版本起，Natasha 支持链式预热：
+
+```cs
+NatashaManagement
+    //获取链式构造器
+    .GetInitializer() 
+    //使用引用程序集中的命名空间
+    .WithRefUsing()
+    //使用引用程序集中的元数据
+    .WithRefReference()
+    //使用内存中的命名空间
+    .WithMemoryUsing()
+    //使用内存中的元数据
+    .WithMemoryReference()
+    //使用文件来持久化缓存 命名空间
+    .WithFileUsingCache()
+    //过滤哪些元数据是不能用的，被排除的
+    .WithExcludeReferences((asm, asmStr) => { return false; })
+    //注册域构造器
+    .Preheating<NatashaDomainCreator>();
+```
+
+如果不指定相关 API ,预热将跳过此行为，例如只写 WithXXXReference 不写 using 相关的 API, 那么 Natasha 预热时将只对元数据进行操作，不会缓存 using code. 这样做的好处是实现了高度定制化，按需预热。
+
 ### Ordinary Preheating
 
 1. The generic preheating method will automatically create a singleton for the compilation domain creator.
@@ -23,8 +49,18 @@ Reference Assembly does not include the implementation and will not cause unexpe
 4. The second parameter specifies whether to extract the metadata from the memory assembly. Setting it to false will extract the metadata from the reference assembly.
 
 ```cs
-//Register the compilation domain and preheating method
+//注册编译域并预热方法
 NatashaManagement.Preheating<NatashaDomainCreator>(false, false);
+//或 V9 版本
+NatashaManagement
+    //获取链式构造器
+    .GetInitializer() 
+    //使用引用程序集中的命名空间
+    .WithRefUsing()
+    //使用引用程序集中的元数据
+    .WithRefReference()
+    //注册域构造器
+    .Preheating<NatashaDomainCreator>();
 ```
 
 ### Using Cache Preheating
@@ -32,8 +68,20 @@ NatashaManagement.Preheating<NatashaDomainCreator>(false, false);
 The first generation will write the 'Using Code' into the cache file 'Natasha.Namespace.cache', and subsequent restarts will automatically load it from the file.
 
 ```cs
-//Register the compilation domain and preheating method
-NatashaManagement.Preheating<NatashaDomainCreator>(false, false, true);
+//注册编译域并预热方法
+NatashaManagement.Preheating<NatashaDomainCreator>(false, false，true);
+//或 V9 版本
+NatashaManagement
+    //获取链式构造器
+    .GetInitializer() 
+    //使用引用程序集中的命名空间
+    .WithRefUsing()
+    //使用引用程序集中的元数据
+    .WithRefReference()
+    //使用文件来持久化缓存 命名空间
+    .WithFileUsingCache()
+    //注册域构造器
+    .Preheating<NatashaDomainCreator>();
 ```
 
 ### Separate Preheating
