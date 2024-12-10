@@ -111,18 +111,18 @@ builder.SetDllFilePath/SetPdbFilePath/SetCommentFilePath();
 Natasha has assembly-related configurations
 
 ```cs
-//Output the full assembly
+//输出完整程序集
 builder.OutputAsFullAssembly();
-//Output the referenced assembly, which by default does not include private members
+//输出引用程序集，此时将默认不包含私有成员
 builder.OutputAsRefAssembly();
-//Include private members when outputting
+//输出时包含私有成员
 builder.WithPrivateMembers();
-//Do not include private members when outputting
+//输出时不包含私有成员
 builder.WithoutPrivateMembers();
 
-//The compilation result is a referenced assembly, written to a file, and not loaded into the domain.
+//编译结果为引用程序集，且写入文件，且不会加载到域。
 builder
   .OutputAsRefAssembly();
   .WithFileOutput()
-  .WithoutInjectToDomain();
+  .CompileWithoutAssembly();
 ```

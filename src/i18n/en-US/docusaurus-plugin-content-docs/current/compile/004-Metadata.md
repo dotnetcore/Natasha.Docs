@@ -33,6 +33,8 @@ loadContext.AddReferenceAndUsingCode(refAssemblyFilePath);
 Add [metadata references] separately
 
 ```cs
+loadContext.AddReferences()
+//或
 loadContext.ReferenceRecorder.AddReference(
     AssemblyName assemblyName, 
     MetadataReference reference, 
@@ -44,6 +46,8 @@ The purpose of the third parameter is: when the assemblyName already exists in t
 ### Add [Using Code] separately
 
 ```cs
+loadContext.AddUsing()
+//或
 loadContext.UsingRecorder.Using(string? @using);
 loadContext.UsingRecorder.Using(IEnumerable<string> @using);
 loadContext.UsingRecorder.Using(Assembly assembly);
