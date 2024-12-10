@@ -15,6 +15,32 @@ title: 2.2 スマートコンパイルモード-アセンブリの参照
 
 ## プレヒートの例
 
+### 链式预热
+
+从 V9 版本起，Natasha 支持链式预热：
+
+```cs
+NatashaManagement
+    //获取链式构造器
+    .GetInitializer() 
+    //使用引用程序集中的命名空间
+    .WithRefUsing()
+    //使用引用程序集中的元数据
+    .WithRefReference()
+    //使用内存中的命名空间
+    .WithMemoryUsing()
+    //使用内存中的元数据
+    .WithMemoryReference()
+    //使用文件来持久化缓存 命名空间
+    .WithFileUsingCache()
+    //过滤哪些元数据是不能用的，被排除的
+    .WithExcludeReferences((asm, asmStr) => { return false; })
+    //注册域构造器
+    .Preheating<NatashaDomainCreator>();
+```
+
+如果不指定相关 API ,预热将跳过此行为，例如只写 WithXXXReference 不写 using 相关的 API, 那么 Natasha 预热时将只对元数据进行操作，不会缓存 using code. 这样做的好处是实现了高度定制化，按需预热。
+
 ### 通常のプレヒート
 
 1. ジェネリックなプレヒートメソッドでコンパイルドメインクリエーターのシングルトンを自動的に作成します。
@@ -23,8 +49,18 @@ title: 2.2 スマートコンパイルモード-アセンブリの参照
 4. 2番目のパラメータは、メモリアセンブリからメタデータを抽出するかどうかを指定します。falseに設定すると、アセンブリの参照からメタデータを抽出します。
 
 ```cs
-//コンパイルドメインを登録してプレヒートメソッドを使用
+//注册编译域并预热方法
 NatashaManagement.Preheating<NatashaDomainCreator>(false, false);
+//或 V9 版本
+NatashaManagement
+    //获取链式构造器
+    .GetInitializer() 
+    //使用引用程序集中的命名空间
+    .WithRefUsing()
+    //使用引用程序集中的元数据
+    .WithRefReference()
+    //注册域构造器
+    .Preheating<NatashaDomainCreator>();
 ```
 
 ### Usingキャッシュのプレヒート
@@ -32,8 +68,20 @@ NatashaManagement.Preheating<NatashaDomainCreator>(false, false);
 最初の生成時にUsing Codeをキャッシュファイル`Natasha.Namespace.cache`に書き込み、後続の再起動ではファイルから自動的に読み込みます。
 
 ```cs
-//コンパイルドメインを登録してプレヒートメソッドを使用
+//注册编译域并预热方法
 NatashaManagement.Preheating<NatashaDomainCreator>(false, false，true);
+//或 V9 版本
+NatashaManagement
+    //获取链式构造器
+    .GetInitializer() 
+    //使用引用程序集中的命名空间
+    .WithRefUsing()
+    //使用引用程序集中的元数据
+    .WithRefReference()
+    //使用文件来持久化缓存 命名空间
+    .WithFileUsingCache()
+    //注册域构造器
+    .Preheating<NatashaDomainCreator>();
 ```
 
 ### 分離プレヒート
