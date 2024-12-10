@@ -2,6 +2,8 @@
 title: 1. テンプレートの初期化操作
 ---
 
+## 该文档已停更，若需要请提 ISSUE
+
 Natasha のすべてのテンプレートは ComplierTemplate を継承しています。ComplierTemplate は静的な構築メソッドを提供します。そのため、上位の API もサポートされます。
 
 <br/>

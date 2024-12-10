@@ -33,6 +33,8 @@ loadContext.AddReferenceAndUsingCode(refAssemblyFilePath);
 单独添加 [元数据引用]
 
 ```cs
+loadContext.AddReferences()
+//或
 loadContext.ReferenceRecorder.AddReference(
     AssemblyName assemblyName, 
     MetadataReference reference, 
@@ -44,6 +46,8 @@ loadContext.ReferenceRecorder.AddReference(
 ### 单独增加 [Using Code]
 
 ```cs
+loadContext.AddUsing()
+//或
 loadContext.UsingRecorder.Using(string? @using);
 loadContext.UsingRecorder.Using(IEnumerable<string> @using);
 loadContext.UsingRecorder.Using(Assembly assembly);
